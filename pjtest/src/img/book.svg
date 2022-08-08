@@ -1,0 +1,21 @@
+<svg width="1920" height="1080" viewBox="0 0 1920 1080" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_74_14)">
+<rect width="1920" height="1080" fill="#ECE6CC"/>
+<path d="M320 40H1550C1577.61 40 1600 62.3858 1600 90V1080H320V40Z" fill="#DAC0A9"/>
+<path d="M320 40H1550C1577.61 40 1600 62.3858 1600 90V1080H320V40Z" fill="black" fill-opacity="0.2"/>
+<path d="M320 50H1535C1562.61 50 1585 72.3858 1585 100V1080H320V50Z" fill="#D9D9D9"/>
+<path d="M320 50H1525C1552.61 50 1575 72.3858 1575 100V1080H320V50Z" fill="#EDEDED"/>
+<path d="M320 50H1515C1542.61 50 1565 72.3858 1565 100V1080H320V50Z" fill="#FFFDFD"/>
+<path d="M1900 826C1900 853.614 1877.61 876 1850 876L1600 876V636L1850 636C1877.61 636 1900 658.386 1900 686V826Z" fill="#774A20"/>
+<path d="M320 1080L320 40H368L368 1080H320Z" fill="#774A20"/>
+<rect x="1575" y="325" width="185" height="150" fill="#ED6068"/>
+<rect x="1585" y="128" width="185" height="150" fill="#AFE783"/>
+<rect x="1308" y="280" width="240" height="120" transform="rotate(-90 1308 280)" fill="#BC9F84"/>
+<path d="M1368 190L1427.76 280H1308.24L1368 190Z" fill="#FFFDFD"/>
+</g>
+<defs>
+<clipPath id="clip0_74_14">
+<rect width="1920" height="1080" fill="white"/>
+</clipPath>
+</defs>
+</svg>

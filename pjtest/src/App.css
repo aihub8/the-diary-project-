@@ -1,0 +1,110 @@
+.App-header {
+  background-color: #ECE6CC;
+  min-height: 100vh;
+  display: flex;
+/*리액트 이미지와 글씨 링크 중앙에 위치와 글씨 사이즈와 색깔*/
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  /* font-size: calc(10px + 2vmin);
+  color: white; */
+}
+
+.App-book {
+  position: fixed;
+  height: 100vmin;
+  pointer-events: none;
+}
+
+.write {
+  background: url(./img/write.svg);
+  border: 0;
+  outline: 0;
+  cursor: pointer;
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  left: 1010px;
+  top: 80px;
+  opacity: 10.0;
+}
+
+/* .button-write {
+  background: url(./img/buttonwrite.svg);
+  border: 0;
+  outline: 0;
+  cursor: pointer;
+  position: absolute;
+  width: 76px;
+  height: 78px;
+  left: 1010px;
+  top: 164px;
+  opacity: 10.0;
+} */
+
+.delete {
+  background: url(./img/delete.svg);
+  border: 0;
+  outline: 0;
+  cursor: pointer;
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  left: 1005px;
+  top: 193px;
+  opacity: 10.0;
+}
+
+/* .bookmark {
+  background: url(./img/bookmark.svg);
+  border: 0;
+  outline: 0;
+  cursor: pointer;
+  position: fixed;
+  width: 80px;
+  height: 160px;
+  left: 827px;
+  top: 16.5px;
+  opacity: 10.0;
+  <img src={to}/>
+} */
+
+.to {
+  background: url(./img/to.svg);
+  border: 0;
+  outline: 0;
+  cursor: pointer;
+  position: absolute;
+  width: 150px;
+  height: 200px;
+  left: 820px;
+  top: 400px;
+  opacity: 10.0;
+}
+
+
+
+/*리액트 이펙트 움직이는 부분*/
+/* @keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+} */
+/*리액트 이미지 사이즈 조절하는 부분*/
+/* .App-logo {
+  height: 40vmin;
+  pointer-events: none;
+} */
+/*리액트 이펙트 움직이는 부분*/
+/* @media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+} */
+
+
+
+
