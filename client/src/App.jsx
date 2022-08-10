@@ -8,10 +8,7 @@ import { Provider } from "react-redux";
 import Header from "./components/Header";
 import Login from "./pages/Login";
 import Tutorial from "./pages/diary/Tutorial";
-<<<<<<< HEAD
 import Dali from "./pages/diary/Dali";
-=======
->>>>>>> 93f7039e84acf9834f9c0b0de96550138a7f05ad
 import Home from "./pages/Home";
 
 //social
@@ -41,11 +38,8 @@ function App() {
             {/** 일기장 작성 튜토리얼 페이지 */}
             <Route path="tutorial" element={<Tutorial />} />
             {/**글작성 */}
-<<<<<<< HEAD
             <Route path="dali" element={<Dali />} />
             {/**달리 */}
-=======
->>>>>>> 93f7039e84acf9834f9c0b0de96550138a7f05ad
             <Route path="write" element={<DiaryCreate />} />
             <Route path="diaryList" element={<DiaryList />} />{" "}
             <Route path=":id">

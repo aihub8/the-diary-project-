@@ -15,40 +15,34 @@ const DiaryCreate = () => {
   const dispatch = useDispatch(); //action을 사용하기위해 보내주는 역할
   const today = moment("YYYY-MM-DD HH:mm:ss");
   const [diary, setDiary] = useState({});
-<<<<<<< HEAD
-=======
- 
-
 
   const getPapago = () => {
     //console.log(hashtag)
-    axios.get(url.url+`/translate/${diary.tag1}`)
-    //.then(res=>console.log(res))
-    .then(res=>console.log(res.data.message.result.translatedText))
-    .catch(e=>console.log(e))
+    axios
+      .get(url.url + `/translate/${diary.tag1}`)
+      //.then(res=>console.log(res))
+      .then((res) => console.log(res.data.message.result.translatedText))
+      .catch((e) => console.log(e));
 
-    axios.get(url.url+`/translate/${diary.tag2}`)
-    //.then(res=>console.log(res))
-    .then(res=>console.log(res.data.message.result.translatedText))
-    .catch(e=>console.log(e))
+    axios
+      .get(url.url + `/translate/${diary.tag2}`)
+      //.then(res=>console.log(res))
+      .then((res) => console.log(res.data.message.result.translatedText))
+      .catch((e) => console.log(e));
 
-    axios.get(url.url+`/translate/${diary.tag3}`)
-    //.then(res=>console.log(res))
-    .then(res=>console.log(res.data.message.result.translatedText))
-    .catch(e=>console.log(e))
-  }
->>>>>>> 93f7039e84acf9834f9c0b0de96550138a7f05ad
+    axios
+      .get(url.url + `/translate/${diary.tag3}`)
+      //.then(res=>console.log(res))
+      .then((res) => console.log(res.data.message.result.translatedText))
+      .catch((e) => console.log(e));
+  };
 
   useEffect(() => {
     if (cookies.userData === undefined) {
       console.log(cookies.userData);
       navigate("/");
     } else {
-<<<<<<< HEAD
-      console.log(cookies);
-=======
       //console.log(cookies);
->>>>>>> 93f7039e84acf9834f9c0b0de96550138a7f05ad
 
       const receivedInfo = {
         shortId: "",
@@ -69,20 +63,13 @@ const DiaryCreate = () => {
     }
   }, []);
 
-<<<<<<< HEAD
-=======
-  
->>>>>>> 93f7039e84acf9834f9c0b0de96550138a7f05ad
   const onChangeDiary = (e) => {
     //글셋팅
     setDiary({
       ...diary,
       [e.target.name]: e.target.value,
     });
-<<<<<<< HEAD
-=======
     //console.log(diary.tag1)
->>>>>>> 93f7039e84acf9834f9c0b0de96550138a7f05ad
   };
 
   const validationCheck = (diary) => {
@@ -220,10 +207,7 @@ const DiaryCreate = () => {
               <div className="invalid-feedback">
                 오늘의 감정을 태그로 입력하세요.
               </div>
-<<<<<<< HEAD
-=======
               <button onClick={getPapago}>해시태그 클릭</button>
->>>>>>> 93f7039e84acf9834f9c0b0de96550138a7f05ad
             </div>
           </div>
           <div className="form-group">

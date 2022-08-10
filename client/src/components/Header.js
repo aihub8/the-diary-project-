@@ -173,28 +173,6 @@ const NavMenu = styled.div`
       }
     }
   }
-
-  /* &:before {
-    content: "hello";
-    display: block;
-    background-color: rgb(249, 249, 249);
-    border-radius: 0px 0px 4px 4px;
-    bottom: -6px;
-    content: "";
-    height: 2px;
-    opacity: 0;
-    position: absolute;
-    right: 0px;
-    transform-origin: left center;
-    transform: scaleX(0);
-    transition: all 250ms cubic-bezier(0.25, 046 0.45, 0.94);
-    visibility: hidden;
-    width: auto;
-  } */
-
-  /* @media (max-width: 768px) {
-    display: none;
-  } */
 `;
 
 const Login = styled.a`
