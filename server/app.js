@@ -12,11 +12,11 @@ const app = express();
 mongoose.connect("mongodb://localhost:27017/mydiary");
 
 mongoose.connection.on("connected", () => {
-  console.log("DB connect success");
+    console.log("DB connect success");
 });
 
 mongoose.connection.on("error", (err) => {
-  console.log(err);
+    console.log(err);
 });
 
 app.use(cors());
@@ -32,5 +32,5 @@ app.use("/diary", authMiddleware, diaryRouter);
 //user url 경로 라우팅
 app.use("/user", userRouter);
 app.listen(8080, () => {
-  console.log("server open");
+    console.log("server open");
 });

@@ -17,8 +17,13 @@ const DiaryUpdate2 = () => {
   const [currntDiary, setCurrentDiary] = useState({});
   const navigate = useNavigate();
   const currentShortId = params.id;
+<<<<<<< HEAD
   // console.log(params.id);
   // console.log(currentShortId);
+=======
+  console.log(params.id);
+  console.log(currentShortId);
+>>>>>>> 93f7039e84acf9834f9c0b0de96550138a7f05ad
   useEffect(() => {
     getDiaryView(params.id).then((res) => {
       console.log(res);
