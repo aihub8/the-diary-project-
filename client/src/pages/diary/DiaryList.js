@@ -42,6 +42,7 @@ const DiaryList = () => {
         navigate("/");
       });
   };
+
   const onClickPagination = (page) => {
     getDiaryList(page);
   };
