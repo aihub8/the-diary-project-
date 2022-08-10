@@ -1,0 +1,130 @@
+.background-color {
+  position: relative;
+  width: 1920px;
+  height: 1080px;
+  background: #ece6cc;
+}
+
+.diaryimg-svg{
+  position: absolute;
+  width: 1580px;
+  height: 1040px;
+  left: 320px;
+  top: 40px;
+}
+
+.button-write {
+  background: url(./img/buttonwrite.svg);
+  border: 0;
+  outline: 0;
+
+  cursor: pointer;
+  position: absolute;
+  
+  width: 76px;
+  height: 78px;
+  left: 1640px;
+  top: 164px;
+  opacity: 10.0;
+}
+
+.button-delete {  
+  background: url(./img/buttondelete.svg);
+  border: 0;
+  outline: 0;
+  
+  cursor: pointer;
+  position: absolute;
+  width: 88px;
+  height: 78px;
+  left: 1624px;
+  top: 361px;
+}
+
+.button-lowerlist {
+  border: 0;
+  outline: 0;
+  cursor: pointer;
+
+  position: absolute;
+  width: 280px;
+  height: 280px;
+  left: 1285px;
+  top: 800px;
+  
+}
+
+.button-bookmark {
+  position: absolute;
+  width: 120px;
+  height: 229px;
+  left: 1308px;
+  top: 49px;
+
+  background: #D9D9D9;
+
+  opacity: 0.0;
+  border: 0;
+  outline: 0;
+  cursor: pointer;
+}
+/* .button-try {
+  border: 0;
+  outline: 0;
+
+  cursor: pointer;
+  position: absolute;
+  
+  width: 0px;
+  height: 0px;
+  left: 1640px;
+  top: 164px;
+  opacity: 10.0;
+} */
+
+
+@keyframes slide-fade-in-dropdown-animation {
+  0% {
+    transform: translateY(-100%);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.slide-fade-in-dropdown {
+  overflow: hidden;
+}
+
+.slide-fade-in-dropdown > ul {
+  animation: slide-fade-in-dropdown-animation .4s ease;
+}
+
+@keyframes slide-fade-out-dropdown-animation {
+  0% {
+    transform: translateY(0);
+  }
+
+  100% {
+    transform: translateY(-100%);
+  }
+}
+
+.slide-fade-out-dropdown {
+  overflow: hidden;
+}
+
+.slide-fade-out-dropdown > ul {
+  animation: slide-fade-out-dropdown-animation 0.4s ease;
+  animation-fill-mode: forwards;
+}
+
+.components-dropdown > ul {
+  position: relative;
+  top: 5px;
+  margin-top: 0;
+  margin-bottom: 5px;
+  padding-left: 0;
+  list-style: none;
+}
