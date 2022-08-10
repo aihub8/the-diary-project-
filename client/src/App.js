@@ -1,4 +1,4 @@
-// import "./App.css";
+import "./App.css";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 //Redux
 import Store from "./app/Store";
@@ -20,12 +20,13 @@ import DiaryCreate from "./pages/diary/DiaryCreate";
 import DiaryView from "./pages/diary/DiaryView";
 import DiaryUpdate2 from "./pages/diary/DiaryUpdate2";
 import DiaryList from "./pages/diary/DiaryList";
-
+import styled from "styled-components";
 function App() {
   return (
     <Provider store={Store}>
       <Router>
         <Header />
+
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="oauth">
@@ -56,4 +57,12 @@ function App() {
     </Provider>
   );
 }
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  position: absolute;
+  width: 1920px;
+  height: 1080px;
+  background: #ece6cc;
+`;
 export default App;
