@@ -188,6 +188,8 @@ const DiaryView = () => {
               readOnly
               disabled
             ></textarea>
+             <img src={`data:image/jpeg;base64,${currntDiary.img_url}`}></img> 
+             {/* 달리 이미지  */}
           </div>
           <button
             type="button"

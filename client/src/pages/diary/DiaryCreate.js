@@ -8,6 +8,7 @@ import moment from "moment";
 //Redux
 import { useDispatch } from "react-redux";
 import { setDiaryDataDetails } from "./../../app/reducer/diarySlice";
+var Base64; //dalle이미지의 bast64값 
 
 const DiaryCreate = () => {
   const navigate = useNavigate();
@@ -15,25 +16,59 @@ const DiaryCreate = () => {
   const dispatch = useDispatch(); //action을 사용하기위해 보내주는 역할
   const today = moment("YYYY-MM-DD HH:mm:ss");
   const [diary, setDiary] = useState({});
+  const [dalle, setDalle] = useState(false)
  
+//태그들의 번역된 값(한->영)들을 dalle api에 전송하는 함수 
+const dalleReturn = async(translatedHashTag1, translatedHashTag2,translatedHashTag3) => {
+  await axios.post(
+    'https://main-dalle-server-scy6500.endpoint.ainize.ai/generate',
+    // '{"text":"apple", "num_images":1}',
+    {
+        'text': translatedHashTag1+translatedHashTag2+translatedHashTag3,
+        'num_images': 1
+    },
+    {
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }
+).then((res)=>{
+  console.log(res.data[0])    
+  Base64 = res.data[0]
+  })
+  .catch(e=>console.log(e));
 
+setDiary({
+  ...diary, 
+  ["img_url"]:Base64
+})
+// console.log(diary)
+  setDalle(true)
+}
+  //태그값들을 파파고 api를 통해 번역된 값을 가져와 저장함. 
+  const getPapago = async() => {
+    alert("이미지 생성 중입니다 잠시만 기다려주세요")
+    var translatedHashTag1, translatedHashTag2,translatedHashTag3; 
 
-  const getPapago = () => {
-    //console.log(hashtag)
-    axios.get(url.url+`/translate/${diary.tag1}`)
-    //.then(res=>console.log(res))
-    .then(res=>console.log(res.data.message.result.translatedText))
+    await axios.get(url.url+`/translate/${diary.tag1}`)
+    .then((res)=>{
+      translatedHashTag1 = res.data.message.result.translatedText
+      console.log(res.data.message.result.translatedText)}) //태그 1의 번역된 값
     .catch(e=>console.log(e))
 
-    axios.get(url.url+`/translate/${diary.tag2}`)
-    //.then(res=>console.log(res))
-    .then(res=>console.log(res.data.message.result.translatedText))
+    await axios.get(url.url+`/translate/${diary.tag2}`)
+    .then((res)=>{
+      translatedHashTag2 = res.data.message.result.translatedText
+      console.log(res.data.message.result.translatedText)})//태그 2의 번역된 값 
     .catch(e=>console.log(e))
 
-    axios.get(url.url+`/translate/${diary.tag3}`)
-    //.then(res=>console.log(res))
-    .then(res=>console.log(res.data.message.result.translatedText))
+    await axios.get(url.url+`/translate/${diary.tag3}`)
+    .then((res)=>{
+      translatedHashTag3 = res.data.message.result.translatedText
+      console.log(res.data.message.result.translatedText)})//태그 3의 번역된 값 
     .catch(e=>console.log(e))
+
+    dalleReturn(translatedHashTag1, translatedHashTag2,translatedHashTag3)
   }
 
   useEffect(() => {
@@ -58,7 +93,9 @@ const DiaryCreate = () => {
         img_url: "",
       };
 
-      setDiary(receivedInfo);
+      setDiary(receivedInfo)
+      //console.log(receivedInfo)
+      //console.log(diary)
     }
   }, []);
 
@@ -69,7 +106,7 @@ const DiaryCreate = () => {
       ...diary,
       [e.target.name]: e.target.value,
     });
-    //console.log(diary.tag1)
+    console.log(diary)
   };
 
   const validationCheck = (diary) => {
@@ -123,6 +160,10 @@ const DiaryCreate = () => {
   const getDiary = async () => {
     return await axios.get(url.url + `/diary/${diary.shortId}/view`);
   };
+
+  const diaryCheck = () =>{
+    console.log(diary)
+  }
   return (
     <div className="album">
       <div className="container">
@@ -207,7 +248,8 @@ const DiaryCreate = () => {
               <div className="invalid-feedback">
                 오늘의 감정을 태그로 입력하세요.
               </div>
-              <button onClick={getPapago}>해시태그 클릭</button>
+              <button onClick={getPapago}>달리 이미지 생성</button>
+              <button onClick={diaryCheck}>diary 상태 체크</button>
             </div>
           </div>
           <div className="form-group">
@@ -257,7 +299,9 @@ const DiaryCreate = () => {
             }}
           >
             뒤로가기
-          </button>
+          </button>{
+            dalle?
+          <img src={`data:image/jpeg;base64,${Base64}`}></img>:(<></>)}
         </form>
       </div>
     </div>
