@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import kakaLoginButtonImg from "./../img/kakao_login_medium.png";
+import kakaLoginButtonNarrowImg from "./../img/kakao_login_large_narrow.png";
 import RabbitKv from "./../img/DiaryRabbitKV.svg";
 
 const DiaryNav = () => {
@@ -47,7 +48,8 @@ const DiaryNav = () => {
           <LoginNav onClick={() => navigate("/")}>Login</LoginNav>
           <KaKaoLoginNav>
             <a href={KAKAO_OAUTH_URI}>
-              <img src={kakaLoginButtonImg} alt="" />
+              {/* <img src={kakaLoginButtonNarrowImg} /> */}
+              &nbsp;&nbsp;&nbsp; Login with Kakao
             </a>
           </KaKaoLoginNav>
         </PostItNav2>
@@ -80,22 +82,24 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  font-size: 25px;
+  font-size: 15px;
   font-weight: bold;
   a {
     color: white;
   }
+  z-index: -1;
 `;
 
 const PostItNav1 = styled.div`
   /* border: 1px solid #000000; */
   margin-top: 25%;
-  height: 45%;
-  width: 40%;
+  height: 80%;
+  width: 50%;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  justify-content: space-between;
+  /* justify-content: flex-start; */
+  /* justify-content: space-between; */
+  justify-content: space-evenly;
   align-items: center;
   padding-left: 0px;
   padding-right: 20px;
@@ -104,16 +108,12 @@ const PostItNav1 = styled.div`
   a {
     text-decoration: none !important;
   }
-  /* a:hover {
-    text-decoration: none !important;
-  } */
-  /* z-index: -1; */
 `;
 const PostItNav2 = styled.div`
   /* border: 1px solid #000000; */
-  margin-top: 25%;
-  height: 45%;
-  width: 40%;
+  margin-top: 40%;
+  height: 50%;
+  width: 50%;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -132,8 +132,8 @@ const PostItNav2 = styled.div`
 `;
 
 const DiaryNav1 = styled.a`
-  width: 100%;
-  height: 20%;
+  width: 70%;
+  height: 7%;
   background: #afe783;
   padding: 20%;
   color: white;
@@ -144,8 +144,8 @@ const DiaryNav1 = styled.a`
   }
 `;
 const DiaryNav2 = styled.a`
-  width: 110%;
-  height: 22%;
+  width: 70%;
+  height: 7%;
   background: #ffb1ae;
   padding: 20%;
   &:hover {
@@ -154,8 +154,8 @@ const DiaryNav2 = styled.a`
   }
 `;
 const DiaryNav3 = styled.a`
-  width: 100%;
-  height: 20%;
+  width: 70%;
+  height: 7%;
   background: #cd83e7;
   padding: 20%;
   &:hover {
@@ -164,8 +164,8 @@ const DiaryNav3 = styled.a`
   }
 `;
 const DiaryNav4 = styled.a`
-  width: 115%;
-  height: 22%;
+  width: 70%;
+  height: 7%;
   background: #83abe7;
   padding: 20%;
   &:hover {
@@ -173,21 +173,36 @@ const DiaryNav4 = styled.a`
     opacity: 1;
   }
 `;
+
 const LoginNav = styled.a`
+  /* margin-top: 30%; */
   width: 100%;
-  height: 20%;
+  height: 15%;
   background: #4fed4c;
   margin-bottom: 10px;
-  padding: 20%;
+  margin-left: 0%;
+  padding-left: 0%;
+  padding-top: 10%;
+  text-align: center;
+  /* padding: 20%; */
 `;
 const KaKaoLoginNav = styled.a`
+  /* width: 5%; */
+  background: #fee500;
+  height: 15%;
   width: 100%;
-  height: 20%;
-  padding: 20%;
+  padding-top: 20%;
+  text-align: center;
+  /* padding: 20%; */
+  img {
+    width: 100%;
+  }
+  margin-left: 0%;
+  padding-left: 0%;
 `;
 const DiaryHandleContainer = styled.div`
   /* border: 1px solid #000000; */
-  height: 30%;
+  height: 20%;
   width: 60%;
   display: flex;
   flex-direction: column;
@@ -202,10 +217,11 @@ const DiaryHandle = styled.a`
   background: #774a20;
   border-radius: 0px 50px 50px 0px;
   padding: 10%;
-  img {
+  align-items: center;
+  /* img {
     width: 100%;
     transform: rotate(180deg);
-  }
+  } */
   box-shadow: rgb(0 0 0/50%) 0px 0px 18px 0px;
   &:hover {
     background: #492a0d;
