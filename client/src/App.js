@@ -1,5 +1,9 @@
 import "./App.css";
 import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useCookies } from "react-cookie";
+import { useState } from "react";
+import { useEffect } from "react";
 //Redux
 import Store from "./app/Store";
 import { Provider } from "react-redux";
@@ -22,10 +26,14 @@ import DiaryList from "./pages/diary/DiaryList";
 import styled from "styled-components";
 import DiaryNav from "./components/DiaryNav";
 import DiaryBar from "./components/DiaryBar";
-import { useState } from "react";
 
+import bgImg from "./img/main_bg_2.svg";
+import LoginNew from "./pages/LoginNew";
+// import bgImg from "./img/Rectangle_25.png";
 function App() {
   const [darkMode, setDarkMode] = useState(false);
+  const [cookies, setCookie, removeCookie] = useCookies(["userData"]);
+  console.log(cookies.userData);
   function toggleDarkMode() {
     console.log(" toggleDarkMode");
     setDarkMode((preMode) => !preMode);
@@ -36,42 +44,39 @@ function App() {
         <MainWrapper color={darkMode ? "#ffeace" : "#ffeace"}>
           <PageWrap>
             <DiaryBar />
-            <DiaryPageBg1>
-              <DiaryPageBg2>
-                <DiaryPage>
-                  <Routes>
-                    <Route path="/" element={<Login />} />
-                    <Route path="oauth">
-                      <Route
-                        path="kakao/callback"
-                        element={<KakaoCallBack />}
-                      />
-                      <Route path="signUp" element={<SocialSignup />} />
-                    </Route>
-                    <Route path="diary">
-                      {/** 첫로그인후 메인 home */}
-                      <Route path="home" element={<Home />} />
-                      {/** 일기장 작성 튜토리얼 페이지 */}
-                      <Route path="tutorial" element={<Tutorial />} />
-                      {/**글작성 */}
-                      <Route path="dali" element={<Dali />} />
-                      {/**달리 */}
-                      <Route path="write" element={<DiaryCreate />} />
-                      <Route path="diaryList" element={<DiaryList />} />{" "}
-                      <Route path=":id">
-                        <Route path="diaryView" element={<DiaryView />} />{" "}
-                        {/* url -> http://localhost:3000/review/:id/detail */}
-                        <Route
-                          path="diaryUpdate"
-                          element={<DiaryUpdate2 />}
-                        />{" "}
-                        {/* url -> http://localhost:3000/review/:id/update */}
-                      </Route>
-                    </Route>
-                  </Routes>
-                </DiaryPage>
-              </DiaryPageBg2>
-            </DiaryPageBg1>
+            <div className="diaryMain__Page">
+              {/* <div
+                className={
+                  cookies.userData ? "diaryMain__Page" : "loginMain__Page"
+                }
+              > */}
+              <Routes>
+                {/* <Route path="/" element={<Login />} /> */}
+                <Route path="/" element={<LoginNew />} />
+                <Route path="oauth">
+                  <Route path="kakao/callback" element={<KakaoCallBack />} />
+                  <Route path="signUp" element={<SocialSignup />} />
+                </Route>
+                <Route path="diary">
+                  {/** 첫로그인후 메인 home */}
+                  <Route path="home" element={<Home />} />
+                  {/** 일기장 작성 튜토리얼 페이지 */}
+                  <Route path="tutorial" element={<Tutorial />} />
+                  {/**글작성 */}
+                  <Route path="dali" element={<Dali />} />
+                  {/**달리 */}
+                  <Route path="write" element={<DiaryCreate />} />
+                  <Route path="diaryList" element={<DiaryList />} />{" "}
+                  <Route path=":id">
+                    <Route path="diaryView" element={<DiaryView />} />{" "}
+                    {/* url -> http://localhost:3000/review/:id/detail */}
+                    <Route path="diaryUpdate" element={<DiaryUpdate2 />} />{" "}
+                    {/* url -> http://localhost:3000/review/:id/update */}
+                  </Route>
+                </Route>
+              </Routes>
+              {/* </div> */}
+            </div>
             <DiaryNav />
           </PageWrap>
         </MainWrapper>
@@ -84,7 +89,7 @@ const MainWrapper = styled.div`
   /* border: 1px solid #000000; */
   width: 100vw;
   height: 100vh;
-  background-color: ${(props) => props.color || "#ffeace"};
+  background-color: ${(props) => props.color || "#ECE6CC"};
   background-size: cover;
   display: flex;
   justify-content: center;
@@ -112,42 +117,20 @@ const PageWrap = styled.div`
   overflow: hidden;
 `;
 
-const DiaryPageBg1 = styled.div`
+const DiaryPageBg = styled.div`
   /* border: 1px solid #000000; */
   margin-left: 0;
   position: relative;
-  width: 80%;
+  bottom: 0%;
+  width: 99%;
   height: 100%;
-  background: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
+  /* background: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
     #dac0a9;
   border-radius: 0px 50px 0px 0px;
-  box-shadow: rgb(0 0 0/50%) 0px 0px 18px 0px;
-`;
-const DiaryPageBg2 = styled.div`
-  /* border: 1px solid #000000; */
-  position: relative;
-  margin-left: 0;
-  /* margin-top: 1%; */
-  top: 0%;
-  margin: 0;
-  width: 100%;
-  height: 98%;
-  margin-bottom: 0%;
-  bottom: 0%;
-  background: #d9d9d9;
+  box-shadow: rgb(0 0 0/50%) 0px 0px 18px 0px; */
+  background-image: url(${bgImg});
+  background-size: cover;
   border-radius: 0px 50px 0px 0px;
-`;
-const DiaryPage = styled.div`
-  /* border: 1px solid #000000; */
-  margin-left: 0;
-  margin-top: 2%;
-  margin-bottom: 0%;
-  bottom: 0%;
-  width: 97%;
-  height: 100%;
-  background: #fffdfd;
-  border-radius: 0px 50px 0px 0px;
-  /* padding: 20px; */
 `;
 
 export default App;

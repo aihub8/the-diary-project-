@@ -31,18 +31,33 @@ const DiaryNav = () => {
     <Wrapper>
       {" "}
       {cookies.userData ? (
-        <PostItNav1>
-          <DiaryNav1 onClick={() => navigate("/")}>메인</DiaryNav1>
-          <DiaryNav2 onClick={() => navigate("/diary/write")}>
-            일기쓰기
-          </DiaryNav2>
-          <DiaryNav3 onClick={() => navigate("/diary/tutorial")}>
-            튜토리얼
-          </DiaryNav3>
-          <DiaryNav4 onClick={() => navigate("/diary/diaryList")}>
-            목록
-          </DiaryNav4>
-        </PostItNav1>
+        <>
+          <PostItNav1>
+            <DiaryNav1 onClick={() => navigate("/")}>메인</DiaryNav1>
+            <DiaryNav2 onClick={() => navigate("/diary/write")}>
+              일기쓰기
+            </DiaryNav2>
+            <DiaryNav3 onClick={() => navigate("/diary/tutorial")}>
+              튜토리얼
+            </DiaryNav3>
+            <DiaryNav4 onClick={() => navigate("/diary/diaryList")}>
+              목록
+            </DiaryNav4>
+          </PostItNav1>
+          <DiaryHandleContainer>
+            <DiaryHandle>
+              <a
+                onClick={() => {
+                  removeCookie("userData", { path: "/" });
+                  navigate("/");
+                }}
+              >
+                {/* <img src={RabbitKv} alt="" /> */}
+                LogOut
+              </a>
+            </DiaryHandle>
+          </DiaryHandleContainer>
+        </>
       ) : (
         <PostItNav2>
           <LoginNav onClick={() => navigate("/")}>Login</LoginNav>
@@ -54,19 +69,6 @@ const DiaryNav = () => {
           </KaKaoLoginNav>
         </PostItNav2>
       )}
-      <DiaryHandleContainer>
-        <DiaryHandle>
-          <a
-            onClick={() => {
-              removeCookie("userData", { path: "/" });
-              navigate("/");
-            }}
-          >
-            {/* <img src={RabbitKv} alt="" /> */}
-            LogOut
-          </a>
-        </DiaryHandle>
-      </DiaryHandleContainer>
     </Wrapper>
   );
 };

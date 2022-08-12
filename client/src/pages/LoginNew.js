@@ -6,7 +6,8 @@ import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import loginMain__Page from "./../img/loginMain__Page_2.svg";
-const Login = () => {
+import Login from "./Login";
+const LoginNew = () => {
   const navigate = useNavigate();
   //view를 변경하기 위한 유즈스테이트
   const [cookies, setCookie, removeCookie] = useCookies(["userData"]);
@@ -54,56 +55,34 @@ const Login = () => {
     }
   }, [cookies]);
   return (
-    <main>
-      <section>
-        <div>
-          <h1>My Diary</h1>
-          <p></p>
-          <p>
-            <button
-              onClick={() => {
-                setView({
-                  signIn: true,
-                  signUp: false,
-                });
-              }}
-              className="btn btn-primary my-2 m-1"
-            >
-              로그인
-            </button>
-            <button
-              onClick={() => {
-                setView({
-                  signIn: false,
-                  signUp: true,
-                });
-              }}
-              className="btn btn-secondary my-2 m-1"
-            >
-              회원가입
-            </button>
-          </p>
-        </div>
-      </section>
-      {view.signIn ? (
-        <SignInForm
-          signInData={signInData}
-          onChangeSignInData={onChangeSignInData}
-        />
-      ) : (
-        <></>
-      )}
-      {view.signUp ? (
-        <SignUpForm
-          signUpData={signUpData}
-          setSignUpData={setSignUpData}
-          onChangeSignUpData={onChangeSignUpData}
-        />
-      ) : (
-        <></>
-      )}
-    </main>
+    <Wrapper>
+      <FunctionWrapper>
+        <Login />
+      </FunctionWrapper>
+    </Wrapper>
   );
 };
 
-export default Login;
+const Wrapper = styled.div`
+  border: 1px solid gray;
+  background-image: url(${loginMain__Page});
+  background-size: cover;
+  position: absolute;
+  margin-left: -10%;
+  margin-bottom: 0%;
+  bottom: 0%;
+  width: 110%;
+  height: 105%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+const FunctionWrapper = styled.div`
+  border: 1px solid #000000;
+  width: 1000px;
+  height: 700px;
+  margin-top: 50%;
+`;
+
+export default LoginNew;
