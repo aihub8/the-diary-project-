@@ -111,20 +111,4 @@ const PageWrap = styled.div`
   overflow: hidden;
 `;
 
-const DiaryPageBg = styled.div`
-  /* border: 1px solid #000000; */
-  margin-left: 0;
-  position: relative;
-  bottom: 0%;
-  width: 99%;
-  height: 100%;
-  /* background: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
-    #dac0a9;
-  border-radius: 0px 50px 0px 0px;
-  box-shadow: rgb(0 0 0/50%) 0px 0px 18px 0px; */
-  background-image: url(${bgImg});
-  background-size: cover;
-  border-radius: 0px 50px 0px 0px;
-`;
-
 export default App;

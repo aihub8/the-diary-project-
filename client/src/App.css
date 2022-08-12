@@ -47,26 +47,11 @@ body {
 }
 
 .diaryMain__Page {
-  /* margin-left: 0;
-  margin-top: 1%;
-  margin-bottom: 0%;
-  bottom: 0%;
-  width: 99%;
-  height: 100%;
-
-  background-image: url("./img/main_bg_2.svg");
-  background-size: cover;
-  border-radius: 0px 50px 0px 0px; */
-  /* border: 1px solid #000000; */
-  margin-left: 0;
+  margin-left: -1.875em;
   position: relative;
   bottom: 0%;
   width: 99%;
   height: 100%;
-  /* background: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
-    #dac0a9;
-  border-radius: 0px 50px 0px 0px;
-  box-shadow: rgb(0 0 0/50%) 0px 0px 18px 0px; */
   background-image: url("./img/main_bg_3.svg");
   background-size: cover;
   border-radius: 0px 50px 0px 0px;

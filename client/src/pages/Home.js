@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
+import "./../styles/Home.css";
 const Home = () => {
   const navigate = useNavigate();
   const [cookies, setCookie, removeCookie] = useCookies("userData");
