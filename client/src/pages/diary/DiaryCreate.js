@@ -15,13 +15,34 @@ const DiaryCreate = () => {
   const dispatch = useDispatch(); //action을 사용하기위해 보내주는 역할
   const today = moment("YYYY-MM-DD HH:mm:ss");
   const [diary, setDiary] = useState({});
-  // const [tags, setTags] = useState({});
+
+  const getPapago = () => {
+    //console.log(hashtag)
+    axios
+      .get(url.url + `/translate/${diary.tag1}`)
+      //.then(res=>console.log(res))
+      .then((res) => console.log(res.data.message.result.translatedText))
+      .catch((e) => console.log(e));
+
+    axios
+      .get(url.url + `/translate/${diary.tag2}`)
+      //.then(res=>console.log(res))
+      .then((res) => console.log(res.data.message.result.translatedText))
+      .catch((e) => console.log(e));
+
+    axios
+      .get(url.url + `/translate/${diary.tag3}`)
+      //.then(res=>console.log(res))
+      .then((res) => console.log(res.data.message.result.translatedText))
+      .catch((e) => console.log(e));
+  };
+
   useEffect(() => {
     if (cookies.userData === undefined) {
       console.log(cookies.userData);
       navigate("/");
     } else {
-      console.log(cookies);
+      //console.log(cookies);
 
       const receivedInfo = {
         shortId: "",
@@ -48,6 +69,7 @@ const DiaryCreate = () => {
       ...diary,
       [e.target.name]: e.target.value,
     });
+    //console.log(diary.tag1)
   };
 
   const validationCheck = (diary) => {
@@ -185,6 +207,7 @@ const DiaryCreate = () => {
               <div className="invalid-feedback">
                 오늘의 감정을 태그로 입력하세요.
               </div>
+              <button onClick={getPapago}>해시태그 클릭</button>
             </div>
           </div>
           <div className="form-group">

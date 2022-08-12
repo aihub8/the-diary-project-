@@ -1,9 +1,14 @@
+<<<<<<< HEAD:client/src/App.js
 import "./App.css";
 import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import { useState } from "react";
 import { useEffect } from "react";
+=======
+// import "./App.css";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+>>>>>>> efeea0ddee03b2603956923056f67988ec11ba29:client/src/App.jsx
 //Redux
 import Store from "./app/Store";
 import { Provider } from "react-redux";
@@ -23,6 +28,7 @@ import DiaryCreate from "./pages/diary/DiaryCreate";
 import DiaryView from "./pages/diary/DiaryView";
 import DiaryUpdate2 from "./pages/diary/DiaryUpdate2";
 import DiaryList from "./pages/diary/DiaryList";
+<<<<<<< HEAD:client/src/App.js
 import styled from "styled-components";
 import DiaryNav from "./components/DiaryNav";
 import DiaryBar from "./components/DiaryBar";
@@ -30,6 +36,9 @@ import DiaryBar from "./components/DiaryBar";
 import bgImg from "./img/main_bg_2.svg";
 import LoginNew from "./pages/LoginNew";
 // import bgImg from "./img/Rectangle_25.png";
+=======
+
+>>>>>>> efeea0ddee03b2603956923056f67988ec11ba29:client/src/App.jsx
 function App() {
   const [darkMode, setDarkMode] = useState(false);
   const [cookies, setCookie, removeCookie] = useCookies(["userData"]);
@@ -41,6 +50,7 @@ function App() {
   return (
     <Provider store={Store}>
       <Router>
+<<<<<<< HEAD:client/src/App.js
         <MainWrapper color={darkMode ? "#ECE6CC" : "#ECE6CC"}>
           <PageWrap>
             <DiaryBar />
@@ -74,10 +84,40 @@ function App() {
             <DiaryNav />
           </PageWrap>
         </MainWrapper>
+=======
+        <Header />
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="oauth">
+            <Route path="kakao/callback" element={<KakaoCallBack />} />
+            <Route path="signUp" element={<SocialSignup />} />
+          </Route>
+          <Route path="diary">
+            {/** 첫로그인후 메인 home */}
+            <Route path="home" element={<Home />} />{" "}
+            {/** 일기장 작성 튜토리얼 페이지 */}
+            <Route path="tutorial" element={<Tutorial />} />
+            {/**글작성 */}
+            <Route path="dali" element={<Dali />} />
+            {/**달리 */}
+            <Route path="write" element={<DiaryCreate />} />
+            <Route path="diaryList" element={<DiaryList />} />{" "}
+            <Route path=":id">
+              <Route path="diaryView" element={<DiaryView />} />{" "}
+              {/* url -> http://localhost:3000/review/:id/detail */}
+              <Route path="diaryUpdate" element={<DiaryUpdate2 />} />{" "}
+              {/* url -> http://localhost:3000/review/:id/update */}
+            </Route>
+          </Route>
+
+          {/* <Footer /> */}
+        </Routes>
+>>>>>>> efeea0ddee03b2603956923056f67988ec11ba29:client/src/App.jsx
       </Router>
     </Provider>
   );
 }
+<<<<<<< HEAD:client/src/App.js
 
 const MainWrapper = styled.div`
   /* border: 1px solid #000000; */
@@ -111,4 +151,6 @@ const PageWrap = styled.div`
   overflow: hidden;
 `;
 
+=======
+>>>>>>> efeea0ddee03b2603956923056f67988ec11ba29:client/src/App.jsx
 export default App;
