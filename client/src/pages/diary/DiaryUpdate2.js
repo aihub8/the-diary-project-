@@ -8,7 +8,7 @@ import $ from "jquery";
 //Redux
 import { useDispatch } from "react-redux";
 import { setDiaryDataDetails } from "./../../app/reducer/diarySlice";
-
+import "./../../styles/DiaryUpdate2.css";
 const DiaryUpdate2 = () => {
   const dispatch = useDispatch(); //action을 사용하기위해 보내주는 역할
   const params = useParams();
@@ -119,7 +119,7 @@ const DiaryUpdate2 = () => {
   //--------------------------------------------------------------------
 
   return (
-    <div className="album">
+    <div className="diary__update2">
       <div className="container">
         <form>
           <div className="form-row">

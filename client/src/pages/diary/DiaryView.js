@@ -8,7 +8,7 @@ import { useCookies } from "react-cookie";
 //Redux
 import { useDispatch } from "react-redux";
 import { setDiaryDataDetails } from "./../../app/reducer/diarySlice";
-
+import "./../../styles/DiaryView.css";
 const DiaryView = () => {
   const dispatch = useDispatch(); //action을 사용하기위해 보내주는 역할
   const params = useParams();
@@ -75,7 +75,7 @@ const DiaryView = () => {
   //---------------------------------------------------------------------
 
   return (
-    <div className="album">
+    <div className="diary__view">
       <div className="container">
         <form>
           <div className="form-row">

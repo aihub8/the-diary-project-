@@ -8,7 +8,7 @@ import moment from "moment";
 //Redux
 import { useDispatch } from "react-redux";
 import { setDiaryDataDetails } from "./../../app/reducer/diarySlice";
-
+import "./../../styles/DiaryCreate.css";
 const DiaryCreate = () => {
   const navigate = useNavigate();
   const [cookies, ,] = useCookies(["userData"]);
@@ -102,7 +102,7 @@ const DiaryCreate = () => {
     return await axios.get(url.url + `/diary/${diary.shortId}/view`);
   };
   return (
-    <div className="album">
+    <div className="diary__create">
       <div className="container">
         <form>
           <div className="form-row">

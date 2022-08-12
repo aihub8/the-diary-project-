@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import url from "./../../data/port.json";
+import "./../../styles/DiaryList.css";
 const DiaryList = () => {
   const navigate = useNavigate();
   const [cookies, setCookie, removeCookie] = useCookies(["userData"]);
@@ -77,7 +78,7 @@ const DiaryList = () => {
   };
 
   return (
-    <main>
+    <main className="diary__list">
       <section className="py-5 text-center container">
         <div className="row py-lg-5">
           <div className="col-lg-6 col-md-8 mx-auto">
