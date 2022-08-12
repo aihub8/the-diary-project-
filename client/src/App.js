@@ -41,15 +41,10 @@ function App() {
   return (
     <Provider store={Store}>
       <Router>
-        <MainWrapper color={darkMode ? "#ffeace" : "#ffeace"}>
+        <MainWrapper color={darkMode ? "#ECE6CC" : "#ECE6CC"}>
           <PageWrap>
             <DiaryBar />
             <div className="diaryMain__Page">
-              {/* <div
-                className={
-                  cookies.userData ? "diaryMain__Page" : "loginMain__Page"
-                }
-              > */}
               <Routes>
                 {/* <Route path="/" element={<Login />} /> */}
                 <Route path="/" element={<LoginNew />} />
@@ -75,7 +70,6 @@ function App() {
                   </Route>
                 </Route>
               </Routes>
-              {/* </div> */}
             </div>
             <DiaryNav />
           </PageWrap>

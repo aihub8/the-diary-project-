@@ -5,7 +5,7 @@ import SignUpForm from "./user/SignUpForm";
 import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import loginMain__Page from "./../img/loginMain__Page_2.svg";
+import loginMain__Page from "./../img/login_new.svg";
 import Login from "./Login";
 const LoginNew = () => {
   const navigate = useNavigate();
@@ -64,7 +64,7 @@ const LoginNew = () => {
 };
 
 const Wrapper = styled.div`
-  border: 1px solid gray;
+  /* border: 1px solid gray; */
   background-image: url(${loginMain__Page});
   background-size: cover;
   position: absolute;
@@ -73,7 +73,6 @@ const Wrapper = styled.div`
   bottom: 0%;
   width: 110%;
   height: 105%;
-
   display: flex;
   justify-content: center;
   align-items: center;
