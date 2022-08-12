@@ -30,8 +30,10 @@ app.use("/auth", authRouter);
 //posts url 경로 라우팅
 app.use("/diary", authMiddleware, diaryRouter);
 //user url 경로 라우팅
-app.use("/translate",transeRouter)
 app.use("/user", userRouter);
+//papago url 경로 라우팅
+app.use("/translate",transeRouter)
+
 app.listen(8080, () => {
   console.log("server open");
 });

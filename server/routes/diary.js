@@ -4,10 +4,18 @@ const asyncHandler = require("../utils/async-handler");
 const { User } = require("../models");
 const router = Router();
 const moment = require("moment");
-
+const { body, validationResult } = require('express-validator');
+const {diaryValidatorErrorChecker} = require('../utils/diaryValidator')
 //Diary insert
 router.post(
-  "/write-page",
+  "/write-page",[
+    body('content').isEmpty(),
+    body('emotion').isEmpty(),
+    body('tag1').isEmpty(),
+    body('tag2').isEmpty(),
+    body('tag3').isEmpty(),
+    diaryValidatorErrorChecker
+  ],
   async (
     req,
     res,
@@ -40,8 +48,9 @@ router.post(
         title: title,
         reg_date: moment().format("YYYY-MM-DD HH:mm:ss"),
         tag1: tag1,
-        tag2: tag1,
-        tag3: tag1,
+        tag2: tag2,
+        tag3: tag3,
+        img_url:img_url
       });
 
       await newDiary.save(function (err, data) {

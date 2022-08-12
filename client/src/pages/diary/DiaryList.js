@@ -74,6 +74,9 @@ const DiaryList = () => {
     // dispatch(setDiaryDataDetails(params.id));
     navigate(`/diary/${shortId}/diaryUpdate`);
   };
+  const checkDiary = ()=> {
+    console.log(diaryList)
+  }
 
   return (
     <main>
@@ -203,6 +206,7 @@ const DiaryList = () => {
             )}
           </ul>
         </nav>
+        <button onClick={checkDiary}>다이어리 상태</button>
       </div>
     </main>
   );

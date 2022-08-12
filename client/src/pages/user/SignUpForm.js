@@ -24,33 +24,34 @@ const SignUpForm = ({ signUpData, onChangeSignUpData, setSignUpData }) => {
   // };
 
   const onClickSignUpButton = () => {
-    if (signUpData.email === "") {
-      alert("이메일 입력해주세요");
-      emailRef.current.focus();
-      return;
-    } else if (signUpData.password === "") {
-      alert("비밀번호를 입력해주세요");
-      $("#password").focus();
-      return;
-    } else if (signUpData.rePassword === "") {
-      alert("rePassword를 입력해주세요");
-      $("#rePassword").focus();
-      return;
-    } else if (signUpData.name === "") {
-      alert("name를 입력해주세요");
-      $("#name").focus();
-      return;
-    } else if (signUpData.password !== signUpData.rePassword) {
-      alert("비밀번호를 확인해주세요");
-      setSignUpData({
-        ...setSignUpData,
-        password: "",
-        rePassword: "",
-      });
+    // if (signUpData.email === "") {
+    //   alert("이메일 입력해주세요");
+    //   emailRef.current.focus();
+    //   //return;
+    // } else if (signUpData.password === "") {
+    //   alert("비밀번호를 입력해주세요");
+    //   $("#password").focus();
+    //   //return;
+    // } else if (signUpData.rePassword === "") {
+    //   alert("rePassword를 입력해주세요");
+    //   $("#rePassword").focus();
+    //   //return;
+    // } else if (signUpData.name === "") {
+    //   alert("name를 입력해주세요");
+    //   $("#name").focus();
+    //   //return;
+    // } 
+    // else if (signUpData.password !== signUpData.rePassword) {
+    //   alert("비밀번호를 확인해주세요");
+    //   setSignUpData({
+    //     ...setSignUpData,
+    //     password: "",
+    //     rePassword: "",
+    //   });
 
-      $("#password").focus();
-      return;
-    }
+    //   $("#password").focus();
+    //   return;
+    // }
     sendSignUpData()
       .then((res) => {
         console.log(res.data);
@@ -58,7 +59,7 @@ const SignUpForm = ({ signUpData, onChangeSignUpData, setSignUpData }) => {
         window.location.reload();
       })
       .catch((e) => {
-        console.log(e);
+        console.log(e.response.data.error); //잘못된 이메일입니다!
         setErrorMessage(e.response.data.error);
       });
   };
