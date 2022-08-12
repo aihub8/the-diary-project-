@@ -4,6 +4,7 @@ import SignInForm from "./user/SignInForm";
 import SignUpForm from "./user/SignUpForm";
 import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
 const Login = () => {
   const navigate = useNavigate();
   //view를 변경하기 위한 유즈스테이트
@@ -52,58 +53,64 @@ const Login = () => {
     }
   }, [cookies]);
   return (
-    <main>
-      <section className="py-5 text-center container">
-        <div className="row py-lg-5">
-          <div className="col-lg-6 col-md-8 mx-auto">
-            <h1 className="fw-light">My Diary</h1>
-            <p className="lead text-muted"></p>
-            <p>
-              <button
-                onClick={() => {
-                  setView({
-                    signIn: true,
-                    signUp: false,
-                  });
-                }}
-                className="btn btn-primary my-2 m-1"
-              >
-                로그인
-              </button>
-              <button
-                onClick={() => {
-                  setView({
-                    signIn: false,
-                    signUp: true,
-                  });
-                }}
-                className="btn btn-secondary my-2 m-1"
-              >
-                회원가입
-              </button>
-            </p>
+    <Wrapper>
+      <main>
+        <section>
+          <div>
+            <div>
+              <h1>My Diary</h1>
+              <p></p>
+              <p>
+                <button
+                  onClick={() => {
+                    setView({
+                      signIn: true,
+                      signUp: false,
+                    });
+                  }}
+                  className="btn btn-primary my-2 m-1"
+                >
+                  로그인
+                </button>
+                <button
+                  onClick={() => {
+                    setView({
+                      signIn: false,
+                      signUp: true,
+                    });
+                  }}
+                  className="btn btn-secondary my-2 m-1"
+                >
+                  회원가입
+                </button>
+              </p>
+            </div>
           </div>
-        </div>
-      </section>
-      {view.signIn ? (
-        <SignInForm
-          signInData={signInData}
-          onChangeSignInData={onChangeSignInData}
-        />
-      ) : (
-        <></>
-      )}
-      {view.signUp ? (
-        <SignUpForm
-          signUpData={signUpData}
-          setSignUpData={setSignUpData}
-          onChangeSignUpData={onChangeSignUpData}
-        />
-      ) : (
-        <></>
-      )}
-    </main>
+        </section>
+        {view.signIn ? (
+          <SignInForm
+            signInData={signInData}
+            onChangeSignInData={onChangeSignInData}
+          />
+        ) : (
+          <></>
+        )}
+        {view.signUp ? (
+          <SignUpForm
+            signUpData={signUpData}
+            setSignUpData={setSignUpData}
+            onChangeSignUpData={onChangeSignUpData}
+          />
+        ) : (
+          <></>
+        )}
+      </main>
+    </Wrapper>
   );
 };
 
+const Wrapper = styled.div`
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
+    #bc9f84;
+`;
 export default Login;

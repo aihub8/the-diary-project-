@@ -4,6 +4,9 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import url from "./../../data/port.json";
+// import "./Cards_try.css";
+import carroticon from "../../img/carroticon.png"
+
 const DiaryList = () => {
   const navigate = useNavigate();
   const [cookies, setCookie, removeCookie] = useCookies(["userData"]);
@@ -14,6 +17,8 @@ const DiaryList = () => {
   });
   const [reload, setReload] = useState(true);
   //  const user_id = cookies.userData.user_id;
+  
+  console.log(diaryList);
 
   useEffect(() => {
     if (cookies.userData === undefined) {
@@ -42,6 +47,7 @@ const DiaryList = () => {
         navigate("/");
       });
   };
+
   const onClickPagination = (page) => {
     getDiaryList(page);
   };
@@ -74,6 +80,9 @@ const DiaryList = () => {
     // dispatch(setDiaryDataDetails(params.id));
     navigate(`/diary/${shortId}/diaryUpdate`);
   };
+  const checkDiary = () => {
+    console.log(diaryList);
+  }
 
   return (
     <main>
@@ -86,11 +95,17 @@ const DiaryList = () => {
       </section>
       <div className="album py-5">
         <div className="container">
-          <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+          {/* <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3"> */}
+          <div className="Card_list_container_try">  
             {diaryList &&
               diaryList.map((it, index) => (
-                <div className="col" key={index}>
-                  <div className="card shadow-sm">
+                // <div className="col" key={index}>
+                //   <div className="card shadow-sm">
+                <div className="Card_container_try" key={index}>
+                  <div className="img_pod_try">
+                    <img className="carroticon" src={carroticon} />
+                  </div> 
+                  <div className="cards_form_try">
                     <div className="card-body">
                       <h5
                         className="card-title"
@@ -203,6 +218,7 @@ const DiaryList = () => {
             )}
           </ul>
         </nav>
+        <button onClick={checkDiary}>다이어리 상태</button>
       </div>
     </main>
   );

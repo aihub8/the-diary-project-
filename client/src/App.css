@@ -1,15 +1,47 @@
-/* .App .DaliEditor .DiaryLists {margin-bottom:0; margin-top:10px;margin-left:300px; display:flex }
-.DiaryEditor { border:1px solid #e5e5e5; text-align:center; padding: 50px; } */
+@font-face {
+  font-family: "gyuri";
+  src: url("./font/gyuri.ttf");
+}
+@font-face {
+  font-family: "abba";
+  src: url("./font/nanum_abba.ttf");
+}
+@font-face {
+  font-family: "hippy";
+  src: url("./font/나눔손글씨 바른히피.ttf");
+}
+@font-face {
+  font-family: "godding";
+  src: url("./font/나눔손글씨 고딕 아니고 고딩.ttf");
+}
+@font-face {
+  font-family: "wife";
+  src: url("./font/나눔손글씨 나의 아내 손글씨.ttf");
+}
+@font-face {
+  font-family: "neurit";
+  src: url("./font/나눔손글씨 느릿느릿체.ttf");
+}
 
-.DiaryEditor input, .DiaryEditor textarea { margin:0 0 20px 0; padding:10px; width:300px; }
-.DiaryEditor textarea { width:500px; height:150px; }
-.DiaryEditor select { margin:0 0 20px 0; padding:10px; width:300px; }
-.DiaryEditor button { cursor:pointer; padding:10px; width:300px; }
+@font-face {
+  font-family: "bumsom ";
+  src: url("./font/나눔손글씨 범솜체.ttf");
+}
 
-.DaliEditor{border:1px solid #e5e5e5; text-align:left; padding: 50px;}
-.DaliEditor input, .DiaryEditor textarea { margin:0 0 20px 0; padding:10px; width:300px; }
-.DaliEditor textarea { width:500px; height:150px; }
-.DaliEditor select { margin:0 0 20px 0; padding:10px; width:300px; }
-.DaliEditor button { cursor:pointer; padding:10px; width:300px; }
-.DaliEditor input{width:100px; margin-right: 10px;}
- */
+@font-face {
+  font-family: "mom";
+  src: url("./font/나눔손글씨 빵구니맘 손글씨.ttf");
+}
+
+@font-face {
+  font-family: "well";
+  src: url("./font/나눔손글씨 잘하고 있어.ttf");
+}
+
+* {
+  font-family: "hippy";
+}
+
+body {
+  margin: 0;
+}

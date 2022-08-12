@@ -15,7 +15,7 @@ const DiaryCreate = () => {
   const dispatch = useDispatch(); //action을 사용하기위해 보내주는 역할
   const today = moment("YYYY-MM-DD HH:mm:ss");
   const [diary, setDiary] = useState({});
-
+  // const [tags, setTags] = useState({});
   useEffect(() => {
     if (cookies.userData === undefined) {
       console.log(cookies.userData);
