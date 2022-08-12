@@ -20,7 +20,8 @@ router.post(
       });
     }),
      //body('password').exists().isLength({min:2})
-    body('password').custom(value => {
+    
+     body('password').custom(value => {
         const regexPassword = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z])(?=.*[!@#\$%\^&\*]).{8,}$/; 
         const isNotValidPassword = !regexPassword.test(value);
         console.log(isNotValidPassword)
@@ -28,6 +29,7 @@ router.post(
           return Promise.reject('Body must have valid password (At Least 1 Upper Case, 1 lower case, 1 spacial character, 1 numeric character)');
         }
       }),
+      
       body('password').custom(value=>{  //위에 비밀번호 내부 에러 때문에 진행이 안되고 넘어감 
         if(value !==body('rePassword')){
           return Promise.reject("different")

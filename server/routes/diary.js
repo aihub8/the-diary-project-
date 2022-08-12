@@ -21,7 +21,7 @@ router.post(
     res,
     next //일기저장
   ) => {
-    const today = moment().format("YYYY-MM-DD HH:mm:ss");
+    //const today = moment().format("YYYY-MM-DD HH:mm:ss");
     const {
       user_id,
       author,
@@ -46,7 +46,9 @@ router.post(
         content: content,
         emotion: emotion,
         title: title,
-        reg_date: moment().format("YYYY-MM-DD HH:mm:ss"),
+        //reg_date: moment().format("YYYY-MM-DD HH:mm:ss"),
+        createdDate:new Date().toLocaleString(),
+        updatedDate: new Date().toLocaleString(),  
         tag1: tag1,
         tag2: tag2,
         tag3: tag3,
@@ -141,10 +143,12 @@ router.post("/:shortId/update", async (req, res, next) => {
       img_url,
     } = req.body;
     console.log(shortId);
-    const mod_date = moment().format("YYYY-MM-DD HH:mm:ss");
+    //const mod_date = moment().format("YYYY-MM-DD HH:mm:ss");
+    updatedDate = new Date().toLocaleString(); 
+    console.log(updatedDate)
     await Diary.updateOne(
       { shortId },
-      { $set: { content, emotion, title, mod_date } }
+      { $set: { content, emotion, title, updatedDate } }
     );
     res.json({ result: "수정완료" });
   } catch (e) {
