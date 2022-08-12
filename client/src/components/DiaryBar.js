@@ -9,6 +9,6 @@ const Wrapper = styled.div`
   height: 100%;
   background: #644e3a;
   border-radius: 0px;
-  z-index: 9999;
+  z-index: 9997;
 `;
 export default DiaryBar;
