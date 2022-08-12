@@ -9,6 +9,7 @@ import moment from "moment";
 import { useDispatch } from "react-redux";
 import { setDiaryDataDetails } from "./../../app/reducer/diarySlice";
 var Base64; //dalle이미지의 bast64값 
+//test
 
 const DiaryCreate = () => {
   const navigate = useNavigate();
