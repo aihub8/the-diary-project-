@@ -3,6 +3,7 @@ import $ from "react";
 import axios from "axios";
 import port from "./../../data/port.json";
 import { useCookies } from "react-cookie";
+import "./../../styles/SocialSignup.css";
 const SocialSignup = () => {
   const [cookiesAuth, setCookieAuth, removeCookieAuth] = useCookies("auth");
   const emailRef = useRef();
@@ -82,7 +83,7 @@ const SocialSignup = () => {
   };
 
   return (
-    <main>
+    <main className="signUp_form">
       <section className="py-5 text-center container">
         <div className="row py-lg-5">
           <div className="col-lg-6 col-md-8 mx-auto">

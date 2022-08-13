@@ -56,33 +56,54 @@ const LoginNew = () => {
   }, [cookies]);
   return (
     <Wrapper>
-      <FunctionWrapper>
+      <Temp>
+        <LoginNewFixedKV>
+          <RabbitKv />
+          <AiDiaryBox> aiduary</AiDiaryBox>
+          <BottomThreeLines></BottomThreeLines>
+        </LoginNewFixedKV>
         <Login />
-      </FunctionWrapper>
+      </Temp>
     </Wrapper>
   );
 };
 
 const Wrapper = styled.div`
-  /* border: 1px solid gray; */
-  background-image: url(${loginMain__Page});
-  background-size: cover;
-  position: absolute;
-  margin-left: -10%;
-  margin-bottom: 0%;
+  /* border: 1px solid red; */
+  /* background-image: url(${loginMain__Page});
+  background-size: cover; */
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
+    #bc9f84;
+  border-radius: 1.875em 1.875em 0 1.875em;
+  position: relative;
+  margin-left: -7.8125em;
+  margin-top: -20px;
+  margin-bottom: 0;
+  padding: 0;
   bottom: 0%;
   width: 110%;
   height: 105%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   z-index: 9999;
 `;
-const FunctionWrapper = styled.div`
-  border: 1px solid #000000;
-  width: 1000px;
-  height: 700px;
-  margin-top: 50%;
-`;
 
+const Temp = styled.div`
+  position: absolute;
+  padding-left: -7.8125em;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+`;
+const LoginNewFixedKV = styled.div`
+  border: 3px solid blue;
+  width: 60em;
+  height: 50%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+const RabbitKv = styled.img``;
+const AiDiaryBox = styled.div``;
+const BottomThreeLines = styled.div``;
 export default LoginNew;

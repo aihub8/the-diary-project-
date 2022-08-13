@@ -43,6 +43,7 @@ function App() {
       <Router>
         <MainWrapper color={darkMode ? "#ECE6CC" : "#ECE6CC"}>
           <PageWrap>
+            {/* {cookies.userData ? <DiaryBar /> : <></>} */}
             <DiaryBar />
             <div className="diaryMain__Page">
               <Routes>

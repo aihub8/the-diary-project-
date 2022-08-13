@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 import { useCookies } from "react-cookie";
+import "./../../styles/SignInForm.css";
 const SignInForm = ({ signInData, onChangeSignInData }) => {
   const navigate = useNavigate();
 
@@ -42,10 +43,10 @@ const SignInForm = ({ signInData, onChangeSignInData }) => {
   };
 
   return (
-    <div className="album">
-      <div className="container">
+    <div className="siginIn_form">
+      <div>
         <form>
-          <div className="mb-3">
+          <div>
             <label htmlFor="email" className="form-label">
               Email address
             </label>
@@ -59,7 +60,7 @@ const SignInForm = ({ signInData, onChangeSignInData }) => {
               aria-describedby="emailHelp"
             />
           </div>
-          <div className="mb-3">
+          <div>
             <label htmlFor="password" className="form-label">
               Password
             </label>
@@ -72,7 +73,7 @@ const SignInForm = ({ signInData, onChangeSignInData }) => {
               id="password"
             />
           </div>
-          <div className="mb-3">
+          <div>
             <span className="text-danger">{errorMessage}</span>
           </div>
           <button

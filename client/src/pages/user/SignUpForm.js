@@ -2,6 +2,7 @@ import { useRef, useState } from "react";
 import $ from "react";
 import axios from "axios";
 import port from "./../../data/port.json";
+import "./../../styles/SignUpForm.css";
 const SignUpForm = ({ signUpData, onChangeSignUpData, setSignUpData }) => {
   const emailRef = useRef();
 
@@ -68,10 +69,10 @@ const SignUpForm = ({ signUpData, onChangeSignUpData, setSignUpData }) => {
   };
 
   return (
-    <div className="album">
-      <div className="container">
+    <div className="signUp_form">
+      <div>
         <form>
-          <div className="mb-3">
+          <div>
             <label htmlFor="email" className="form-label">
               Email address
             </label>
@@ -85,11 +86,11 @@ const SignUpForm = ({ signUpData, onChangeSignUpData, setSignUpData }) => {
               id="email"
               aria-describedby="emailHelp"
             />
-            <div id="emailHelp" className="form-text">
+            <div id="emailHelp">
               We'll never share your email with anyone else.
             </div>
           </div>
-          <div className="mb-3">
+          <div>
             <label htmlFor="password" className="form-label">
               Password
             </label>
@@ -102,7 +103,7 @@ const SignUpForm = ({ signUpData, onChangeSignUpData, setSignUpData }) => {
               id="password"
             />
           </div>
-          <div className="mb-3">
+          <div>
             <label htmlFor="rePassword" className="form-label">
               rePassword
             </label>
@@ -115,7 +116,7 @@ const SignUpForm = ({ signUpData, onChangeSignUpData, setSignUpData }) => {
               id="rePassword"
             />
           </div>
-          <div className="mb-3">
+          <div>
             <label htmlFor="name" className="form-label">
               name
             </label>
@@ -128,7 +129,7 @@ const SignUpForm = ({ signUpData, onChangeSignUpData, setSignUpData }) => {
               id="name"
             />
           </div>
-          <div className="mb-3">
+          <div>
             <p className="text-danger">{errorMessage}</p>
           </div>
           <button

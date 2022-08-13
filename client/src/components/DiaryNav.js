@@ -3,14 +3,12 @@ import { useEffect } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
-import kakaLoginButtonImg from "./../img/kakao_login_medium.png";
-import kakaLoginButtonNarrowImg from "./../img/kakao_login_large_narrow.png";
-import RabbitKv from "./../img/DiaryRabbitKV.svg";
-
+import { useDispatch } from "react-redux";
+import { setUserLoginDataDetails } from "./../app/reducer/userSlice";
 const DiaryNav = () => {
   const navigate = useNavigate();
   const [cookies, setCookie, removeCookie] = useCookies(["userData"]);
-
+  const dispatch = useDispatch(); //action을 사용하기위해 보내주는 역할
   useEffect(() => {
     if (cookies.userData === undefined) {
       console.log(cookies.userData);
@@ -27,6 +25,25 @@ const DiaryNav = () => {
   const REDIRECT_URI = "http://localhost:3000/oauth/kakao/callback";
   const KAKAO_OAUTH_URI = `https:/kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
 
+  const onClickLogin = () => {
+    dispatch(
+      setUserLoginDataDetails({
+        isLoginPg: true,
+        isSignUpPg: false,
+      })
+    );
+    navigate("/");
+  };
+
+  const onClickSignUp = () => {
+    dispatch(
+      setUserLoginDataDetails({
+        isLoginPg: false,
+        isSignUpPg: true,
+      })
+    );
+    navigate("/");
+  };
   return (
     <Wrapper>
       {" "}
@@ -60,13 +77,14 @@ const DiaryNav = () => {
         </>
       ) : (
         <PostItNav2>
-          <LoginNav onClick={() => navigate("/")}>Login</LoginNav>
+          <LoginNav onClick={onClickLogin}>Login</LoginNav>
           <KaKaoLoginNav>
             <a href={KAKAO_OAUTH_URI}>
               {/* <img src={kakaLoginButtonNarrowImg} /> */}
               &nbsp;&nbsp;&nbsp; Login with Kakao
             </a>
           </KaKaoLoginNav>
+          <SignUpNav onClick={onClickSignUp}> signUp</SignUpNav>
         </PostItNav2>
       )}
     </Wrapper>
@@ -75,7 +93,7 @@ const DiaryNav = () => {
 
 export default DiaryNav;
 const Wrapper = styled.div`
-  /* border: 1px solid #000000; */
+  border: 1px solid #000000;
   margin-left: 0;
   width: 30%;
   height: 100%;
@@ -114,7 +132,7 @@ const PostItNav1 = styled.div`
 const PostItNav2 = styled.div`
   /* border: 1px solid #000000; */
   margin-top: 40%;
-  height: 50%;
+  height: 80%;
   width: 50%;
   display: flex;
   flex-direction: column;
@@ -176,7 +194,7 @@ const DiaryNav4 = styled.a`
   }
 `;
 
-const LoginNav = styled.a`
+const LoginNav = styled.button`
   /* margin-top: 30%; */
   width: 100%;
   height: 15%;
@@ -186,9 +204,10 @@ const LoginNav = styled.a`
   padding-left: 0%;
   padding-top: 10%;
   text-align: center;
+  border: none;
   /* padding: 20%; */
 `;
-const KaKaoLoginNav = styled.a`
+const KaKaoLoginNav = styled.div`
   /* width: 5%; */
   background: #fee500;
   height: 15%;
@@ -201,6 +220,19 @@ const KaKaoLoginNav = styled.a`
   }
   margin-left: 0%;
   padding-left: 0%;
+`;
+const SignUpNav = styled.button`
+  /* margin-top: 30%; */
+  width: 100%;
+  height: 15%;
+  background: #2461ff;
+  margin-bottom: 10px;
+  margin-left: 0%;
+  padding-left: 0%;
+  padding-top: 10%;
+  text-align: center;
+  border: none;
+  /* padding: 20%; */
 `;
 const DiaryHandleContainer = styled.div`
   /* border: 1px solid #000000; */

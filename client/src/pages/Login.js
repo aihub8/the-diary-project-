@@ -4,17 +4,23 @@ import SignInForm from "./user/SignInForm";
 import SignUpForm from "./user/SignUpForm";
 import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
-import loginMain__Page from "./../img/loginMain__Page_2.svg";
+import { useSelector } from "react-redux";
+import {
+  selectLoginPgState,
+  selectSignUpPgState,
+} from "./../app/reducer/userSlice";
+import "./../styles/Login.css";
 const Login = () => {
   const navigate = useNavigate();
   //view를 변경하기 위한 유즈스테이트
   const [cookies, setCookie, removeCookie] = useCookies(["userData"]);
-  const [view, setView] = useState({
-    signIn: false,
-    signUp: false,
-  });
+  // const [view, setView] = useState({
+  //   signIn: false,
+  //   signUp: false,
+  // });
 
+  const isLoginPg = useSelector(selectLoginPgState);
+  const isSignUpPg = useSelector(selectSignUpPgState);
   // 로그인 입력받을 데이터 props로 넘겨줌
   const [signInData, setSignInData] = useState({
     email: "",
@@ -54,46 +60,13 @@ const Login = () => {
     }
   }, [cookies]);
   return (
-    <main>
-      <section>
-        <div>
-          <h1>My Diary</h1>
-          <p></p>
-          <p>
-            <button
-              onClick={() => {
-                setView({
-                  signIn: true,
-                  signUp: false,
-                });
-              }}
-              className="btn btn-primary my-2 m-1"
-            >
-              로그인
-            </button>
-            <button
-              onClick={() => {
-                setView({
-                  signIn: false,
-                  signUp: true,
-                });
-              }}
-              className="btn btn-secondary my-2 m-1"
-            >
-              회원가입
-            </button>
-          </p>
-        </div>
-      </section>
-      {view.signIn ? (
+    <div className="login__main">
+      {isLoginPg === true ? (
         <SignInForm
           signInData={signInData}
           onChangeSignInData={onChangeSignInData}
         />
-      ) : (
-        <></>
-      )}
-      {view.signUp ? (
+      ) : isSignUpPg === true ? (
         <SignUpForm
           signUpData={signUpData}
           setSignUpData={setSignUpData}
@@ -102,7 +75,36 @@ const Login = () => {
       ) : (
         <></>
       )}
-    </main>
+      {/* { if(isLoginPg===true && isSignUpPg ===false){ 
+         <SignInForm
+          signInData={signInData}
+          onChangeSignInData={onChangeSignInData}
+        />
+
+      } else if(isLoginPg===false && isSignUpPg ===true){ } else{        <SignUpForm
+          signUpData={signUpData}
+          setSignUpData={setSignUpData}
+          onChangeSignUpData={onChangeSignUpData}
+      />}} */}
+
+      {/* {view.signIn ? (
+        <SignInForm
+          signInData={signInData}
+          onChangeSignInData={onChangeSignInData}
+        />
+      ) : (
+        <></>
+      )}
+      {view.signUp ? (
+<SignUpForm
+          signUpData={signUpData}
+          setSignUpData={setSignUpData}
+          onChangeSignUpData={onChangeSignUpData}
+      />
+      ) : (
+        <></>
+      )} */}
+    </div>
   );
 };
 
