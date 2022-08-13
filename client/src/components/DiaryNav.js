@@ -210,9 +210,11 @@ const LoginNav = styled.button`
 const KaKaoLoginNav = styled.div`
   /* width: 5%; */
   background: #fee500;
-  height: 15%;
   width: 100%;
-  padding-top: 20%;
+  height: 15%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   text-align: center;
   /* padding: 20%; */
   img {
