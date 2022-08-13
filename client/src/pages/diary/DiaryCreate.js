@@ -157,8 +157,9 @@ setDiary({
           // setDiary({ ...diary, shortId: res.data.shortId });
           navigate(`/diary/${res.data.shortId}/diaryView`);
         })
-        .catch((error) => {
-          console.log(error);
+        .catch((e) => {
+          console.log(e.response.data.error);
+          alert(e.response.data.error)
         });
     }
   };

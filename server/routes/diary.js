@@ -9,11 +9,14 @@ const {diaryValidatorErrorChecker} = require('../utils/diaryValidator')
 //Diary insert
 router.post(
   "/write-page",[
-    body('content').isEmpty(),
-    body('emotion').isEmpty(),
-    body('tag1').isEmpty(),
-    body('tag2').isEmpty(),
-    body('tag3').isEmpty(),
+    
+    body('title').isLength({min:1}),
+    body('tag1').isLength({min:1}),
+    body('tag2').isLength({min:1}),
+    body('tag3').isLength({min:1}),
+    body('img_url').isLength({min:1}),
+    body('emotion').isLength({min:1}),
+    body('content').isLength({min:1}),
     diaryValidatorErrorChecker
   ],
   async (
@@ -35,8 +38,8 @@ router.post(
       img_url,
       hidden
     } = req.body;
-    console.log("/write-page 인자값 확인");
-    console.log(req.body);
+    //console.log("/write-page 인자값 확인");
+    //console.log(req.body);
 
     try {
       //인스턴스 생성
@@ -78,10 +81,10 @@ router.post(
 
 //Diary 게시글 한 개
 router.get("/:shortId/view", async (req, res, next) => {
-  console.log("/view");
+  //console.log("/view");
   try {
     const { shortId } = req.params;
-    console.log(shortId);
+    //console.log(shortId);
     const diary = await Diary.findOne({ shortId });
     res.json(diary);
   } catch (e) {

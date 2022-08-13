@@ -3,7 +3,7 @@ const { validationResult } = require("express-validator");
 exports.userValidatorErrorChecker = (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    console.log(errors.array()) 
+    //console.log(errors.array()) 
       //모든 에러들 목록 
     if(errors.array()[0].param==='password'){    //비밀번호 유효성 문제 1. 정규식 문제 
         if(errors.array()[0].msg==="Body must have valid password (At Least 1 Upper Case, 1 lower case, 1 spacial character, 1 numeric character)")
