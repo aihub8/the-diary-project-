@@ -19,6 +19,7 @@ import DiaryCreate from "./pages/diary/DiaryCreate";
 import DiaryView from "./pages/diary/DiaryView";
 import DiaryUpdate2 from "./pages/diary/DiaryUpdate2";
 import DiaryList from "./pages/diary/DiaryList";
+import DiaryOtherList from "./pages/diary/DiaryOtherList";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
             <Route path="kakao/callback" element={<KakaoCallBack />} />
             <Route path="signUp" element={<SocialSignup />} />
           </Route>
+          
           <Route path="diary">
             {/** 첫로그인후 메인 home */}
             <Route path="home" element={<Home />} />{" "}
@@ -38,6 +40,7 @@ function App() {
             <Route path="tutorial" element={<Tutorial />} />
             {/**글작성 */}
             <Route path="write" element={<DiaryCreate />} />
+            <Route path="other" element={<DiaryOtherList />}/>
             <Route path="diaryList" element={<DiaryList />} />{" "}
             <Route path=":id">
               <Route path="diaryView" element={<DiaryView />} />{" "}

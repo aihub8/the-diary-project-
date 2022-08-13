@@ -11,15 +11,16 @@ const Diary = new mongoose.Schema(
     content: String,
     emotion: Number,
     title: String,
-    //reg_date: { type: Date, default: Date.now },
-    //mod_date: { type: Date, default: Date.now },
-    createdDate: String, 
-    updatedDate: String, 
+    //reg_date: { type: Date, default: Date.now }, //삭제 
+    //mod_date: { type: Date, default: Date.now },  //삭제 
+    createdDate: String,    //추가
+    updatedDate: String,    //추가
     view_cnt: Number,
     tag1: String,
     tag2: String,
     tag3: String,
     img_url: String,
+    hidden: String
   },
   { timestamps: { createdAt: "created_at" } }
 );

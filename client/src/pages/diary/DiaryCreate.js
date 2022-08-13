@@ -92,6 +92,7 @@ setDiary({
         tag2: "",
         tag3: "",
         img_url: "",
+        hidden: "true"
       };
 
       setDiary(receivedInfo)
@@ -109,6 +110,8 @@ setDiary({
     });
     console.log(diary)
   };
+
+  
 
   const validationCheck = (diary) => {
     /*if (diary.title === "") {
@@ -284,6 +287,16 @@ setDiary({
               name="content"
               onChange={onChangeDiary}
             ></textarea>
+            <select
+              className="hidden-select"
+              name="hidden"
+              id="hidden"
+              onChange={onChangeDiary}
+              required
+            >
+              <option value="true">숨기기</option>
+              <option value="false">보여주기</option>
+            </select>
           </div>
           <button
             type="button"

@@ -13,7 +13,9 @@ const Header = () => {
     if (cookies.userData === undefined) {
       console.log(cookies.userData);
       navigate("/");
-    } else {
+    } 
+    else 
+    {
       console.log(cookies.userData);
       navigate("/diary/home");
     }
@@ -45,6 +47,9 @@ const Header = () => {
         </a>
         <a onClick={() => navigate("/diary/dali")}>
           <span>달리</span>
+        </a>
+        <a onClick={() => navigate("/diary/other")}>
+          <span>남의글</span>
         </a>
       </NavMenu>
 

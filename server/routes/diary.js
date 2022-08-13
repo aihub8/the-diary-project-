@@ -21,7 +21,7 @@ router.post(
     res,
     next //일기저장
   ) => {
-    //const today = moment().format("YYYY-MM-DD HH:mm:ss");
+    //const today = moment().format("YYYY-MM-DD HH:mm:ss"); //삭제 
     const {
       user_id,
       author,
@@ -33,6 +33,7 @@ router.post(
       tag2,
       tag3,
       img_url,
+      hidden
     } = req.body;
     console.log("/write-page 인자값 확인");
     console.log(req.body);
@@ -46,13 +47,14 @@ router.post(
         content: content,
         emotion: emotion,
         title: title,
-        //reg_date: moment().format("YYYY-MM-DD HH:mm:ss"),
-        createdDate:new Date().toLocaleString(),
-        updatedDate: new Date().toLocaleString(),  
+        //reg_date: moment().format("YYYY-MM-DD HH:mm:ss"), //삭제 
+        createdDate:new Date().toLocaleString(),    //추가
+        updatedDate: new Date().toLocaleString(),   //추가 
         tag1: tag1,
         tag2: tag2,
         tag3: tag3,
-        img_url:img_url
+        img_url:img_url,
+        hidden:hidden
       });
 
       await newDiary.save(function (err, data) {
@@ -110,6 +112,31 @@ router.get("/:user_id/getList", async (req, res, next) => {
   res.json({ diaries, totalPage });
 });
 
+//남의글 보기 
+router.get("/:user_id/getOtherList", async (req, res, next) => {
+  //일기목록 모두 가져오기
+  console.log("남의글 /getList");
+
+  const { user_id } = req.params;
+  console.log(user_id);
+  if (req.query.page < 1) {
+    next("Please enter a number greater than 1"); //page가 1보다 작다면 오류처리.
+    return;
+  }
+  //({user_id: {$ne: user_id}})
+  const page = Number(req.query.page || 1); // req.query.page가 null or undifind면 1을 넣어라. 즉, default = 1
+  const perPage = Number(req.query.perPage || 10);
+  const total = await Diary.countDocuments({});
+  const diaries = await Diary.find({user_id: {$ne: user_id}}).find({hidden:"false"})
+
+    .sort({ createdAt: -1 }) //마지막으로 작성된 게시글을 첫번째 인덱스로 가져옴
+    .skip(perPage * (page - 1)) //ex> 2페이지라면 5번부터
+    .limit(perPage); // 6개씩 가져와줘.
+  const totalPage = Math.ceil(total / perPage);
+  console.log(diaries);
+  res.json({ diaries, totalPage });
+});
+
 //Diary 삭제
 router.get("/:shortId/delete", async (req, res, next) => {
   console.log("/delete");
@@ -143,12 +170,12 @@ router.post("/:shortId/update", async (req, res, next) => {
       img_url,
     } = req.body;
     console.log(shortId);
-    //const mod_date = moment().format("YYYY-MM-DD HH:mm:ss");
-    updatedDate = new Date().toLocaleString(); 
+    //const mod_date = moment().format("YYYY-MM-DD HH:mm:ss"); //삭제
+    updatedDate = new Date().toLocaleString();    //추가
     console.log(updatedDate)
     await Diary.updateOne(
       { shortId },
-      { $set: { content, emotion, title, updatedDate } }
+      { $set: { content, emotion, title, updatedDate } } 
     );
     res.json({ result: "수정완료" });
   } catch (e) {
