@@ -25,18 +25,18 @@ const Modal = (props) => {
         <section onClick={(e)=>e.stopPropagation()}>
           <header>
             {header}
-            <button className="close" onClick={close}>
+            {/* <button className="close" onClick={close}>
               &times;
-            </button>
+            </button> */}
           </header>
           {/* <main>{props.children}</main> */}
           <main><HoriScrollList /></main>
             {/* <HoriScrollList /> */}
-          <footer>
+          {/* <footer>
             <button className="close" onClick={close}>
               close
             </button>
-          </footer>
+          </footer> */}
         </section>
       ) : null}
     </div>

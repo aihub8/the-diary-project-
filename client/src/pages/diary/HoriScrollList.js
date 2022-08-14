@@ -3,8 +3,8 @@ import './HoriScrollList.css'
 
 import React, { useState } from "react";
 import axios from "axios";
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useLayoutEffect } from "react";
+import { Link, NavLink, Routes, Route, useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import url from "./../../data/port.json";
 import carroticon from "../../img/carroticon.png"
@@ -29,6 +29,7 @@ const HoriScrollList = () => {
       });
     }
   }, [reload]);
+
   console.log(cookies.userData);
 
   const getDiaryList = async (user_id) => {
@@ -51,29 +52,35 @@ const HoriScrollList = () => {
   return(
     <div className="wrap">
       <div className="scroll__wrap">
-        <div className="Card_list_container_try">  
+        <div className="modal_card_list_container">  
             {diaryList &&
               diaryList.map((it, index) => (
                 // <div className="col" key={index}>
                 //   <div className="card shadow-sm">
-                <div className="Card_container_try" key={index}>
-                  <div className="img_pod_try">
+                <div className="modal_card_container" key={index}>
+                  <div className="modal_img_pod">
                     <img className="carroticon" src={carroticon} />
                   </div> 
-                  <div className="cards_form_try">
+                  <div className="modal_cards_form">
                     <div className="card-body">
+                      <h2
+                        className="modal_card_date"
+                      >
+                        {it.createdDate} 
+                      </h2>
                       <h1
-                        className="card-title"
+                        className="modal_card-title"
                         onClick={() => {
                           navigate(`/diary/${it.shortId}/diaryView`);
                         }}
                       >
                         {it.title}
                       </h1>
-                      <a className='cards_btn_primary' onClick={() => {
-                            navigate(`/diary/${it.shortId}/diaryView`);
+                      <button className='modal_cards_btn' onClick={() => {
+                            navigate(`/diary/${it.shortId}/diaryView`, {replace: true});
                           }}>Read more
-                      </a>
+                      </button>
+                      
                       {/* <p className="card-text">
                         {it.content.substring(0, it.content.length / 2)}
                         <a
@@ -114,6 +121,10 @@ const HoriScrollList = () => {
           </div>
 
         </div>
+{/* 
+        <Routes>
+          <Route path=/diary/${it.shortId}/diaryView` />
+        </Routes> */}
     </div>
     )
 }

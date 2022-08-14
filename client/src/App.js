@@ -9,7 +9,6 @@ import Login from "./pages/Login";
 import Tutorial from "./pages/diary/Tutorial";
 import Dali from "./pages/diary/Dali";
 import Home from "./pages/Home";
-import Modal from "./pages/diary/Modal";
 
 //social
 import KakaoCallBack from "./pages/user/KakaoCallBack";
@@ -23,7 +22,10 @@ import DiaryList from "./pages/diary/DiaryList";
 import styled from "styled-components";
 import DiaryNav from "./components/DiaryNav";
 import DiaryBar from "./components/DiaryBar";
-import RabbitKv from "./img/DiaryRabbitKV.svg";
+
+// modal
+// import Modal from "./pages/diary/Modal";
+// import RabbitKv from "./img/DiaryRabbitKV.svg";
 
 import { useState } from "react";
 
@@ -82,12 +84,12 @@ function App() {
                       </Route>
                     </Route>
                   </Routes>
-                  <DiaryRabbitKV>
+                  {/* <DiaryRabbitKV>
                     <DiaryRabbitButton onClick={openModal} >
                       <img src={RabbitKv}/>
                     </DiaryRabbitButton>
                       <Modal open={modalOpen} close={closeModal} header="Modal heading" />
-                  </DiaryRabbitKV>
+                  </DiaryRabbitKV> */}
                 </DiaryPage>
               </DiaryPageBg2>
             </DiaryPageBg1>
@@ -169,38 +171,38 @@ const DiaryPage = styled.div`
   /* padding: 20px; */
 `;
 //modal style css
-const DiaryRabbitKV = styled.div`
-  // border: 1px solid #000000;
-  // display: absolute;
-  // display: flex;
-  // flex-direction: column;
-  // justify-content: flex-start;
-  /* background: #BC9F84; */
-  // width: 25%;
-  // height: 20%;
-  // top: 80%;
-  // z-index: 9999;
-  // img {
-  //   width: 100%;
-  // }
-`;
-const DiaryRabbitButton = styled.button`
-  border: 0;
-  outline: 0;
-  cursor: pointer;
-  //버튼색 투명하게
-  background-color:transparent;
-  position: absolute;
-  width: 17%;
-  // height: 300px; width값에 자동으로 원본 사이즈 조정
-  // top: 69%; 우리 다이어리 웹의 기준이 바닥에 있기 때문에 반응형을 바닥을 중심으로 잡았다.
-  bottom: 1%;
-  left: 75%;
-  // z-index: 9999;
-  img {
-    width: 100%;
-    height: 100%
-  }
-`
+// const DiaryRabbitKV = styled.div`
+//   // border: 1px solid #000000;
+//   // display: absolute;
+//   // display: flex;
+//   // flex-direction: column;
+//   // justify-content: flex-start;
+//   /* background: #BC9F84; */
+//   // width: 25%;
+//   // height: 20%;
+//   // top: 80%;
+//   // z-index: 9999;
+//   // img {
+//   //   width: 100%;
+//   // }
+// `;
+// const DiaryRabbitButton = styled.button`
+//   border: 0;
+//   outline: 0;
+//   cursor: pointer;
+//   //버튼색 투명하게
+//   background-color:transparent;
+//   position: absolute;
+//   width: 17%;
+//   // height: 300px; width값에 자동으로 원본 사이즈 조정
+//   // top: 69%; 우리 다이어리 웹의 기준이 바닥에 있기 때문에 반응형을 바닥을 중심으로 잡았다.
+//   bottom: 1%;
+//   left: 75%;
+//   // z-index: 9999;
+//   img {
+//     width: 100%;
+//     height: 100%
+//   }
+// `
 
 export default App;

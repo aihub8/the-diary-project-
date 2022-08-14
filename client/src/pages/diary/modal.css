@@ -28,7 +28,8 @@
 
     /* 내가 새로 추가한 부분 */
     width: 100%;
-    max-height: 80%;
+    /* max-height: 70%; */
+    min-height: 70%;
     top: 0%;
     transform: translate(0, 60%);
 
@@ -36,9 +37,10 @@
 
 .modal > section > header {
     position: relative;
-    padding: 16px 64px 16px 16px;
+    padding: 0.6rem 3rem 0.6rem 3rem;
     background-color: #774A20;
     font-weight: 700;
+    text-align: center;
 }
 
 .modal > section > header button {
@@ -53,13 +55,13 @@
     background-color: transparent;
 }
 
-.modal > section > main {
-    padding: 16px;
-    border-bottom: 1px solid #dee2e6;
-    border-top: 1px solid #dee2e6;
-  }
+  .modal > section > main {
+      padding: 0 0 0 0;
+      border-bottom: 1px solid #dee2e6;
+      border-top: 1px solid #dee2e6;
+    }
 
-.modal > section > footer {
+/* .modal > section > footer {
     padding: 12px 16px;
     text-align: right;
   }
@@ -70,7 +72,7 @@
     background-color: #6c757d;
     border-radius: 5px;
     font-size: 13px;
-}
+} */
 
 .modal.openModal {
     display: flex;
