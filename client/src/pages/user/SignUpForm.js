@@ -8,50 +8,34 @@ const SignUpForm = ({ signUpData, onChangeSignUpData, setSignUpData }) => {
 
   const [errorMessage, setErrorMessage] = useState("");
 
-  // //비밀번호 유효성 검사
-  // const checkPassword = (e) => {
-  //   //  8 ~ 10자 영문, 숫자 조합
-  //   var regExp = /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z]{8,10}$/;
-  //   // 형식에 맞는 경우 true 리턴
-  //   console.log("비밀번호 유효성 검사 :: ", regExp.test(e.target.value));
-  // };
-
-  // // 이메일 유효성 검사
-  // const checkEmail = (e) => {
-  //   var regExp =
-  //     /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
-  //   // 형식에 맞는 경우 true 리턴
-  //   console.log("이메일 유효성 검사 :: ", regExp.test(e.target.value));
-  // };
-
   const onClickSignUpButton = () => {
-    if (signUpData.email === "") {
-      alert("이메일 입력해주세요");
-      emailRef.current.focus();
-      return;
-    } else if (signUpData.password === "") {
-      alert("비밀번호를 입력해주세요");
-      $("#password").focus();
-      return;
-    } else if (signUpData.rePassword === "") {
-      alert("rePassword를 입력해주세요");
-      $("#rePassword").focus();
-      return;
-    } else if (signUpData.name === "") {
-      alert("name를 입력해주세요");
-      $("#name").focus();
-      return;
-    } else if (signUpData.password !== signUpData.rePassword) {
-      alert("비밀번호를 확인해주세요");
-      setSignUpData({
-        ...setSignUpData,
-        password: "",
-        rePassword: "",
-      });
+    // if (signUpData.email === "") {
+    //   alert("이메일 입력해주세요");
+    //   emailRef.current.focus();
+    //   return;
+    // } else if (signUpData.password === "") {
+    //   alert("비밀번호를 입력해주세요");
+    //   $("#password").focus();
+    //   return;
+    // } else if (signUpData.rePassword === "") {
+    //   alert("rePassword를 입력해주세요");
+    //   $("#rePassword").focus();
+    //   return;
+    // } else if (signUpData.name === "") {
+    //   alert("name를 입력해주세요");
+    //   $("#name").focus();
+    //   return;
+    // } else if (signUpData.password !== signUpData.rePassword) {
+    //   alert("비밀번호를 확인해주세요");
+    //   setSignUpData({
+    //     ...setSignUpData,
+    //     password: "",
+    //     rePassword: "",
+    //   });
 
-      $("#password").focus();
-      return;
-    }
+    //   $("#password").focus();
+    //   return;
+    // }
     sendSignUpData()
       .then((res) => {
         console.log(res.data);

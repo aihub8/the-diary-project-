@@ -51,8 +51,8 @@ body {
   position: relative;
   bottom: 0%;
   width: 99%;
-  height: 100%;
-  background-image: url("./img/main_bg_3.svg");
+  height: 100vh;
+  background-image: url("./img/main_bg_4.svg");
   background-size: cover;
   border-radius: 0px 50px 0px 0px;
 }

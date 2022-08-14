@@ -5,6 +5,7 @@ const diaryRouter = require("./routes/diary");
 const userRouter = require("./routes/user");
 const authRouter = require("./routes/oauth");
 const authMiddleware = require("./utils/authMiddleware");
+const transeRouter = require("./routes/papago");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 
@@ -28,9 +29,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/auth", authRouter);
 //posts url 경로 라우팅
 app.use("/diary", authMiddleware, diaryRouter);
-
 //user url 경로 라우팅
 app.use("/user", userRouter);
+//papago url 경로 라우팅
+app.use("/translate", transeRouter);
 app.listen(8080, () => {
   console.log("server open");
 });

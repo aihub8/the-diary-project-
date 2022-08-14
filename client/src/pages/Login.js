@@ -1,7 +1,6 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import SignInForm from "./user/SignInForm";
-import SignUpForm from "./user/SignUpForm";
+
 import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -10,14 +9,13 @@ import {
   selectSignUpPgState,
 } from "./../app/reducer/userSlice";
 import "./../styles/Login.css";
+import SignInForm from "./user/SignInForm";
+import SignUpForm from "./user/SignUpForm";
+
 const Login = () => {
   const navigate = useNavigate();
-  //view를 변경하기 위한 유즈스테이트
+
   const [cookies, setCookie, removeCookie] = useCookies(["userData"]);
-  // const [view, setView] = useState({
-  //   signIn: false,
-  //   signUp: false,
-  // });
 
   const isLoginPg = useSelector(selectLoginPgState);
   const isSignUpPg = useSelector(selectSignUpPgState);
@@ -75,35 +73,6 @@ const Login = () => {
       ) : (
         <></>
       )}
-      {/* { if(isLoginPg===true && isSignUpPg ===false){ 
-         <SignInForm
-          signInData={signInData}
-          onChangeSignInData={onChangeSignInData}
-        />
-
-      } else if(isLoginPg===false && isSignUpPg ===true){ } else{        <SignUpForm
-          signUpData={signUpData}
-          setSignUpData={setSignUpData}
-          onChangeSignUpData={onChangeSignUpData}
-      />}} */}
-
-      {/* {view.signIn ? (
-        <SignInForm
-          signInData={signInData}
-          onChangeSignInData={onChangeSignInData}
-        />
-      ) : (
-        <></>
-      )}
-      {view.signUp ? (
-<SignUpForm
-          signUpData={signUpData}
-          setSignUpData={setSignUpData}
-          onChangeSignUpData={onChangeSignUpData}
-      />
-      ) : (
-        <></>
-      )} */}
     </div>
   );
 };
