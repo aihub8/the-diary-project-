@@ -9,13 +9,81 @@ import moment from "moment";
 import { useDispatch } from "react-redux";
 import { setDiaryDataDetails } from "./../../app/reducer/diarySlice";
 import "./../../styles/DiaryCreate.css";
+let Base64 = ""; //dalle이미지의 bast64값
+
 const DiaryCreate = () => {
   const navigate = useNavigate();
   const [cookies, ,] = useCookies(["userData"]);
   const dispatch = useDispatch(); //action을 사용하기위해 보내주는 역할
   const today = moment("YYYY-MM-DD HH:mm:ss");
   const [diary, setDiary] = useState({});
-  // const [tags, setTags] = useState({});
+  const [dalle, setDalle] = useState(false);
+
+  //태그들의 번역된 값(한->영)들을 dalle api에 전송하는 함수
+  const dalleReturn = async (
+    translatedHashTag1,
+    translatedHashTag2,
+    translatedHashTag3
+  ) => {
+    await axios
+      .post(
+        "https://main-dalle-server-scy6500.endpoint.ainize.ai/generate",
+        // '{"text":"apple", "num_images":1}',
+        {
+          text: translatedHashTag1 + translatedHashTag2 + translatedHashTag3,
+          num_images: 1,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
+      .then((res) => {
+        console.log(res.data[0]);
+        Base64 = res.data[0];
+      })
+      .catch((e) => console.log(e));
+
+    setDiary({
+      ...diary,
+      ["img_url"]: Base64,
+    });
+    // console.log(diary)
+    setDalle(true);
+  };
+  //태그값들을 파파고 api를 통해 번역된 값을 가져와 저장함.
+  const getPapago = async () => {
+    alert("이미지 생성 중입니다 잠시만 기다려주세요");
+    var translatedHashTag1, translatedHashTag2, translatedHashTag3;
+
+    await axios
+      .get(url.url + `/translate/${diary.tag1}`)
+      .then((res) => {
+        translatedHashTag1 = res.data.message.result.translatedText;
+        console.log(res.data.message.result.translatedText);
+      }) //태그 1의 번역된 값
+      .catch((e) => console.log(e));
+
+    await axios
+      .get(url.url + `/translate/${diary.tag2}`)
+      .then((res) => {
+        translatedHashTag2 = res.data.message.result.translatedText;
+        console.log(res.data.message.result.translatedText);
+      }) //태그 2의 번역된 값
+      .catch((e) => console.log(e));
+
+    await axios
+      .get(url.url + `/translate/${diary.tag3}`)
+      .then((res) => {
+        translatedHashTag3 = res.data.message.result.translatedText;
+        console.log(res.data.message.result.translatedText);
+      }) //태그 3의 번역된 값
+      .catch((e) => console.log(e));
+
+    dalleReturn(translatedHashTag1, translatedHashTag2, translatedHashTag3);
+  };
+
   useEffect(() => {
     if (cookies.userData === undefined) {
       console.log(cookies.userData);
@@ -36,6 +104,7 @@ const DiaryCreate = () => {
         tag2: "",
         tag3: "",
         img_url: "",
+        hidden: "true",
       };
 
       setDiary(receivedInfo);
@@ -50,57 +119,25 @@ const DiaryCreate = () => {
     });
   };
 
-  const validationCheck = (diary) => {
-    if (diary.title === "") {
-      alert("title");
-      $("#title").focus();
-      return false;
-    } else if (diary.content === "") {
-      alert("content");
-      $("#content").focus();
-      return false;
-    } else if (diary.emotion === "") {
-      alert("emotion");
-      $("#emotion").focus();
-      return false;
-    } else if (diary.tag1 === "") {
-      alert("tag1");
-      $("#tag1").focus();
-      return false;
-    } else if (diary.tag2 === "") {
-      alert("tag2");
-      $("#tag2").focus();
-      return false;
-    } else if (diary.tag3 === "") {
-      alert("tag3");
-      $("#tag3").focus();
-      return false;
-    }
+  const onClickCreateDairy = async () => {
+    return await axios
+      .post(url.url + "/diary/write-page", diary, {
+        headers: {
+          accessToken: cookies.userData.accessToken,
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        dispatch(setDiaryDataDetails(res.data.shortId));
+        // setDiary({ ...diary, shortId: res.data.shortId });
+        navigate(`/diary/${res.data.shortId}/diaryView`);
+      })
+      .catch((error) => {
+        console.log(error.response.data.error);
+        alert(error.response.data.error);
+      });
   };
 
-  const onClickCreateDairy = async () => {
-    // 글작성
-    if (validationCheck) {
-      return await axios
-        .post(url.url + "/diary/write-page", diary, {
-          headers: {
-            accessToken: cookies.userData.accessToken,
-          },
-        })
-        .then((res) => {
-          console.log(res);
-          dispatch(setDiaryDataDetails(res.data.shortId));
-          // setDiary({ ...diary, shortId: res.data.shortId });
-          navigate(`/diary/${res.data.shortId}/diaryView`);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    }
-  };
-  const getDiary = async () => {
-    return await axios.get(url.url + `/diary/${diary.shortId}/view`);
-  };
   return (
     <div className="diary__create">
       <div className="container">
@@ -113,7 +150,7 @@ const DiaryCreate = () => {
                 className="form-control"
                 id="author"
                 name="author"
-                value={diary.author}
+                value={diary.author || ""}
                 onChange={onChangeDiary}
                 readOnly
                 disabled
@@ -123,7 +160,7 @@ const DiaryCreate = () => {
                 className="form-control"
                 id="user_id"
                 name="user_id"
-                value={diary.user_id}
+                value={diary.user_id || ""}
                 onChange={onChangeDiary}
                 hidden
               />
@@ -185,6 +222,8 @@ const DiaryCreate = () => {
               <div className="invalid-feedback">
                 오늘의 감정을 태그로 입력하세요.
               </div>
+              <button onClick={getPapago}>달리 이미지 생성</button>
+              {/* <button onClick={diaryCheck}>diary 상태 체크</button> */}
             </div>
           </div>
           <div className="form-group">
@@ -217,6 +256,16 @@ const DiaryCreate = () => {
               name="content"
               onChange={onChangeDiary}
             ></textarea>
+            <select
+              className="hidden-select"
+              name="hidden"
+              id="hidden"
+              onChange={onChangeDiary}
+              required
+            >
+              <option value="true">숨기기</option>
+              <option value="false">보여주기</option>
+            </select>
           </div>
           <button
             type="button"
@@ -235,6 +284,7 @@ const DiaryCreate = () => {
           >
             뒤로가기
           </button>
+          {dalle ? <img src={`data:image/jpeg;base64,${Base64}`}></img> : <></>}
         </form>
       </div>
     </div>
