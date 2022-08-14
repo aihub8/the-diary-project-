@@ -13,6 +13,7 @@ const HoriScrollList = () => {
   const navigate = useNavigate();
   const [cookies, setCookie, removeCookie] = useCookies(["userData"]);
   const [diaryList, setDiaryList] = useState([]);
+  const [month, setMonth] = useState(new Date().getMonth()+1)
   
   const [reload, setReload] = useState(true);
   //  const user_id = cookies.userData.user_id;
@@ -24,33 +25,43 @@ const HoriScrollList = () => {
       console.log(cookies.userData);
       navigate("/");
     } else {
-      getDiaryList(cookies.userData.user_id).then((res) => {
+      getDiaryList(cookies.userData.user_id,month).then((res) => {
         console.log(res);
       });
     }
   }, [reload]);
 
-  console.log(cookies.userData);
+  //console.log(cookies.userData);
 
-  const getDiaryList = async (user_id) => {
+  const getDiaryList = async (user_id,month) => {
     return await axios
-      .get(url.url + `/diary/${user_id}/getModalList`, {
+      .get(url.url + `/diary/${user_id}/${month}/getModalList`, {
         headers: {
           accessToken: cookies.userData.accessToken,
         },
       })
       .then((res) => {
         setDiaryList(res.data.diaries);
+        setMonth(month); 
         console.log(res);
       })
       .catch((e) => {
         console.log(e);
         navigate("/");
       });
+      
+      //setReload(!reload)
   };
 
   return(
     <div className="wrap">
+      <nav aria-label="Page navigation example">
+  <ul class="pagination">{month-1<1?(<>다음달 없음</>):
+    (<li class="page-item"><a class="page-link" onClick={()=>{getDiaryList(cookies.userData.user_id,month-1)}}>지금띄워주고 있는 이전달 목록:{month-1}월</a></li>)}
+    <li class="page-item"><a class="page-link" >지금띄워주고 있는달 목록:{month}월</a></li>
+    {month+1>12?(<>다음달 없음</>):<li class="page-item"><a class="page-link" onClick={()=>{getDiaryList(cookies.userData.user_id,month+1)}}>지금띄워주고 있는 다음달 목록:{month+1}월</a></li>}
+  </ul>
+</nav>
       <div className="scroll__wrap">
         <div className="modal_card_list_container">  
             {diaryList &&
@@ -119,7 +130,19 @@ const HoriScrollList = () => {
                 </div>
               ))}
           </div>
-
+          {/* <ul class="pagination">
+        {
+      (month-1)<1?(<></>):(<><li className="page-item">
+      <a className="page-link" aria-label="Previous" onClick={()=> getDiaryList(cookies.userData.user_id,month-1)}>
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+    <li className="page-item"><a className="page-link" >{month-1}</a></li></>)
+    }
+    <li class="page-item"><a class="page-link" onClick={()=>{getDiaryList(cookies.userData.user_id,month-1)}}>저번달</a></li>
+    <li class="page-item"><a class="page-link" href="#">{month}</a></li>
+    <li class="page-item"><a class="page-link" href="#">다음달</a></li>
+  </ul> */}
         </div>
 {/* 
         <Routes>

@@ -24,7 +24,7 @@ router.post(
       tag1,
       tag2,
       tag3,
-      img_url,
+      img_url
     } = req.body;
     console.log("/write-page 인자값 확인");
     console.log(req.body);
@@ -38,12 +38,12 @@ router.post(
         content: content,
         emotion: emotion,
         title: title,
-        // reg_date: moment().format("YYYY-MM-DD HH:mm:ss"),
         createdDate: new Date().toLocaleString(),
         updatedDate: new Date().toLocaleString(),
         tag1: tag1,
         tag2: tag1,
         tag3: tag1,
+        month: new Date().getMonth()+1
       });
 
       await newDiary.save(function (err, data) {
@@ -78,13 +78,15 @@ router.get("/:shortId/view", async (req, res, next) => {
   }
 });
 
-//Diary list
-router.get("/:user_id/getList", async (req, res, next) => {
-  //일기목록 모두 가져오기
-  console.log("/getList");
 
-  const { user_id } = req.params;
-  console.log(user_id);
+
+//Modal Diary list
+router.get("/:user_id/:month/getModalList", async (req, res, next) => {
+  //일기목록 모두 가져오기
+  console.log("/getModalList(달별 페이징)");
+
+  const { user_id ,month} = req.params;
+  console.log(user_id,month);
   if (req.query.page < 1) {
     next("Please enter a number greater than 1"); //page가 1보다 작다면 오류처리.
     return;
@@ -92,34 +94,11 @@ router.get("/:user_id/getList", async (req, res, next) => {
   const page = Number(req.query.page || 1); // req.query.page가 null or undifind면 1을 넣어라. 즉, default = 1
   const perPage = Number(req.query.perPage || 10);
   const total = await Diary.countDocuments({});
-  const diaries = await Diary.find({ user_id })
+  const diaries = await Diary.find({ user_id }).find({month})
     .sort({ createdAt: -1 }) //마지막으로 작성된 게시글을 첫번째 인덱스로 가져옴
     .skip(perPage * (page - 1)) //ex> 2페이지라면 5번부터
     .limit(perPage); // 6개씩 가져와줘.
   const totalPage = Math.ceil(total / perPage);
-  console.log(diaries);
-  res.json({ diaries, totalPage });
-});
-
-//Modal Diary list
-router.get("/:user_id/getModalList", async (req, res, next) => {
-  //일기목록 모두 가져오기
-  console.log("/getModalList");
-
-  const { user_id } = req.params;
-  console.log(user_id);
-  // if (req.query.page < 1) {
-  //   next("Please enter a number greater than 1"); //page가 1보다 작다면 오류처리.
-  //   return;
-  // }
-  // const page = Number(req.query.page || 1); // req.query.page가 null or undifind면 1을 넣어라. 즉, default = 1
-  // const perPage = Number(req.query.perPage || 10);
-  const total = await Diary.countDocuments({});
-  const diaries = await Diary.find({ user_id })
-    .sort({ createdAt: -1 }) //마지막으로 작성된 게시글을 첫번째 인덱스로 가져옴
-  //   .skip(perPage * (page - 1)) //ex> 2페이지라면 5번부터
-  //   .limit(perPage); // 6개씩 가져와줘.
-  const totalPage = Math.ceil(total);
   console.log(diaries);
   res.json({ diaries, totalPage });
 });

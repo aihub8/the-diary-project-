@@ -23,9 +23,10 @@ import styled from "styled-components";
 import DiaryNav from "./components/DiaryNav";
 import DiaryBar from "./components/DiaryBar";
 
-// modal
+//modal
 // import Modal from "./pages/diary/Modal";
 // import RabbitKv from "./img/DiaryRabbitKV.svg";
+// import DiaryRabbitButton from "./"
 
 import { useState } from "react";
 

@@ -16,6 +16,7 @@ const DiaryList = () => {
     totalPage: 0, //전체 페이지 수
   });
   const [reload, setReload] = useState(true);
+  const [month, setMonth] = useState(new Date().getMonth()+1)
   //  const user_id = cookies.userData.user_id;
   
   console.log(diaryList);
@@ -32,14 +33,15 @@ const DiaryList = () => {
   }, [reload]);
   console.log(cookies.userData);
 
-  const getDiaryList = async (user_id) => {
+  const getDiaryList = async (user_id,month) => {
     return await axios
-      .get(url.url + `/diary/${user_id}/getList`, {
+      .get(url.url + `/diary/${user_id,month}/getList`, {
         headers: {
           accessToken: cookies.userData.accessToken,
         },
       })
       .then((res) => {
+        console.log(res)
         setDiaryList(res.data.diaries);
       })
       .catch((e) => {
