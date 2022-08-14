@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import { useDispatch } from "react-redux";
 import { setUserLoginDataDetails } from "./../app/reducer/userSlice";
+
 const DiaryNav = () => {
   const navigate = useNavigate();
   const [cookies, setCookie, removeCookie] = useCookies(["userData"]);
@@ -57,8 +58,8 @@ const DiaryNav = () => {
             <DiaryNav3 onClick={() => navigate("/diary/tutorial")}>
               튜토리얼
             </DiaryNav3>
-            <DiaryNav4 onClick={() => navigate("/diary/diaryList")}>
-              목록
+            <DiaryNav4 onClick={() => navigate("/diary/other")}>
+              남의글
             </DiaryNav4>
           </PostItNav1>
           <DiaryHandleContainer>
@@ -69,7 +70,6 @@ const DiaryNav = () => {
                   navigate("/");
                 }}
               >
-                {/* <img src={RabbitKv} alt="" /> */}
                 LogOut
               </a>
             </DiaryHandle>
@@ -79,10 +79,7 @@ const DiaryNav = () => {
         <PostItNav2>
           <LoginNav onClick={onClickLogin}>Login</LoginNav>
           <KaKaoLoginNav>
-            <a href={KAKAO_OAUTH_URI}>
-              {/* <img src={kakaLoginButtonNarrowImg} /> */}
-              &nbsp;&nbsp;&nbsp; Login with Kakao
-            </a>
+            <a href={KAKAO_OAUTH_URI}>&nbsp;&nbsp;&nbsp; Login with Kakao</a>
           </KaKaoLoginNav>
           <SignUpNav onClick={onClickSignUp}> signUp</SignUpNav>
         </PostItNav2>
@@ -117,8 +114,6 @@ const PostItNav1 = styled.div`
   width: 50%;
   display: flex;
   flex-direction: column;
-  /* justify-content: flex-start; */
-  /* justify-content: space-between; */
   justify-content: space-evenly;
   align-items: center;
   padding-left: 0px;
@@ -195,7 +190,6 @@ const DiaryNav4 = styled.a`
 `;
 
 const LoginNav = styled.button`
-  /* margin-top: 30%; */
   width: 100%;
   height: 15%;
   background: #4fed4c;
@@ -205,10 +199,8 @@ const LoginNav = styled.button`
   padding-top: 10%;
   text-align: center;
   border: none;
-  /* padding: 20%; */
 `;
 const KaKaoLoginNav = styled.div`
-  /* width: 5%; */
   background: #fee500;
   width: 100%;
   height: 15%;
@@ -216,7 +208,6 @@ const KaKaoLoginNav = styled.div`
   justify-content: center;
   align-items: center;
   text-align: center;
-  /* padding: 20%; */
   img {
     width: 100%;
   }
@@ -224,7 +215,6 @@ const KaKaoLoginNav = styled.div`
   padding-left: 0%;
 `;
 const SignUpNav = styled.button`
-  /* margin-top: 30%; */
   width: 100%;
   height: 15%;
   background: #2461ff;
@@ -234,7 +224,6 @@ const SignUpNav = styled.button`
   padding-top: 10%;
   text-align: center;
   border: none;
-  /* padding: 20%; */
 `;
 const DiaryHandleContainer = styled.div`
   /* border: 1px solid #000000; */
@@ -246,7 +235,7 @@ const DiaryHandleContainer = styled.div`
   /* justify-content: space-between; */
 `;
 
-const DiaryHandle = styled.a`
+const DiaryHandle = styled.div`
   margin-top: 20%;
   width: 70%;
   height: 70%;
