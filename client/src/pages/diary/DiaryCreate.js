@@ -13,12 +13,40 @@ let Base64 = ""; //dalle이미지의 bast64값
 
 const DiaryCreate = () => {
   const navigate = useNavigate();
-  const [cookies, ,] = useCookies(["userData"]);
   const dispatch = useDispatch(); //action을 사용하기위해 보내주는 역할
-  const now = moment();
-  const currentTime = now.format("YYYY.MM.DD HH:mm:ss"); // 2021-10-09T00:01:13+09:00
+  const [cookies, ,] = useCookies(["userData"]);
   const [diary, setDiary] = useState({});
   const [dalle, setDalle] = useState(false);
+  const [reload, setReload] = useState(true);
+  const now = moment();
+  const currentTime = now.format("YYYY.MM.DD HH:mm:ss"); // 2021-10-09T00:01:13+09:00
+
+  useEffect(() => {
+    if (cookies.userData === undefined) {
+      console.log(cookies.userData);
+      navigate("/");
+    } else {
+      console.log(cookies);
+
+      const receivedInfo = {
+        shortId: "",
+        user_id: cookies.userData.user_id,
+        author: cookies.userData.author,
+        email: cookies.userData.email,
+        title: "",
+        content: "",
+        emotion: "",
+        reg_date: currentTime,
+        tag1: "",
+        tag2: "",
+        tag3: "",
+        img_url: "",
+        hidden: "true",
+      };
+
+      setDiary(receivedInfo);
+    }
+  }, [reload]);
 
   //태그들의 번역된 값(한->영)들을 dalle api에 전송하는 함수
   const dalleReturn = async (
@@ -29,7 +57,6 @@ const DiaryCreate = () => {
     await axios
       .post(
         "https://main-dalle-server-scy6500.endpoint.ainize.ai/generate",
-        // '{"text":"apple", "num_images":1}',
         {
           text: translatedHashTag1 + translatedHashTag2 + translatedHashTag3,
           num_images: 1,
@@ -50,9 +77,9 @@ const DiaryCreate = () => {
       ...diary,
       ["img_url"]: Base64,
     });
-    // console.log(diary)
     setDalle(true);
   };
+
   //태그값들을 파파고 api를 통해 번역된 값을 가져와 저장함.
   const getPapago = async () => {
     alert("이미지 생성 중입니다 잠시만 기다려주세요");
@@ -85,33 +112,6 @@ const DiaryCreate = () => {
     dalleReturn(translatedHashTag1, translatedHashTag2, translatedHashTag3);
   };
 
-  useEffect(() => {
-    if (cookies.userData === undefined) {
-      console.log(cookies.userData);
-      navigate("/");
-    } else {
-      console.log(cookies);
-
-      const receivedInfo = {
-        shortId: "",
-        user_id: cookies.userData.user_id,
-        author: cookies.userData.author,
-        email: cookies.userData.email,
-        title: "",
-        content: "",
-        emotion: "",
-        reg_date: currentTime,
-        tag1: "",
-        tag2: "",
-        tag3: "",
-        img_url: "",
-        hidden: "true",
-      };
-
-      setDiary(receivedInfo);
-    }
-  }, []);
-
   const onChangeDiary = (e) => {
     //글셋팅
     setDiary({
@@ -137,6 +137,12 @@ const DiaryCreate = () => {
         console.log(error.response.data.error);
         alert(error.response.data.error);
       });
+  };
+
+  const onClickSetReroad = () => {
+    console.log("리로드임");
+    setReload((reload) => !reload);
+    navigate("/diary/write");
   };
 
   return (
@@ -192,7 +198,7 @@ const DiaryCreate = () => {
                   id="tag1"
                   name="tag1"
                   onChange={onChangeDiary}
-                  placeholder="tag1"
+                  placeholder="#tag1"
                   required
                 />
 
@@ -202,7 +208,7 @@ const DiaryCreate = () => {
                   id="tag2"
                   name="tag2"
                   onChange={onChangeDiary}
-                  placeholder="tag2"
+                  placeholder="#tag2"
                   required
                 />
 
@@ -212,7 +218,7 @@ const DiaryCreate = () => {
                   id="tag3"
                   name="tag3"
                   onChange={onChangeDiary}
-                  placeholder="tag3"
+                  placeholder="#tag3"
                   required
                 />
                 <button onClick={getPapago}>달리 이미지 생성</button>
@@ -229,15 +235,15 @@ const DiaryCreate = () => {
                   required
                 >
                   <option value="">오늘의 감정지수는?</option>
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                  <option value="5">5</option>
-                  <option value="6">6</option>
-                  <option value="7">7</option>
+                  <option value="1">😁</option>
+                  <option value="2">😂</option>
+                  <option value="3">😫</option>
+                  <option value="4">😒</option>
+                  <option value="5">😤</option>
+                  <option value="6">😡</option>
+                  <option value="7">☠</option>
                 </select>
-                <span class="icoArrow">
+                <span className="icoArrow">
                   <img
                     src="https://freepikpsd.com/media/2019/10/down-arrow-icon-png-7-Transparent-Images.png"
                     alt=""
@@ -283,18 +289,26 @@ const DiaryCreate = () => {
               >
                 뒤로가기
               </button>
+              {/* <button type="button" className="" onClick={onClickSetReroad}>
+                리셋
+              </button> */}
             </div>
           </div>
           <div className="diaryCreate__dalle">
-            <div className="diaryCreate__dalle_img"></div>
-            {/* {dalle ? (
-              <img
-                src={`data:image/jpeg;base64,${Base64}`}
-                style={{ width: "100px", height: "100px" }}
-              ></img>
-            ) : (
-              <></>
-            )} */}
+            <div className="diaryCreate__dalle_img">
+              {dalle ? (
+                <>
+                  <img src={`data:image/jpeg;base64,${Base64}`} alt="" />
+                  <div className="diaryCreate__dalle_text">
+                    ai 이미지 생성 완료!
+                  </div>
+                </>
+              ) : (
+                <div className="diaryCreate__dalle_none">
+                  태그로 생성된 <br></br>ai 이미지를 확인해보세요 !
+                </div>
+              )}
+            </div>
           </div>
         </form>
       </div>

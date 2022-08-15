@@ -9,6 +9,7 @@ import { useCookies } from "react-cookie";
 import { useDispatch } from "react-redux";
 import { setDiaryDataDetails } from "./../../app/reducer/diarySlice";
 import "./../../styles/DiaryView.css";
+// import "./../../styles/diaryView.css";
 const DiaryView = () => {
   const dispatch = useDispatch(); //action을 사용하기위해 보내주는 역할
   const params = useParams();
@@ -75,148 +76,150 @@ const DiaryView = () => {
   //---------------------------------------------------------------------
 
   return (
-    <div className="diary__view">
-      <div className="container">
+    <div className="diaryView">
+      <div className="diaryView__container">
         <form>
-          <div className="form-row">
-            <div className="form-group col-md-6">
-              <label htmlFor="inputEmail4">작성자</label>
-              <input
-                type="title"
-                className="form-control"
-                id="author"
-                name="author"
-                value={currntDiary.author}
-                readOnly
-                disabled
-              />
-              <input
-                type="title"
-                className="form-control"
-                id="user_id"
-                name="user_id"
-                value={currntDiary.user_id}
-                hidden
-              />
+          <div className="diaryView__nonDalle">
+            <div className="setion0">
+              <div className="">오늘날짜: &nbsp;</div>
             </div>
-            <div className="form-group col-md-6">
-              <label htmlFor="inputPassword4">제목</label>
-              <input
-                type="title"
-                className="form-control"
-                id="title"
-                name="title"
-                value={currntDiary.title}
+            <div className="setion1">
+              <div className="">
+                <label htmlFor="inputEmail4">작성자&nbsp;&nbsp;</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="author"
+                  name="author"
+                  value={currntDiary.author}
+                  readOnly
+                  disabled
+                />
+                <input
+                  type="title"
+                  className="form-control"
+                  id="user_id"
+                  name="user_id"
+                  value={currntDiary.user_id}
+                  hidden
+                />
+                <label htmlFor="inputPassword4">
+                  &nbsp;&nbsp;제목 &nbsp;&nbsp;
+                </label>
+                <input
+                  type="title"
+                  className="diaryView__nonDalle_setion1_title"
+                  id="title"
+                  name="title"
+                  placeholder="제목을 입력하세요"
+                  onChange={onChangeDiary}
+                />
+              </div>
+            </div>
+            <div className="setion2">
+              <div className="">오늘의 감정을 태그로 입력하세요.</div>
+              <div className="tags">
+                <input
+                  type="text"
+                  className="form-control"
+                  id="tag1"
+                  name="tag1"
+                  value={currntDiary.tag1}
+                  required
+                  readOnly
+                  disabled
+                />
+
+                <input
+                  type="text"
+                  className="form-control"
+                  id="tag2"
+                  name="tag2"
+                  value={currntDiary.tag2}
+                  required
+                  readOnly
+                  disabled
+                />
+
+                <input
+                  type="text"
+                  className="form-control"
+                  id="tag3"
+                  name="tag3"
+                  value={currntDiary.tag3}
+                  required
+                  readOnly
+                  disabled
+                />
+              </div>
+            </div>
+            <div className="setion3">
+              <div>감정지수를 선택하세요.</div>
+              <div className="selectBox">
+                <select
+                  className="select"
+                  name="emotion"
+                  id="emotion"
+                  value={currntDiary.emotion}
+                  required
+                  readOnly
+                  disabled
+                >
+                  <option value="">{currntDiary.emotion}</option>
+                </select>
+                <span class="icoArrow">
+                  <img
+                    src="https://freepikpsd.com/media/2019/10/down-arrow-icon-png-7-Transparent-Images.png"
+                    alt=""
+                  />
+                </span>
+              </div>
+            </div>
+            <div className="setion4">
+              <textarea
+                className=""
+                id="content"
+                rows="3"
+                name="content"
+                value={currntDiary.content}
                 onChange={onChangeDiary}
                 readOnly
                 disabled
-              />
+              ></textarea>
+            </div>
+            <div className="setion5">
+              <button
+                type="button"
+                className=""
+                // style={{ marginRight: "2%" }}
+                onClick={onClickUpdateButton}
+              >
+                수정하기
+              </button>
+              <button
+                type="button"
+                className=""
+                onClick={() => {
+                  window.history.back();
+                }}
+              >
+                뒤로가기
+              </button>
+              <button
+                type="button"
+                className=""
+                onClick={() => {
+                  onClickDeleteButton(params.id);
+                }}
+              >
+                삭제
+              </button>
             </div>
           </div>
-          <div className="form-row">
-            <div className="col-md-6 mb-3">
-              <label htmlFor="validationCustom03">tag1</label>
-              <input
-                type="text"
-                className="form-control"
-                id="tag1"
-                name="tag1"
-                value={currntDiary.tag1}
-                required
-                readOnly
-                disabled
-              />
-            </div>
-            <div className="col-md-3 mb-3">
-              <label htmlFor="validationCustom04">tag2</label>
-              <input
-                type="text"
-                className="form-control"
-                id="tag2"
-                name="tag2"
-                value={currntDiary.tag2}
-                required
-                readOnly
-                disabled
-              />
-            </div>
-            <div className="col-md-3 mb-3">
-              <label htmlFor="validationCustom05">tag3</label>
-              <input
-                type="text"
-                className="form-control"
-                id="tag3"
-                name="tag3"
-                value={currntDiary.tag3}
-                required
-                readOnly
-                disabled
-              />
-            </div>
+          <div className="diaryView__dalle">
+            <div className="diaryView__dalle_img"></div>
+            <img src={`data:image/jpeg;base64,${currntDiary.img_url}`} alt="" />
           </div>
-          <div className="form-group">
-            <select
-              className="custom-select"
-              name="emotion"
-              id="emotion"
-              value={currntDiary.emotion}
-              required
-              readOnly
-              disabled
-            >
-              <option value="">{currntDiary.emotion}</option>
-              {/* <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-              <option value="6">6</option>
-              <option value="7">7</option> */}
-            </select>
-          </div>
-          <div className="mb-3">
-            <label htmlFor="content" className="form-label">
-              내용
-            </label>
-            <textarea
-              className="form-control"
-              id="content"
-              rows="3"
-              name="content"
-              value={currntDiary.content}
-              onChange={onChangeDiary}
-              readOnly
-              disabled
-            ></textarea>
-            <img src={`data:image/jpeg;base64,${currntDiary.img_url}`}></img>
-            {/* 달리 이미지  */}
-          </div>
-          <button
-            type="button"
-            className="btn btn-dark"
-            style={{ marginRight: "2%" }}
-            onClick={onClickUpdateButton}
-          >
-            수정하기
-          </button>
-          <button
-            type="button"
-            className="btn btn-light"
-            onClick={() => {
-              window.history.back();
-            }}
-          >
-            뒤로가기
-          </button>
-          <button
-            type="button"
-            className="btn btn-light"
-            onClick={() => {
-              onClickDeleteButton(params.id);
-            }}
-          >
-            삭제
-          </button>
         </form>
       </div>
     </div>

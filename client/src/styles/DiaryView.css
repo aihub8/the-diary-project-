@@ -1,3 +1,201 @@
-.diary__view {
-  padding: 3.125em;
+.diaryView {
+  /* padding: 6.25em; */
+  /* position: relative; */
+  position: absolute;
+  /* border: 1px solid midnightblue; */
+  margin-left: 3em;
+  margin-top: 3em;
+  width: 90%;
+  height: 90%;
+
+  z-index: 9999;
+}
+
+.diaryView input,
+textarea,
+button {
+  border-radius: 5px;
+  background: #eee7db;
+  border: 0 solid black;
+}
+.diaryView__container {
+  /* border: 1px solid mediumspringgreen; */
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  /* justify-content: flex-start; */
+}
+.diaryView__nonDalle {
+  /* position: absolute; */
+  /* border: 1px solid blue; */
+  width: 65%;
+  height: 100%;
+  margin: 0px;
+  float: left;
+}
+.diaryView__nonDalle input,
+select,
+button {
+  height: 30px;
+}
+.diaryView__nonDalle .setion0 {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 15px;
+}
+.diaryView__nonDalle .setion1 {
+  margin-top: 2px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 15px;
+}
+.diaryView__nonDalle .setion1 input {
+  width: 40%;
+  text-align: center;
+}
+
+.diaryView__nonDalle .setion2 {
+  width: 100%;
+  margin-bottom: 10px;
+}
+.diaryView__nonDalle .setion2 .tags {
+  padding-top: 10px;
+  width: 95%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+.diaryView__nonDalle .setion2 input {
+  text-align: center;
+  width: 25%;
+  margin: 5px;
+}
+.diaryView__nonDalle .setion2 button {
+  width: 25%;
+  margin: 5px;
+  background: #c1ab86;
+}
+.diaryView__nonDalle .setion2 button:hover {
+  opacity: 1;
+  background: #604e2e;
+  color: white;
+}
+.diaryView__nonDalle .setion3 {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 20px;
+}
+.diaryView__nonDalle .setion3 select {
+  margin-left: 10px;
+  border-radius: 4px;
+  border: 1px solid #c1ab86;
+  outline: 0 none;
+}
+
+.diaryView__nonDalle .setion3 .selectBox .select {
+  width: inherit;
+  height: inherit;
+  background: transparent;
+  outline: 0 none;
+  padding: 0 5px;
+  position: relative;
+  z-index: 3;
+  /* // select가 위로 올라와야 함 */
+}
+.diaryView__nonDalle .setion3 .selectBox .select option {
+  background: #c1ab86;
+  color: #fff;
+  padding: 3px 0;
+  font-size: 16px;
+  border-radius: 4px;
+}
+.diaryView__nonDalle .setion3 .selectBox .icoArrow {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 1;
+  width: 35px;
+  height: inherit;
+  border-left: 2px solid lightcoral;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.diaryView__nonDalle .setion3 .selectBox .icoArrow img {
+  width: 50%;
+  transition: 0.3s;
+  /* // 부드럽게 회전 */
+}
+
+.diaryView__nonDalle .setion3 .selectBox .select:focus + .icoArrow img {
+  transform: rotate(180deg);
+}
+
+/* .diaryView__nonDalle .setion3 select option {
+  background: black;
+  color: #fff;
+  padding: 3px 0;
+} */
+
+.diaryView__nonDalle .setion4 {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 20px;
+  margin-left: 5px;
+  width: 95%;
+  height: 50%;
+}
+.diaryView__nonDalle .setion4 textarea {
+  width: 100%;
+}
+.diaryView__nonDalle .setion5 {
+  width: 95%;
+  /* height: 10%; */
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 20px;
+  margin-left: 5px;
+}
+.diaryView__nonDalle .setion5 {
+  /* border: 1px soild brown; */
+  width: 50%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  margin-bottom: 20px;
+  margin-left: 5px;
+}
+.diaryView__nonDalle .setion5 button {
+  width: 35%;
+}
+.diaryView__dalle {
+  /* border: 1px solid violet; */
+  width: 32%;
+  height: 100%;
+  float: right;
+  margin: 0px;
+  /* padding: 3em; */
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.diaryView__dalle_img {
+  border: 1px solid red;
+  width: 70%;
+  height: 30%;
+  margin-top: 1em;
+}
+
+.diaryView__dalle_img img {
+  z-index: 9999;
+  /* width: 40%; */
+  /* width: 100px;
+  height: 100px; */
 }
