@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import url from "../../data/port.json";
 import "./../../styles/DiaryOtherList.css";
+import RabbitKVSrc from "./../../img/DiaryRabbitKV.svg";
 const DiaryOhterList = () => {
   const navigate = useNavigate();
   const [cookies, setCookie, removeCookie] = useCookies(["userData"]);
@@ -84,103 +85,112 @@ const DiaryOhterList = () => {
     <div className="diaryOtherList_paper">
       <div className="diaryOtherList_paper_content">
         <main className="diaryOtherList">
-          <div className="">
-            <div className="">
-              <div className="">
-                {diaryList &&
-                  diaryList.map((it, index) => (
-                    <div className="" key={index}>
-                      <div className="">
-                        <div className="">
-                          <h5
-                            className=""
-                            onClick={() => {
-                              navigate(`/diary/${it.shortId}/diaryView`);
-                            }}
-                          >
-                            {it.title}
-                          </h5>
-                          <p className="">
-                            {it.content.substring(0, it.content.length / 2)}
-                            <a
-                              onClick={() => {
-                                navigate(`/diary/${it.shortId}/diaryView`);
-                              }}
-                            >
-                              &nbsp;&nbsp;&nbsp;...상세보기
-                            </a>
-                          </p>
-                          <div className=""></div>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
+          {diaryList &&
+            diaryList.map((it, index) => (
+              <div className="" key={index}>
+                <div class="mini-posts">
+                  <article class="mini-post">
+                    <header>
+                      <h3>
+                        <a
+                          onClick={() => {
+                            navigate(`/diary/${it.shortId}/diaryView`);
+                          }}
+                        >
+                          {it.title}
+                        </a>
+                      </h3>
+                      <time class="published" datetime={it.created_at}>
+                        {it.createdDate}
+                      </time>
+                      <a
+                        onClick={() => {
+                          navigate(`/diary/${it.shortId}/diaryView`);
+                        }}
+                        class="author"
+                      >
+                        <img src={RabbitKVSrc} alt="" />
+                      </a>
+                    </header>
+                    <a
+                      onClick={() => {
+                        navigate(`/diary/${it.shortId}/diaryView`);
+                      }}
+                      class="image"
+                    >
+                      <img
+                        src={`data:image/jpeg;base64,${it.img_url}`}
+                        alt=""
+                        style={{ width: "100%", overflow: "hidden" }}
+                      />
+                    </a>
+                  </article>
+                </div>
               </div>
-            </div>
-          </div>
-          <div style={{ textAlign: "center" }}>
-            <nav
-              aria-label="Page navigation example"
-              style={{ display: "inline-block" }}
-            >
-              <ul className="">
-                {page.page - 1 < 1 ? (
-                  <></>
-                ) : (
-                  <>
-                    <li className="">
-                      <a
-                        className=""
-                        aria-label="Previous"
-                        onClick={() => onClickPagination(page.page - 1)}
-                      >
-                        <span aria-hidden="true">&laquo;</span>
-                      </a>
-                    </li>
-                    <li className="">
-                      <a
-                        className=""
-                        onClick={() => onClickPagination(page.page - 1)}
-                      >
-                        {page.page - 1}
-                      </a>
-                    </li>
-                  </>
-                )}
-
-                <li className="">
-                  <a className="" onClick={() => onClickPagination(page.page)}>
-                    {page.page}
-                  </a>
-                </li>
-                {page.page + 1 > page.totalPage ? (
-                  <></>
-                ) : (
-                  <>
-                    <li className="">
-                      <a
-                        className=""
-                        onClick={() => onClickPagination(page.page + 1)}
-                      >
-                        {page.page + 1}
-                      </a>
-                    </li>
-                    <li className="">
-                      <a
-                        className=""
-                        aria-label="Next"
-                        onClick={() => onClickPagination(page.page + 1)}
-                      >
-                        <span aria-hidden="true">&raquo;</span>
-                      </a>
-                    </li>
-                  </>
-                )}
-              </ul>
-            </nav>
-            <button onClick={checkDiary}>다이어리 상태</button>
-          </div>
+            ))}
         </main>
+        <div style={{ textAlign: "center" }}>
+          <nav
+            aria-label="Page navigation example"
+            style={{ display: "inline-block" }}
+          >
+            <ul className="">
+              {page.page - 1 < 1 ? (
+                <></>
+              ) : (
+                <>
+                  <li className="">
+                    <a
+                      className=""
+                      aria-label="Previous"
+                      onClick={() => onClickPagination(page.page - 1)}
+                    >
+                      <span aria-hidden="true">&laquo;</span>
+                    </a>
+                  </li>
+                  <li className="">
+                    <a
+                      className=""
+                      onClick={() => onClickPagination(page.page - 1)}
+                    >
+                      {page.page - 1}
+                    </a>
+                  </li>
+                </>
+              )}
+
+              <li className="">
+                <a className="" onClick={() => onClickPagination(page.page)}>
+                  {page.page}
+                </a>
+              </li>
+              {page.page + 1 > page.totalPage ? (
+                <></>
+              ) : (
+                <>
+                  <li className="">
+                    <a
+                      className=""
+                      onClick={() => onClickPagination(page.page + 1)}
+                    >
+                      {page.page + 1}
+                    </a>
+                  </li>
+                  <li className="">
+                    <a
+                      className=""
+                      aria-label="Next"
+                      onClick={() => onClickPagination(page.page + 1)}
+                    >
+                      <span aria-hidden="true">&raquo;</span>
+                    </a>
+                  </li>
+                </>
+              )}
+            </ul>
+          </nav>
+          <button onClick={checkDiary}>다이어리 상태</button>
+        </div>
       </div>
     </div>
   );

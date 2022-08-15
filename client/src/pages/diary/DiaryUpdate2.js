@@ -292,6 +292,16 @@ const DiaryUpdate2 = () => {
                   ></textarea>
                 </div>
                 <div className="setion5">
+                  <select
+                    className=""
+                    name="hidden"
+                    id="hidden"
+                    onChange={onChangeDiary}
+                    required
+                  >
+                    <option value="true">숨기기</option>
+                    <option value="false">보여주기</option>
+                  </select>
                   <button
                     type="button"
                     style={{ marginRight: "2%" }}

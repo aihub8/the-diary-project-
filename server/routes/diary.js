@@ -186,7 +186,7 @@ router.get("/:user_id/getOtherList", async (req, res, next) => {
   }
   //({user_id: {$ne: user_id}})
   const page = Number(req.query.page || 1); // req.query.page가 null or undifind면 1을 넣어라. 즉, default = 1
-  const perPage = Number(req.query.perPage || 10);
+  const perPage = Number(req.query.perPage || 6);
   const total = await Diary.countDocuments({});
   const diaries = await Diary.find({ user_id: { $ne: user_id } })
     .find({ hidden: "false" })
