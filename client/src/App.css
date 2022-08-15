@@ -46,6 +46,13 @@ body {
   margin: 0;
 }
 
+form {
+  margin: 0px !important;
+  padding: 0px !important;
+  display: inline !important;
+  width: 100% !important;
+}
+
 .diaryMain__Page {
   margin-left: -1.875em;
   position: relative;

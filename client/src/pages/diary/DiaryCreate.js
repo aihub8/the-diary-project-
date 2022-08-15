@@ -15,7 +15,8 @@ const DiaryCreate = () => {
   const navigate = useNavigate();
   const [cookies, ,] = useCookies(["userData"]);
   const dispatch = useDispatch(); //action을 사용하기위해 보내주는 역할
-  const today = moment("YYYY-MM-DD HH:mm:ss");
+  const now = moment();
+  const currentTime = now.format("YYYY.MM.DD HH:mm:ss"); // 2021-10-09T00:01:13+09:00
   const [diary, setDiary] = useState({});
   const [dalle, setDalle] = useState(false);
 
@@ -99,7 +100,7 @@ const DiaryCreate = () => {
         title: "",
         content: "",
         emotion: "",
-        reg_date: today.format(),
+        reg_date: currentTime,
         tag1: "",
         tag2: "",
         tag3: "",
@@ -139,152 +140,162 @@ const DiaryCreate = () => {
   };
 
   return (
-    <div className="diary__create">
-      <div className="container">
+    <div className="diaryCreate">
+      <div className="diaryCreate__container">
         <form>
-          <div className="form-row">
-            <div className="form-group col-md-6">
-              <label htmlFor="inputEmail4">작성자</label>
-              <input
-                type="title"
-                className="form-control"
-                id="author"
-                name="author"
-                value={diary.author || ""}
-                onChange={onChangeDiary}
-                readOnly
-                disabled
-              />
-              <input
-                type="title"
-                className="form-control"
-                id="user_id"
-                name="user_id"
-                value={diary.user_id || ""}
-                onChange={onChangeDiary}
-                hidden
-              />
+          <div className="diaryCreate__nonDalle">
+            <div className="setion0">
+              <div className="">오늘날짜: &nbsp;{currentTime}</div>
             </div>
-            <div className="form-group col-md-6">
-              <label htmlFor="inputPassword4">제목</label>
-              <input
-                type="title"
-                className="form-control"
-                id="title"
-                name="title"
-                placeholder="제목을 입력하세요"
-                onChange={onChangeDiary}
-              />
-            </div>
-          </div>
-          <div className="form-row">
-            <div className="col-md-6 mb-3">
-              <label htmlFor="validationCustom03">tag1</label>
-              <input
-                type="text"
-                className="form-control"
-                id="tag1"
-                name="tag1"
-                onChange={onChangeDiary}
-                placeholder="tag1"
-                required
-              />
-              <div className="invalid-feedback">
-                오늘의 감정을 태그로 입력하세요.
+            <div className="setion1">
+              <div className="">
+                <label htmlFor="inputEmail4">작성자&nbsp;&nbsp;</label>
+                <input
+                  type="text"
+                  className="diaryCreate__nonDalle_setion1_author"
+                  id="author"
+                  name="author"
+                  value={diary.author || ""}
+                  onChange={onChangeDiary}
+                  style={{ width: "30%" }}
+                  readOnly
+                  disabled
+                />
+                <input
+                  type="title"
+                  className=""
+                  id="user_id"
+                  name="user_id"
+                  value={diary.user_id || ""}
+                  onChange={onChangeDiary}
+                  hidden
+                />
+                <label htmlFor="inputPassword4">
+                  &nbsp;&nbsp;제목 &nbsp;&nbsp;
+                </label>
+                <input
+                  type="title"
+                  className="diaryCreate__nonDalle_setion1_title"
+                  id="title"
+                  name="title"
+                  placeholder="제목을 입력하세요"
+                  onChange={onChangeDiary}
+                />
               </div>
             </div>
-            <div className="col-md-3 mb-3">
-              <label htmlFor="validationCustom04">tag2</label>
-              <input
-                type="text"
-                className="form-control"
-                id="tag2"
-                name="tag2"
-                onChange={onChangeDiary}
-                placeholder="tag2"
-                required
-              />
-              <div className="invalid-feedback">
-                오늘의 감정을 태그로 입력하세요.
+            <div className="setion2">
+              <div className="">오늘의 감정을 태그로 입력하세요.</div>
+              <div className="tags">
+                <input
+                  type="text"
+                  className=""
+                  id="tag1"
+                  name="tag1"
+                  onChange={onChangeDiary}
+                  placeholder="tag1"
+                  required
+                />
+
+                <input
+                  type="text"
+                  className=""
+                  id="tag2"
+                  name="tag2"
+                  onChange={onChangeDiary}
+                  placeholder="tag2"
+                  required
+                />
+
+                <input
+                  type="text"
+                  className=""
+                  id="tag3"
+                  name="tag3"
+                  onChange={onChangeDiary}
+                  placeholder="tag3"
+                  required
+                />
+                <button onClick={getPapago}>달리 이미지 생성</button>
               </div>
             </div>
-            <div className="col-md-3 mb-3">
-              <label htmlFor="validationCustom05">tag3</label>
-              <input
-                type="text"
-                className="form-control"
-                id="tag3"
-                name="tag3"
-                onChange={onChangeDiary}
-                placeholder="tag3"
-                required
-              />
-              <div className="invalid-feedback">
-                오늘의 감정을 태그로 입력하세요.
+            <div className="setion3">
+              <div>감정지수를 선택하세요.</div>
+              <div className="selectBox">
+                <select
+                  className="select"
+                  name="emotion"
+                  id="emotion"
+                  onChange={onChangeDiary}
+                  required
+                >
+                  <option value="">오늘의 감정지수는?</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                  <option value="7">7</option>
+                </select>
+                <span class="icoArrow">
+                  <img
+                    src="https://freepikpsd.com/media/2019/10/down-arrow-icon-png-7-Transparent-Images.png"
+                    alt=""
+                  />
+                </span>
               </div>
-              <button onClick={getPapago}>달리 이미지 생성</button>
-              {/* <button onClick={diaryCheck}>diary 상태 체크</button> */}
+            </div>
+            <div className="setion4">
+              <textarea
+                className=""
+                id="content"
+                rows="3"
+                name="content"
+                onChange={onChangeDiary}
+              ></textarea>
+            </div>
+            <div className="setion5">
+              <select
+                className=""
+                name="hidden"
+                id="hidden"
+                onChange={onChangeDiary}
+                required
+              >
+                <option value="true">숨기기</option>
+                <option value="false">보여주기</option>
+              </select>
+
+              <button
+                type="button"
+                className=""
+                style={{ marginRight: "2%" }}
+                onClick={onClickCreateDairy}
+              >
+                일기작성완료
+              </button>
+              <button
+                type="button"
+                className=""
+                onClick={() => {
+                  window.history.back();
+                }}
+              >
+                뒤로가기
+              </button>
             </div>
           </div>
-          <div className="form-group">
-            <select
-              className="custom-select"
-              name="emotion"
-              id="emotion"
-              onChange={onChangeDiary}
-              required
-            >
-              <option value="">오늘의 감정지수는?</option>
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-              <option value="6">6</option>
-              <option value="7">7</option>
-            </select>
-            <div className="invalid-feedback">감정지수를 선택하세요.</div>
+          <div className="diaryCreate__dalle">
+            <div className="diaryCreate__dalle_img"></div>
+            {/* {dalle ? (
+              <img
+                src={`data:image/jpeg;base64,${Base64}`}
+                style={{ width: "100px", height: "100px" }}
+              ></img>
+            ) : (
+              <></>
+            )} */}
           </div>
-          <div className="mb-3">
-            <label htmlFor="content" className="form-label">
-              내용
-            </label>
-            <textarea
-              className="form-control"
-              id="content"
-              rows="3"
-              name="content"
-              onChange={onChangeDiary}
-            ></textarea>
-            <select
-              className="hidden-select"
-              name="hidden"
-              id="hidden"
-              onChange={onChangeDiary}
-              required
-            >
-              <option value="true">숨기기</option>
-              <option value="false">보여주기</option>
-            </select>
-          </div>
-          <button
-            type="button"
-            className="btn btn-dark"
-            style={{ marginRight: "2%" }}
-            onClick={onClickCreateDairy}
-          >
-            일기작성완료
-          </button>
-          <button
-            type="button"
-            className="btn btn-light"
-            onClick={() => {
-              window.history.back();
-            }}
-          >
-            뒤로가기
-          </button>
-          {dalle ? <img src={`data:image/jpeg;base64,${Base64}`}></img> : <></>}
         </form>
       </div>
     </div>

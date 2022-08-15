@@ -125,6 +125,7 @@ const PostItNav1 = styled.div`
 const PostItNav2 = styled.div`
   /* border: 1px solid #000000; */
   margin-top: 20%;
+  margin-left: -10px;
   height: 100%;
   width: 50%;
   display: flex;
@@ -236,8 +237,11 @@ const DiaryHandleContainer = styled.div`
 const LoginNav = styled.a`
   width: 100%;
   height: 10%;
+  margin-bottom: 0.9375em;
+  border-radius: 0px;
   background: #4fed4c;
-  margin-bottom: 10px;
+  box-shadow: 5px 5px 0px #43c941, -5px -5px 0px #5bff57;
+
   display: flex;
   justify-content: center;
   align-items: center;
@@ -245,9 +249,12 @@ const LoginNav = styled.a`
   border: none;
 `;
 const KaKaoLoginNav = styled.div`
+  border-radius: 0px;
   background: #fee500;
+  box-shadow: 5px 5px 0px #d8c300, -5px -5px 0px #ffff00;
   width: 100%;
   height: 10%;
+  margin-bottom: 0.9375em;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -257,45 +264,46 @@ const KaKaoLoginNav = styled.div`
   }
   margin-left: 0%;
   padding-left: 0%;
-  margin-bottom: 10px;
 `;
 const SignUpNav = styled.a`
   width: 100%;
   height: 10%;
-  background: #2461ff;
+  border-radius: 0px;
+  background: #a3fffd;
+  box-shadow: 5px 5px 0px #8bd9d7, -5px -5px 0px #bbffff;
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
   border: none;
 `;
-const DiaryHandleContainer2 = styled.div`
-  /* border: 1px solid #000000; */
-  width: 190%;
-  height: 30%;
-  margin-top: 5em;
-  margin-left: -30px;
-  z-index: 9999;
-  background: #774a20;
-  border-radius: 50px 0px 0px 50px;
-  a {
-    width: 70%;
-    height: 70%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    background: #774a20;
-    border-radius: 0px 50px 50px 0px;
-    box-shadow: rgb(0 0 0/50%) 0px 0px 18px 0px;
-    &:hover {
-      background: #492a0d;
-      opacity: 1;
-    }
-  }
-  /* justify-content: space-between; */
+// const DiaryHandleContainer2 = styled.div`
+//   /* border: 1px solid #000000; */
+//   width: 190%;
+//   height: 30%;
+//   margin-top: 5em;
+//   margin-left: -30px;
+//   z-index: 9999;
+//   background: #774a20;
+//   border-radius: 50px 0px 0px 50px;
+//   a {
+//     width: 70%;
+//     height: 70%;
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+//     text-align: center;
+//     background: #774a20;
+//     border-radius: 0px 50px 50px 0px;
+//     box-shadow: rgb(0 0 0/50%) 0px 0px 18px 0px;
+//     &:hover {
+//       background: #492a0d;
+//       opacity: 1;
+//     }
+//   }
+/* justify-content: space-between; 
 `;
-// const DiaryHandle = styled.div`
+// const DiaryHandle = styled.div`;
 //   /* margin-top: 20%; */
 
 // `;
