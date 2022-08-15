@@ -121,13 +121,14 @@ const DiaryView = () => {
                       className="title"
                       id="title"
                       name="title"
-                      placeholder="제목을 입력하세요"
-                      onChange={onChangeDiary}
+                      value={currntDiary.title}
+                      readOnly
+                      disabled
                     />
                   </div>
                 </div>
                 <div className="setion2">
-                  <div className="text">#Tags</div>
+                  <div className="text">Tags</div>
                   <div className="tags">
                     <input
                       type="text"

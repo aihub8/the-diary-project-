@@ -123,6 +123,7 @@ option {
   background: #c1ab86;
 }
 .diaryCreate__nonDalle .setion2 button:hover {
+  transition: all 0.2% ease 0.5s;
   opacity: 1;
   background: #604e2e;
   color: white;
