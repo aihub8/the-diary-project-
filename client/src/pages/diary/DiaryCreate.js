@@ -13,11 +13,11 @@ let Base64 = ""; //dalle이미지의 bast64값
 
 const DiaryCreate = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch(); //action을 사용하기위해 보내주는 역할
+  const dispatch = useDispatch();
+
   const [cookies, ,] = useCookies(["userData"]);
   const [diary, setDiary] = useState({});
   const [dalle, setDalle] = useState(false);
-  const [reload, setReload] = useState(true);
   const now = moment();
   const currentTime = now.format("YYYY.MM.DD HH:mm:ss"); // 2021-10-09T00:01:13+09:00
 
@@ -46,7 +46,7 @@ const DiaryCreate = () => {
 
       setDiary(receivedInfo);
     }
-  }, [reload]);
+  }, []);
 
   //태그들의 번역된 값(한->영)들을 dalle api에 전송하는 함수
   const dalleReturn = async (
@@ -139,178 +139,178 @@ const DiaryCreate = () => {
       });
   };
 
-  const onClickSetReroad = () => {
-    console.log("리로드임");
-    setReload((reload) => !reload);
-    navigate("/diary/write");
-  };
-
   return (
-    <div className="diaryCreate">
-      <div className="diaryCreate__container">
-        <form>
-          <div className="diaryCreate__nonDalle">
-            <div className="setion0">
-              <div className="">오늘날짜: &nbsp;{currentTime}</div>
-            </div>
-            <div className="setion1">
-              <div className="">
-                <label htmlFor="inputEmail4">작성자&nbsp;&nbsp;</label>
-                <input
-                  type="text"
-                  className="diaryCreate__nonDalle_setion1_author"
-                  id="author"
-                  name="author"
-                  value={diary.author || ""}
-                  onChange={onChangeDiary}
-                  style={{ width: "30%" }}
-                  readOnly
-                  disabled
-                />
-                <input
-                  type="title"
-                  className=""
-                  id="user_id"
-                  name="user_id"
-                  value={diary.user_id || ""}
-                  onChange={onChangeDiary}
-                  hidden
-                />
-                <label htmlFor="inputPassword4">
-                  &nbsp;&nbsp;제목 &nbsp;&nbsp;
-                </label>
-                <input
-                  type="title"
-                  className="diaryCreate__nonDalle_setion1_title"
-                  id="title"
-                  name="title"
-                  placeholder="제목을 입력하세요"
-                  onChange={onChangeDiary}
-                />
-              </div>
-            </div>
-            <div className="setion2">
-              <div className="">오늘의 감정을 태그로 입력하세요.</div>
-              <div className="tags">
-                <input
-                  type="text"
-                  className=""
-                  id="tag1"
-                  name="tag1"
-                  onChange={onChangeDiary}
-                  placeholder="#tag1"
-                  required
-                />
-
-                <input
-                  type="text"
-                  className=""
-                  id="tag2"
-                  name="tag2"
-                  onChange={onChangeDiary}
-                  placeholder="#tag2"
-                  required
-                />
-
-                <input
-                  type="text"
-                  className=""
-                  id="tag3"
-                  name="tag3"
-                  onChange={onChangeDiary}
-                  placeholder="#tag3"
-                  required
-                />
-                <button onClick={getPapago}>달리 이미지 생성</button>
-              </div>
-            </div>
-            <div className="setion3">
-              <div>감정지수를 선택하세요.</div>
-              <div className="selectBox">
-                <select
-                  className="select"
-                  name="emotion"
-                  id="emotion"
-                  onChange={onChangeDiary}
-                  required
-                >
-                  <option value="">오늘의 감정지수는?</option>
-                  <option value="1">😁</option>
-                  <option value="2">😂</option>
-                  <option value="3">😫</option>
-                  <option value="4">😒</option>
-                  <option value="5">😤</option>
-                  <option value="6">😡</option>
-                  <option value="7">☠</option>
-                </select>
-                <span className="icoArrow">
-                  <img
-                    src="https://freepikpsd.com/media/2019/10/down-arrow-icon-png-7-Transparent-Images.png"
-                    alt=""
-                  />
-                </span>
-              </div>
-            </div>
-            <div className="setion4">
-              <textarea
-                className=""
-                id="content"
-                rows="3"
-                name="content"
-                onChange={onChangeDiary}
-              ></textarea>
-            </div>
-            <div className="setion5">
-              <select
-                className=""
-                name="hidden"
-                id="hidden"
-                onChange={onChangeDiary}
-                required
-              >
-                <option value="true">숨기기</option>
-                <option value="false">보여주기</option>
-              </select>
-
-              <button
-                type="button"
-                className=""
-                style={{ marginRight: "2%" }}
-                onClick={onClickCreateDairy}
-              >
-                일기작성완료
-              </button>
-              <button
-                type="button"
-                className=""
-                onClick={() => {
-                  window.history.back();
-                }}
-              >
-                뒤로가기
-              </button>
-              {/* <button type="button" className="" onClick={onClickSetReroad}>
-                리셋
-              </button> */}
-            </div>
-          </div>
-          <div className="diaryCreate__dalle">
-            <div className="diaryCreate__dalle_img">
-              {dalle ? (
-                <>
-                  <img src={`data:image/jpeg;base64,${Base64}`} alt="" />
-                  <div className="diaryCreate__dalle_text">
-                    ai 이미지 생성 완료!
-                  </div>
-                </>
-              ) : (
-                <div className="diaryCreate__dalle_none">
-                  태그로 생성된 <br></br>ai 이미지를 확인해보세요 !
+    <div className="diaryCreatePaper">
+      <div className="diaryCreatePaper_content">
+        <div className="diaryCreate">
+          <div className="diaryCreate__container">
+            <form>
+              <div className="diaryCreate__nonDalle">
+                <div className="setion0">
+                  <div className="">오늘날짜: &nbsp;{currentTime}</div>
                 </div>
-              )}
-            </div>
+                <div className="setion1">
+                  <div className="">
+                    <label htmlFor="inputEmail4">작성자&nbsp;&nbsp;</label>
+                    <input
+                      type="text"
+                      className="author"
+                      id="author"
+                      name="author"
+                      value={diary.author || ""}
+                      onChange={onChangeDiary}
+                      style={{ width: "30%" }}
+                      readOnly
+                      disabled
+                    />
+                    <input
+                      type="text"
+                      className=""
+                      id="user_id"
+                      name="user_id"
+                      value={diary.user_id || ""}
+                      onChange={onChangeDiary}
+                      hidden
+                    />
+                    <label htmlFor="inputPassword4">
+                      &nbsp;&nbsp;제목 &nbsp;&nbsp;
+                    </label>
+                    <input
+                      type="text"
+                      className="title"
+                      id="title"
+                      name="title"
+                      placeholder="제목을 입력하세요"
+                      onChange={onChangeDiary}
+                    />
+                  </div>
+                </div>
+                <div className="setion2">
+                  <div className="text">오늘의 감정을 태그로 입력하세요.</div>
+                  <div className="tags">
+                    <input
+                      type="text"
+                      className=""
+                      id="tag1"
+                      name="tag1"
+                      onChange={onChangeDiary}
+                      placeholder="#tag1"
+                      required
+                    />
+
+                    <input
+                      type="text"
+                      className=""
+                      id="tag2"
+                      name="tag2"
+                      onChange={onChangeDiary}
+                      placeholder="#tag2"
+                      required
+                    />
+
+                    <input
+                      type="text"
+                      className=""
+                      id="tag3"
+                      name="tag3"
+                      onChange={onChangeDiary}
+                      placeholder="#tag3"
+                      required
+                    />
+                    <button className="aiButton" onClick={getPapago}>
+                      AI 이미지 생성
+                    </button>
+                  </div>
+                </div>
+                <div className="setion3">
+                  <div className="text">감정지수를 선택하세요.</div>
+                  <div className="selectBox">
+                    <select
+                      className="select"
+                      name="emotion"
+                      id="emotion"
+                      onChange={onChangeDiary}
+                      required
+                    >
+                      <option value="">오늘의 감정지수는?</option>
+                      <option value="1">😁 I feeel goood</option>
+                      <option value="2">😂 oh, That's so funny</option>
+                      <option value="3">😫 what shooooda do?!</option>
+                      <option value="4">😒 unpleasant, boring</option>
+                      <option value="5">😤 how dare you</option>
+                      <option value="6">😡 angry</option>
+                      <option value="7">🤯 I wanna get outta here...</option>
+                      <option value="8">💖 love</option>
+                      <option value="9">🤕 not in a good condition</option>
+                      <option value="10">💙 I feeel blue</option>
+                    </select>
+                    <span className="icoArrow">
+                      <img
+                        src="https://freepikpsd.com/media/2019/10/down-arrow-icon-png-7-Transparent-Images.png"
+                        alt=""
+                      />
+                    </span>
+                  </div>
+                </div>
+                <div className="setion4">
+                  <textarea
+                    className=""
+                    id="content"
+                    rows="3"
+                    name="content"
+                    onChange={onChangeDiary}
+                  ></textarea>
+                </div>
+                <div className="setion5">
+                  <select
+                    className=""
+                    name="hidden"
+                    id="hidden"
+                    onChange={onChangeDiary}
+                    required
+                  >
+                    <option value="true">숨기기</option>
+                    <option value="false">보여주기</option>
+                  </select>
+
+                  <button
+                    type="button"
+                    className=""
+                    style={{ marginRight: "2%" }}
+                    onClick={onClickCreateDairy}
+                  >
+                    일기작성완료
+                  </button>
+                  <button
+                    type="button"
+                    className=""
+                    onClick={() => {
+                      window.history.back();
+                    }}
+                  >
+                    뒤로가기
+                  </button>
+                </div>
+              </div>
+              <div className="diaryCreate__dalle">
+                <div className="diaryCreate__dalle_img">
+                  {dalle ? (
+                    <>
+                      <img src={`data:image/jpeg;base64,${Base64}`} alt="" />
+                      <div className="diaryCreate__dalle_text">
+                        ai 이미지 생성 완료!
+                      </div>
+                    </>
+                  ) : (
+                    <div className="diaryCreate__dalle_none">
+                      태그로 생성된 <br></br>ai 이미지를 확인해보세요 !
+                    </div>
+                  )}
+                </div>
+              </div>
+            </form>
           </div>
-        </form>
+        </div>
       </div>
     </div>
   );

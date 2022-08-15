@@ -3,9 +3,9 @@ import axios from "axios";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
-import url from "../../data/port.json";
+import url from "./../../data/port.json";
 import "./../../styles/DiaryList.css";
-const DiaryOhterList = () => {
+const DiaryList = () => {
   const navigate = useNavigate();
   const [cookies, setCookie, removeCookie] = useCookies(["userData"]);
   const [diaryList, setDiaryList] = useState([]);
@@ -28,15 +28,14 @@ const DiaryOhterList = () => {
   }, [reload]);
   console.log(cookies.userData);
 
-  const getDiaryList = async (my_id) => {
+  const getDiaryList = async (user_id) => {
     return await axios
-      .get(url.url + `/diary/${my_id}/getOtherList`, {
+      .get(url.url + `/diary/${user_id}/getList`, {
         headers: {
           accessToken: cookies.userData.accessToken,
         },
       })
       .then((res) => {
-        console.log(res);
         setDiaryList(res.data.diaries);
       })
       .catch((e) => {
@@ -44,6 +43,7 @@ const DiaryOhterList = () => {
         navigate("/");
       });
   };
+
   const onClickPagination = (page) => {
     getDiaryList(page);
   };
@@ -76,12 +76,16 @@ const DiaryOhterList = () => {
     // dispatch(setDiaryDataDetails(params.id));
     navigate(`/diary/${shortId}/diaryUpdate`);
   };
-  const checkDiary = () => {
-    console.log(diaryList);
-  };
 
   return (
     <main className="diary__list">
+      <section className="py-5 text-center container">
+        <div className="row py-lg-5">
+          <div className="col-lg-6 col-md-8 mx-auto">
+            <h1 className="fw-light">Diary List</h1>
+          </div>
+        </div>
+      </section>
       <div className="album py-5">
         <div className="container">
           <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
@@ -108,7 +112,29 @@ const DiaryOhterList = () => {
                           &nbsp;&nbsp;&nbsp;...상세보기
                         </a>
                       </p>
-                      <div className="d-flex justify-content-between align-items-center"></div>
+                      <div className="d-flex justify-content-between align-items-center">
+                        <div className="btn-group">
+                          <button
+                            type="button"
+                            onClick={() => {
+                              onClickDeleteButton(it.shortId);
+                            }}
+                            className="btn btn-sm btn-outline-secondary"
+                          >
+                            삭제
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => {
+                              onClickUpdateButton(it.shortId);
+                            }}
+                            className="btn btn-sm btn-outline-secondary"
+                          >
+                            수정
+                          </button>
+                        </div>
+                        <small className="text-muted">9 mins</small>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -179,10 +205,9 @@ const DiaryOhterList = () => {
             )}
           </ul>
         </nav>
-        <button onClick={checkDiary}>다이어리 상태</button>
       </div>
     </main>
   );
 };
 
-export default DiaryOhterList;
+export default DiaryList;

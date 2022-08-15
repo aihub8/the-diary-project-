@@ -1,13 +1,46 @@
-.diaryCreate {
-  /* padding: 6.25em; */
-  /* position: relative; */
+.diaryCreatePaper {
+  /* border: 1px solid mediumspringgreen; */
+  width: 100%;
+  min-width: 400px;
+  height: 100%;
+  margin: 0 auto;
+  /* background: #fafafa; */
+  border-radius: 10px;
+  /* box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3); */
+  overflow: hidden;
+}
+
+.diaryCreatePaper_content {
   position: absolute;
+  top: 30px;
+  right: 0;
+  bottom: 30px;
+  left: 60px;
+  /* background: linear-gradient(transparent, transparent 28px, #eee7db 28px); */
+  background-size: 30px 30px;
+}
+
+.diaryCreate_paper_text {
+  width: 100%;
+  max-width: 100%;
+  height: 100%;
+  max-height: 100%;
+  line-height: 30px;
+  padding: 0 10px;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: #604e2e;
+  font-weight: bold;
+  box-sizing: border-box;
+  z-index: 1;
+}
+
+.diaryCreate {
   /* border: 1px solid midnightblue; */
-  margin-left: 3em;
-  margin-top: 3em;
+  padding-top: 1.5em;
   width: 90%;
   height: 90%;
-
   z-index: 9999;
   font-size: 1.25em;
 }
@@ -28,10 +61,8 @@ button {
   height: 100%;
   display: flex;
   flex-direction: row;
-  /* justify-content: flex-start; */
 }
 .diaryCreate__nonDalle {
-  /* position: absolute; */
   /* border: 1px solid blue; */
   width: 65%;
   height: 100%;
@@ -40,9 +71,16 @@ button {
 }
 .diaryCreate__nonDalle input,
 select,
-button {
+button,
+option {
   height: 1.875em;
 }
+
+.diaryCreate__container input:focus {
+  /* border-color: #0982f0; */
+  outline: 2px solid #c1ab86;
+}
+
 .diaryCreate__nonDalle .setion0 {
   width: 100%;
   display: flex;
@@ -81,6 +119,7 @@ button {
 .diaryCreate__nonDalle .setion2 button {
   width: 25%;
   margin: 0.3125em;
+  height: 2em;
   background: #c1ab86;
 }
 .diaryCreate__nonDalle .setion2 button:hover {
@@ -90,8 +129,11 @@ button {
 }
 .diaryCreate__nonDalle .setion3 {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   margin-bottom: 1.25em;
+}
+.diaryCreate__nonDalle .setion3 .text {
+  margin-bottom: 0.625em;
 }
 .diaryCreate__nonDalle .setion3 select {
   margin-left: 0.625em;
@@ -99,21 +141,19 @@ button {
   border: 1px solid #c1ab86;
   outline: 0 none;
   text-align: center;
+  width: 35%;
+  height: 2.5em;
 }
 
 .diaryCreate__nonDalle .setion3 .selectBox .select {
-  width: inherit;
-  height: inherit;
   background: transparent;
   outline: 0 none;
   padding: 0 5px;
   position: relative;
   z-index: 3;
-  /* // select가 위로 올라와야 함 */
 }
 .diaryCreate__nonDalle .setion3 .selectBox .select option {
-  background: #c1ab86;
-  color: #fff;
+  color: #c1ab86;
   padding: 0.1875em 0;
   font-size: 1em;
   border-radius: 0.25em;
@@ -141,12 +181,6 @@ button {
   transform: rotate(180deg);
 }
 
-/* .diaryCreate__nonDalle .setion3 select option {
-  background: black;
-  color: #fff;
-  padding: 3px 0;
-} */
-
 .diaryCreate__nonDalle .setion4 {
   display: flex;
   flex-direction: row;
@@ -159,26 +193,33 @@ button {
   width: 100%;
   padding: 0.625em;
   font-size: 1.25em;
+  overflow: auto;
+  resize: vertical;
 }
+.diaryCreate__nonDalle .setion4 textarea:focus {
+  outline: 2px solid #c1ab86;
+}
+
 .diaryCreate__nonDalle .setion5 {
   width: 95%;
-  /* height: 10%; */
   display: flex;
   flex-direction: row;
   margin-bottom: 1.25em;
   margin-left: 0.3125em;
 }
-.diaryCreate__nonDalle .setion5 {
-  /* border: 1px soild brown; */
-  width: 70%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-  margin-bottom: 1.25em;
-  margin-left: 0.3125em;
+
+.diaryCreate__nonDalle .setion5 select {
+  width: 35%;
+  height: 2.5em;
+  margin-left: 0.625em;
+  border-radius: 0.25em;
+  border: 1px solid #c1ab86;
+  outline: 0 none;
+  text-align: center;
+  margin-right: 0.3125em;
 }
-.diaryCreate__nonDalle .setion5 button,
-select {
+
+.diaryCreate__nonDalle .setion5 button {
   width: 35%;
   margin-right: 0.3125em;
   text-align: center;
@@ -189,8 +230,10 @@ select {
   background: #604e2e;
   color: white;
 }
+
 .diaryCreate__dalle {
   /* border: 1px solid violet; */
+  position: relative;
   width: 32%;
   height: 100%;
   float: right;
@@ -199,7 +242,6 @@ select {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  position: relative;
 }
 
 .diaryCreate__dalle_img {
@@ -224,6 +266,7 @@ select {
   z-index: 9999;
   width: 90%;
 }
+
 .diaryCreate__dalle_text {
   border: 1px solid #eee7db;
   background: #ffff;
@@ -236,14 +279,13 @@ select {
   height: 10%;
   margin-top: 105%;
   text-align: center;
-  /* bottom: 0px; */
 }
 
 .diaryCreate__dalle_none {
   margin-top: 1em;
   border-radius: 0.3125em;
-  background: #604e2e;
-  color: white;
+  background: #ffff;
+  color: #604e2e;
   border: 1px solid #ffff;
   position: absolute;
   z-index: 9999;
@@ -254,8 +296,3 @@ select {
   align-items: center;
   text-align: center;
 }
-/* .diaryCreate__dalle_none hover {
-  opacity: 1;
-  background: #c1ab86;
-  color: white;
-} */

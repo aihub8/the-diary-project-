@@ -217,7 +217,6 @@ router.get("/:shortId/delete", async (req, res, next) => {
 router.post("/:shortId/update", async (req, res, next) => {
   console.log("/update");
   try {
-    // const { shortId } = req.params;
     const {
       shortId,
       user_id,
