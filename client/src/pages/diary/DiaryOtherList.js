@@ -88,8 +88,8 @@ const DiaryOhterList = () => {
           {diaryList &&
             diaryList.map((it, index) => (
               <div className="" key={index}>
-                <div class="mini-posts">
-                  <article class="mini-post">
+                <div className="mini-posts">
+                  <article className="mini-post">
                     <header>
                       <h3>
                         <a
@@ -97,17 +97,17 @@ const DiaryOhterList = () => {
                             navigate(`/diary/${it.shortId}/diaryView`);
                           }}
                         >
-                          {it.title}
+                          {it.title.substring(0, it.content.length / 2)}
                         </a>
                       </h3>
-                      <time class="published" datetime={it.created_at}>
+                      <time className="published" datetime={it.created_at}>
                         {it.createdDate}
                       </time>
                       <a
                         onClick={() => {
                           navigate(`/diary/${it.shortId}/diaryView`);
                         }}
-                        class="author"
+                        className="author"
                       >
                         <img src={RabbitKVSrc} alt="" />
                       </a>
@@ -116,7 +116,7 @@ const DiaryOhterList = () => {
                       onClick={() => {
                         navigate(`/diary/${it.shortId}/diaryView`);
                       }}
-                      class="image"
+                      className="image"
                     >
                       <img
                         src={`data:image/jpeg;base64,${it.img_url}`}
