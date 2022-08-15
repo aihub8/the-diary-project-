@@ -88,11 +88,13 @@ const DiaryView = () => {
             <form>
               <div className="diaryView__nonDalle">
                 <div className="setion0">
-                  <div className="">Date: &nbsp;{currntDiary.createdDate}</div>
+                  <div className="">
+                    작성일: &nbsp;{currntDiary.createdDate}
+                  </div>
                 </div>
                 <div className="setion1">
                   <div className="">
-                    <label htmlFor="inputEmail4">Author&nbsp;&nbsp;</label>
+                    <label htmlFor="inputEmail4">작성자&nbsp;&nbsp;</label>
                     <input
                       type="text"
                       className="author"
@@ -112,7 +114,7 @@ const DiaryView = () => {
                       hidden
                     />
                     <label htmlFor="inputPassword4">
-                      &nbsp;&nbsp;Title &nbsp;&nbsp;
+                      &nbsp;&nbsp;제목 &nbsp;&nbsp;
                     </label>
                     <input
                       type="title"
@@ -125,7 +127,7 @@ const DiaryView = () => {
                   </div>
                 </div>
                 <div className="setion2">
-                  <div className="text">Your #Tags</div>
+                  <div className="text">#Tags</div>
                   <div className="tags">
                     <input
                       type="text"
@@ -159,7 +161,7 @@ const DiaryView = () => {
                   </div>
                 </div>
                 <div className="setion3">
-                  <div className="text">How did you feel</div>
+                  <div className="text">Feel</div>
                   <div className="selectBox">
                     <select
                       className="select"

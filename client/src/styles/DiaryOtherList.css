@@ -1,0 +1,36 @@
+/* .diaryOtherList {
+  padding: 3.125em;
+} */
+.diaryOtherList_paper {
+  /* position: relative; */
+  width: 100%;
+  /* max-width: 800px; */
+  min-width: 400px;
+  height: 100%;
+  margin: 0 auto;
+  border-radius: 10px;
+  /* background: #fafafa; */
+  /* box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3); */
+  overflow: hidden;
+}
+
+.diaryOtherList_paper_content {
+  position: absolute;
+  top: 30px;
+  right: 0;
+  bottom: 30px;
+  left: 60px;
+  background: linear-gradient(transparent, transparent 28px, #eee7db 28px);
+  background-size: 30px 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.diaryOtherList {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  left: 0;
+  align-items: center;
+}

@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import url from "../../data/port.json";
-import "./../../styles/DiaryList.css";
+import "./../../styles/DiaryOtherList.css";
 const DiaryOhterList = () => {
   const navigate = useNavigate();
   const [cookies, setCookie, removeCookie] = useCookies(["userData"]);
@@ -81,107 +81,108 @@ const DiaryOhterList = () => {
   };
 
   return (
-    <main className="diary__list">
-      <div className="album py-5">
-        <div className="container">
-          <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-            {diaryList &&
-              diaryList.map((it, index) => (
-                <div className="col" key={index}>
-                  <div className="card shadow-sm">
-                    <div className="card-body">
-                      <h5
-                        className="card-title"
-                        onClick={() => {
-                          navigate(`/diary/${it.shortId}/diaryView`);
-                        }}
-                      >
-                        {it.title}
-                      </h5>
-                      <p className="card-text">
-                        {it.content.substring(0, it.content.length / 2)}
-                        <a
-                          onClick={() => {
-                            navigate(`/diary/${it.shortId}/diaryView`);
-                          }}
-                        >
-                          &nbsp;&nbsp;&nbsp;...상세보기
-                        </a>
-                      </p>
-                      <div className="d-flex justify-content-between align-items-center"></div>
+    <div className="diaryOtherList_paper">
+      <div className="diaryOtherList_paper_content">
+        <main className="diaryOtherList">
+          <div className="">
+            <div className="">
+              <div className="">
+                {diaryList &&
+                  diaryList.map((it, index) => (
+                    <div className="" key={index}>
+                      <div className="">
+                        <div className="">
+                          <h5
+                            className=""
+                            onClick={() => {
+                              navigate(`/diary/${it.shortId}/diaryView`);
+                            }}
+                          >
+                            {it.title}
+                          </h5>
+                          <p className="">
+                            {it.content.substring(0, it.content.length / 2)}
+                            <a
+                              onClick={() => {
+                                navigate(`/diary/${it.shortId}/diaryView`);
+                              }}
+                            >
+                              &nbsp;&nbsp;&nbsp;...상세보기
+                            </a>
+                          </p>
+                          <div className=""></div>
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                </div>
-              ))}
+                  ))}
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-      <div style={{ textAlign: "center" }}>
-        <nav
-          aria-label="Page navigation example"
-          style={{ display: "inline-block" }}
-        >
-          <ul className="pagination">
-            {page.page - 1 < 1 ? (
-              <></>
-            ) : (
-              <>
-                <li className="page-item">
-                  <a
-                    className="page-link"
-                    aria-label="Previous"
-                    onClick={() => onClickPagination(page.page - 1)}
-                  >
-                    <span aria-hidden="true">&laquo;</span>
-                  </a>
-                </li>
-                <li className="page-item">
-                  <a
-                    className="page-link"
-                    onClick={() => onClickPagination(page.page - 1)}
-                  >
-                    {page.page - 1}
-                  </a>
-                </li>
-              </>
-            )}
+          <div style={{ textAlign: "center" }}>
+            <nav
+              aria-label="Page navigation example"
+              style={{ display: "inline-block" }}
+            >
+              <ul className="">
+                {page.page - 1 < 1 ? (
+                  <></>
+                ) : (
+                  <>
+                    <li className="">
+                      <a
+                        className=""
+                        aria-label="Previous"
+                        onClick={() => onClickPagination(page.page - 1)}
+                      >
+                        <span aria-hidden="true">&laquo;</span>
+                      </a>
+                    </li>
+                    <li className="">
+                      <a
+                        className=""
+                        onClick={() => onClickPagination(page.page - 1)}
+                      >
+                        {page.page - 1}
+                      </a>
+                    </li>
+                  </>
+                )}
 
-            <li className="page-item active">
-              <a
-                className="page-link"
-                onClick={() => onClickPagination(page.page)}
-              >
-                {page.page}
-              </a>
-            </li>
-            {page.page + 1 > page.totalPage ? (
-              <></>
-            ) : (
-              <>
-                <li className="page-item">
-                  <a
-                    className="page-link"
-                    onClick={() => onClickPagination(page.page + 1)}
-                  >
-                    {page.page + 1}
+                <li className="">
+                  <a className="" onClick={() => onClickPagination(page.page)}>
+                    {page.page}
                   </a>
                 </li>
-                <li className="page-item">
-                  <a
-                    className="page-link"
-                    aria-label="Next"
-                    onClick={() => onClickPagination(page.page + 1)}
-                  >
-                    <span aria-hidden="true">&raquo;</span>
-                  </a>
-                </li>
-              </>
-            )}
-          </ul>
-        </nav>
-        <button onClick={checkDiary}>다이어리 상태</button>
+                {page.page + 1 > page.totalPage ? (
+                  <></>
+                ) : (
+                  <>
+                    <li className="">
+                      <a
+                        className=""
+                        onClick={() => onClickPagination(page.page + 1)}
+                      >
+                        {page.page + 1}
+                      </a>
+                    </li>
+                    <li className="">
+                      <a
+                        className=""
+                        aria-label="Next"
+                        onClick={() => onClickPagination(page.page + 1)}
+                      >
+                        <span aria-hidden="true">&raquo;</span>
+                      </a>
+                    </li>
+                  </>
+                )}
+              </ul>
+            </nav>
+            <button onClick={checkDiary}>다이어리 상태</button>
+          </div>
+        </main>
       </div>
-    </main>
+    </div>
   );
 };
 
