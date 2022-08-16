@@ -158,3 +158,18 @@ p {
     cursor: pointer;
 
 }
+
+/* 달별 디자인 */
+.pagination {
+    text-align: center;
+    font-size: 2rem;
+}
+
+.page-item {
+    border: none;
+    outline: none;
+    background: none;
+    margin-left: 1rem;
+
+    display: inline;
+}

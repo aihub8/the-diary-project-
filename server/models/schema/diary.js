@@ -20,6 +20,7 @@ const Diary = new mongoose.Schema(
     tag2: String,
     tag3: String,
     img_url: String,
+    month: String,
   },
   { timestamps: { createdAt: "created_at" } }
 );
