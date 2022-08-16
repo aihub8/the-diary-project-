@@ -1,0 +1,32 @@
+.signUp_form {
+  /* border: 1px solid #000000; */
+  position: absolute;
+  margin-left: 50%;
+}
+/* 
+.form-control {
+  border-color:rgb(142, 109, 232);
+} */
+
+.siginUp_form-input{
+  outline: 2px solid rgb(255, 255, 255);
+  border:2px solid rgb(255, 46, 46);
+  background-color:rgb(255, 255, 255);
+	width:100%;
+	border-radius:4px;
+	margin: 4px 0;
+	/* outline: none; */
+	padding:4px;
+	box-sizing: border-box;
+	transition:.3s;
+}
+
+.siginUp_form-button{
+	background-color:rgb(123, 82, 235);
+  border:rgb(118, 77, 230);
+  color:rgb(255, 255, 255);
+  border-radius:4px;
+  height: 30px;
+  width: 30%;
+}
+
