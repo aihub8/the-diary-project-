@@ -5,27 +5,44 @@ import "./../styles/Home.css";
 import bubble from "./../img/bubble.svg";
 import jingu2 from "./../img/jingu2.svg";
 import styled from "styled-components";
-
+import Typed from "react-typed";
 const Home = () => {
   const navigate = useNavigate();
   const [cookies, setCookie, removeCookie] = useCookies("userData");
   useEffect(() => {
     console.log(cookies);
   }, []);
-
+  const textLines = [
+    `Welcome to`,
+    `Ai-diary.`,
+    `You can easily`,
+    `Make your own <br></br> Ai-based Diary.`,
+  ];
   return (
     <div className="dali__Home">
       <HomeBubble id="HomeBubble">
         {/* <img src={bubble} className="App-bubble" alt="bubble" /> */}
         <HomeText id="HomeText">
-          <span style={{ fontWeight: "bold" }}>처음 방문하셨나요?</span>
+          <span style={{ fontWeight: "bold", lineHeight: 0.5 }}>
+            {" "}
+            <Typed
+              strings={textLines}
+              typeSpeed={100}
+              backDelay={100}
+              backSpeed={100}
+              smartBackspace={true}
+              startDelay={300}
+              // loop={true}
+              // showCursor={true}
+            />
+          </span>
 
           <button
             type="button"
             className="Homebutton"
             onClick={() => navigate("/diary/tutorial")}
           >
-            일기작성 튜토리얼 보러가기
+            튜토리얼 보러가기
           </button>
           <button
             type="button"

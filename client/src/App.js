@@ -2,8 +2,7 @@ import "./App.css";
 import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import { useState } from "react";
-import toaster from "toastr";
-//Redux
+
 import Store from "./app/Store";
 import { Provider } from "react-redux";
 
