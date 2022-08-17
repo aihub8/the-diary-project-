@@ -72,7 +72,7 @@ const LoginNew = () => {
 
 const Wrapper = styled.div`
   /* border: 2px solid red; */
-  border-radius: 2.5em;
+  border-radius: 2.5em 2.5em 0em 0em;
   background: #836a54;
   box-shadow: inset 5px 5px 8px #735d4a, inset -5px -5px 8px #93775e;
   position: relative;
@@ -96,9 +96,9 @@ const RabbitKv = styled.div`
   /* border: 1px solid brown; */
   position: absolute;
   z-index: 9999;
-  width: 10vmin;
-  margin-top: 0.1vmin;
-  margin-left: -1.875vmin;
+  width: 12vmin;
+  margin-top: -1vmin;
+  margin-left: -4vmin;
   img {
     width: 100%;
   }
@@ -171,7 +171,7 @@ const DiaryHandleContainer3 = styled.div`
   width: 25vmin;
   height: 23vmin;
   margin-top: 40vmin;
-  right: -2.0625em;
+  right: -1.9025em;
   background: #5f462f;
   z-index: 9995;
 `;

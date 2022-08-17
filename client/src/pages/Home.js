@@ -13,10 +13,12 @@ const Home = () => {
     console.log(cookies);
   }, []);
   const textLines = [
-    `Welcome to`,
-    `Ai-diary.`,
-    `You can easily`,
-    `Make your own <br></br> Ai-based Diary.`,
+    `처음이신가요?`,
+    `튜토리얼보러가세요`,
+    // `Welcome to`,
+    // `Ai-diary.`,
+    // `You can easily`,
+    // `Make your own <br></br> Ai-based Diary.`,
   ];
   return (
     <div className="dali__Home">

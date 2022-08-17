@@ -5,12 +5,26 @@ import { useNavigate, useParams } from "react-router-dom";
 import url from "./../../data/port.json";
 import { useCookies } from "react-cookie";
 
+//modal
+import Modal from "./Modal";
+import RabbitKv from "../../img/DiaryRabbitKV.svg";
+import styled from "styled-components";
+
 //Redux
 import { useDispatch } from "react-redux";
 import { setDiaryDataDetails } from "./../../app/reducer/diarySlice";
 import "./../../styles/DiaryView.css";
 
 const DiaryView = () => {
+  //modal
+  const [modalOpen, setModalOpen] = useState(false);
+  const openModal = () => {
+    setModalOpen(true);
+  };
+  const closeModal = () => {
+    setModalOpen(false);
+  };
+
   const dispatch = useDispatch(); //action을 사용하기위해 보내주는 역할
   const params = useParams();
   const [cookies, setCookie, removeCookie] = useCookies(["userData"]);
@@ -27,7 +41,7 @@ const DiaryView = () => {
     "🤕 not in a good condition",
     "💙 I feeel blue",
   ];
-  console.log(emotions);
+  //console.log(emotions);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -245,9 +259,53 @@ const DiaryView = () => {
             </form>
           </div>
         </div>
+        <DiaryRabbitKV>
+          <DiaryRabbitButton onClick={openModal} >
+            <img src={RabbitKv}/>
+          </DiaryRabbitButton>
+          <Modal open={modalOpen} close={closeModal} header="Diary List" />
+        </DiaryRabbitKV>
       </div>
+      
     </div>
+    
   );
 };
+
+//modal style css
+const DiaryRabbitKV = styled.div`
+  // border: 1px solid #000000;
+  // display: absolute;
+  // display: flex;
+  // flex-direction: column;
+  // justify-content: flex-start;
+  /* background: #BC9F84; */
+  // width: 25%;
+  // height: 20%;
+  // top: 80%;
+  // z-index: 9999;
+  // img {
+  //   width: 100%;
+  // }
+`;
+const DiaryRabbitButton = styled.button`
+  border: 0;
+  outline: 0;
+  cursor: pointer;
+  //버튼색 투명하게
+  background-color:transparent;
+  position: absolute;
+  // width: 17%;
+  height: 25%;
+  // height: 300px; width값에 자동으로 원본 사이즈 조정
+  // top: 69%; 우리 다이어리 웹의 기준이 바닥에 있기 때문에 반응형을 바닥을 중심으로 잡았다.
+  bottom: 1%;
+  left: 60%;
+  // z-index: 9999;
+  img {
+    width: 100%;
+    height: 100%
+  }
+`
 
 export default DiaryView;

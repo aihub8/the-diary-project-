@@ -5,6 +5,10 @@ import axios from "axios";
 import url from "./../../data/port.json";
 import $ from "jquery";
 import moment from "moment";
+//modal
+import Modal from "./Modal";
+import RabbitKv from "../../img/DiaryRabbitKV.svg";
+import styled from "styled-components";
 //Redux
 import { useDispatch } from "react-redux";
 import { setDiaryDataDetails } from "./../../app/reducer/diarySlice";
@@ -12,6 +16,15 @@ import "./../../styles/DiaryUpdate2.css";
 let Base64 = ""; //dalle이미지의 bast64값
 
 const DiaryUpdate2 = () => {
+  //modal
+  const [modalOpen, setModalOpen] = useState(false);
+  const openModal = () => {
+    setModalOpen(true);
+  };
+  const closeModal = () => {
+    setModalOpen(false);
+  };
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -19,6 +32,7 @@ const DiaryUpdate2 = () => {
   const [cookies, ,] = useCookies(["userData"]);
   const [currntDiary, setCurrentDiary] = useState({});
   const [dalle, setDalle] = useState(false);
+  const [waitDalle, setWatiDalle]=useState(false)
   const now = moment();
   const currentTime = now.format("YYYY.MM.DD HH:mm:ss"); //
   const currentShortId = params.id;
@@ -57,6 +71,7 @@ const DiaryUpdate2 = () => {
     translatedHashTag2,
     translatedHashTag3
   ) => {
+    setWatiDalle(true)
     await axios
       .post(
         "https://main-dalle-server-scy6500.endpoint.ainize.ai/generate",
@@ -71,6 +86,7 @@ const DiaryUpdate2 = () => {
         }
       )
       .then((res) => {
+        setWatiDalle(false)
         console.log(res.data[0]);
         console.log(currntDiary);
         Base64 = res.data[0];
@@ -117,10 +133,16 @@ const DiaryUpdate2 = () => {
 
   const onChangeDiary = (e) => {
     //글셋팅
+    if(waitDalle){
+      alert("생성중에는 작성할 수 없습니다")
+      return;
+    }
+    else{
     setCurrentDiary({
       ...currntDiary,
       [e.target.name]: e.target.value,
     });
+  }
   };
 
   const deleteDiary = async () => {
@@ -231,6 +253,7 @@ const DiaryUpdate2 = () => {
                       name="tag1"
                       placeholder={currntDiary.tag1}
                       onChange={onChangeDiary}
+                      value={currntDiary.tag1}
                       required
                     />
 
@@ -240,6 +263,7 @@ const DiaryUpdate2 = () => {
                       name="tag2"
                       placeholder={currntDiary.tag2}
                       onChange={onChangeDiary}
+                      value={currntDiary.tag2}
                       required
                     />
                     <input
@@ -248,6 +272,7 @@ const DiaryUpdate2 = () => {
                       name="tag3"
                       placeholder={currntDiary.tag3}
                       onChange={onChangeDiary}
+                      value={currntDiary.tag3}
                       required
                     />
                     <button
@@ -304,6 +329,7 @@ const DiaryUpdate2 = () => {
                     id="hidden"
                     onChange={onChangeDiary}
                     required
+                    value={currntDiary.hidden}
                   >
                     <option value="true">숨기기</option>
                     <option value="false">보여주기</option>
@@ -364,9 +390,51 @@ const DiaryUpdate2 = () => {
             </form>
           </div>
         </div>
+        <DiaryRabbitKV>
+          <DiaryRabbitButton onClick={openModal} >
+            <img src={RabbitKv}/>
+          </DiaryRabbitButton>
+          <Modal open={modalOpen} close={closeModal} header="Diary List" />
+        </DiaryRabbitKV>
       </div>
     </div>
   );
 };
+
+//modal style css
+const DiaryRabbitKV = styled.div`
+  // border: 1px solid #000000;
+  // display: absolute;
+  // display: flex;
+  // flex-direction: column;
+  // justify-content: flex-start;
+  /* background: #BC9F84; */
+  // width: 25%;
+  // height: 20%;
+  // top: 80%;
+  // z-index: 9999;
+  // img {
+  //   width: 100%;
+  // }
+`;
+const DiaryRabbitButton = styled.button`
+  border: 0;
+  outline: 0;
+  cursor: pointer;
+  //버튼색 투명하게
+  background-color:transparent;
+  position: absolute;
+  // width: 17%;
+  height: 25%;
+  // height: 300px; width값에 자동으로 원본 사이즈 조정
+  // top: 69%; 우리 다이어리 웹의 기준이 바닥에 있기 때문에 반응형을 바닥을 중심으로 잡았다.
+  bottom: 1%;
+  left: 60%;
+  // z-index: 9999;
+  img {
+    width: 100%;
+    height: 100%
+  }
+`
 
 export default DiaryUpdate2;

@@ -6,6 +6,7 @@ import { useCookies } from "react-cookie";
 import url from "../../data/port.json";
 import "./../../styles/DiaryOtherList.css";
 import RabbitKVSrc from "./../../img/DiaryRabbitKV.svg";
+
 const DiaryOhterList = () => {
   const navigate = useNavigate();
   const [cookies, setCookie, removeCookie] = useCookies(["userData"]);
