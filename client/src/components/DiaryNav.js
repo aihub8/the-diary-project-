@@ -93,7 +93,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  font-size: 23px;
+  font-size: 3.5vmin;
   font-weight: bold;
   a {
     color: white;
