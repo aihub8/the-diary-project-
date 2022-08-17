@@ -73,14 +73,15 @@ const DiaryOhterList = () => {
                             navigate(`/diary/${it.shortId}/diaryView`);
                           }}
                         >
-                          <span>작성자 : &nbsp;{it.author}</span>
-                          <span>
-                            {it.title.substring(0, it.content.length / 2)}
+                          <span style={{ fontSize: "bold", color: "#604e2e" }}>
+                            &nbsp;{it.author} &nbsp;
                           </span>
+                          <span>&nbsp; {it.title.substring(0, 7)}...</span>
                         </a>
                       </h3>
                       <time className="published" dateTime={it.created_at}>
-                        {it.createdDate}
+                        {/* {it.createdDate} */}
+                        {it.createdDate.substring(0, it.createdDate.length / 2)}
                       </time>
                       <a
                         onClick={() => {
