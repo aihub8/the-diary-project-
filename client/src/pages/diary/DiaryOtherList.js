@@ -10,6 +10,7 @@ const DiaryOhterList = () => {
   const navigate = useNavigate();
   const [cookies, setCookie, removeCookie] = useCookies(["userData"]);
   const [diaryList, setDiaryList] = useState([]);
+  const [userId, setUserId] = useState("");
   const [page, setPage] = useState({
     page: 1, //현재 보고있는 페이지 번호
     totalPage: 0, //전체 페이지 수
@@ -19,13 +20,15 @@ const DiaryOhterList = () => {
     if (cookies.userData === undefined) {
       navigate("/");
     } else {
-      getDiaryList(cookies.userData.user_id).then((res) => {});
+      getDiaryList(cookies.userData.user_id, page.page).then((res) => {});
+      setUserId(cookies.userData.user_id);
     }
   }, []);
 
-  const getDiaryList = async (my_id) => {
+  const getDiaryList = async (my_id, temPage) => {
+    console.log(my_id);
     return await axios
-      .get(url.url + `/diary/${my_id}/getOtherList?page=${page}&perPage=6`, {
+      .get(url.url + `/diary/${my_id}/getOtherList?page=${temPage}&perPage=6`, {
         headers: {
           accessToken: cookies.userData.accessToken,
         },
@@ -35,9 +38,10 @@ const DiaryOhterList = () => {
         // let checkcehck = JSON.stringfy(res);
         // console.log(checkcehck);
         let ttp = res.data.totalPage;
+        console.log(ttp);
         setDiaryList(res.data.diaries);
         setPage({
-          ...page,
+          page: temPage,
           totalPage: ttp,
         });
       })
@@ -47,14 +51,16 @@ const DiaryOhterList = () => {
       });
   };
   const onClickPagination = (page) => {
-    getDiaryList(page);
+    getDiaryList(userId, page);
   };
 
   return (
     <div className="diaryOtherList_paper">
       <div className="diaryOtherList_paper_content">
         <main className="diaryOtherList">
-          {diaryList &&
+          {diaryList !== null &&
+          (diaryList !== undefined) & (diaryList !== 0) ? (
+            diaryList &&
             diaryList.map((it, index) => (
               <div className="" key={index}>
                 <div className="mini-posts">
@@ -100,7 +106,10 @@ const DiaryOhterList = () => {
                   </article>
                 </div>
               </div>
-            ))}
+            ))
+          ) : (
+            <div>아직 게시글이 없습니다 😢</div>
+          )}
         </main>
         <div style={{ textAlign: "center" }} className="diaryOtherList_ul">
           <nav

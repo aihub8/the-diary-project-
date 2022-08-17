@@ -58,6 +58,7 @@ function App() {
                   <Route path=":id">
                     <Route path="diaryView" element={<DiaryView />} />
                     <Route path="diaryUpdate" element={<DiaryUpdate2 />} />
+                    <Route path="getOtherList" element={<DiaryList />} />{" "}
                   </Route>
                 </Route>
               </Routes>
