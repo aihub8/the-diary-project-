@@ -27,7 +27,8 @@ const DiaryView = () => {
     "🤕 not in a good condition",
     "💙 I feeel blue",
   ];
-  console.log(emotions);
+  console.log(params.id);
+  console.log(cookies.userData.user_id);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -205,32 +206,48 @@ const DiaryView = () => {
                   ></textarea>
                 </div>
                 <div className="setion5">
-                  <button
-                    type="button"
-                    className=""
-                    // style={{ marginRight: "2%" }}
-                    onClick={onClickUpdateButton}
-                  >
-                    수정하기
-                  </button>
-                  <button
-                    type="button"
-                    className=""
-                    onClick={() => {
-                      window.history.back();
-                    }}
-                  >
-                    뒤로가기
-                  </button>
-                  <button
-                    type="button"
-                    className=""
-                    onClick={() => {
-                      onClickDeleteButton(params.id);
-                    }}
-                  >
-                    삭제
-                  </button>
+                  {cookies.userData.user_id === currntDiary.user_id ? (
+                    <>
+                      <button
+                        type="button"
+                        className=""
+                        // style={{ marginRight: "2%" }}
+                        onClick={onClickUpdateButton}
+                      >
+                        수정하기
+                      </button>
+                      <button
+                        type="button"
+                        className=""
+                        onClick={() => {
+                          window.history.back();
+                        }}
+                      >
+                        뒤로가기
+                      </button>
+                      <button
+                        type="button"
+                        className=""
+                        onClick={() => {
+                          onClickDeleteButton(params.id);
+                        }}
+                      >
+                        삭제
+                      </button>
+                    </>
+                  ) : (
+                    <>
+                      <button
+                        type="button"
+                        className=""
+                        onClick={() => {
+                          window.history.back();
+                        }}
+                      >
+                        뒤로가기
+                      </button>
+                    </>
+                  )}
                 </div>
               </div>
               <div className="diaryView__dalle">
