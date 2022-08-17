@@ -6,7 +6,7 @@ import { Provider } from "react-redux";
 
 //components
 import Login from "./pages/Login";
-import Tutorial from "./pages/diary/Tutorial";
+// import Tutorial from "./pages/diary/Tutorial";
 import Dali from "./pages/diary/Dali";
 import Home from "./pages/Home";
 
@@ -28,6 +28,7 @@ import DiaryBar from "./components/DiaryBar";
 // import RabbitKv from "./img/DiaryRabbitKV.svg";
 
 import { useState } from "react";
+import TutorialModal from "./pages/diary/TutorialModal";
 
 function App() {
 
@@ -48,13 +49,19 @@ function App() {
   return (
     <Provider store={Store}>
       <Router>
+      
         <MainWrapper color={darkMode ? "#ffeace" : "#ffeace"}>
+          <Routes>
+            <Route path="*" element={<TutorialModal />} id="tutorialModalId" />  
+          </Routes>
           <PageWrap>
+          <DiaryNav />
             <DiaryBar />
             <DiaryPageBg1>
               <DiaryPageBg2>
                 <DiaryPage>
                   <Routes>
+                    
                     <Route path="/" element={<Login />} />
                     <Route path="oauth">
                       <Route
@@ -67,7 +74,7 @@ function App() {
                       {/** 첫로그인후 메인 home */}
                       <Route path="home" element={<Home />} />
                       {/** 일기장 작성 튜토리얼 페이지 */}
-                      <Route path="tutorial" element={<Tutorial />} />
+                      {/* <Route path="tutorial" element={<Tutorial />} /> */}
                       {/**글작성 */}
                       <Route path="dali" element={<Dali />} />
                       {/**달리 */}
@@ -86,14 +93,14 @@ function App() {
                   </Routes>
                   {/* <DiaryRabbitKV>
                     <DiaryRabbitButton onClick={openModal} >
-                      <img src={RabbitKv}/>
+                    <img src={RabbitKv}/>
                     </DiaryRabbitButton>
-                      <Modal open={modalOpen} close={closeModal} header="Modal heading" />
+                    <Modal open={modalOpen} close={closeModal} header="Modal heading" />
                   </DiaryRabbitKV> */}
                 </DiaryPage>
               </DiaryPageBg2>
             </DiaryPageBg1>
-            <DiaryNav />
+
           </PageWrap>
         </MainWrapper>
       </Router>

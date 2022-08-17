@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 import RabbitKv from "../../img/DiaryRabbitKV_tuto.svg";
+import { keyframes } from "styled-components";
 
 
 const Tutorial = () => {
@@ -31,7 +32,7 @@ const Tutorial = () => {
 
 			<TutorialBox__left>
 				Title
-				<TutorialInputBox />
+				<TutorialInputBox  />
 			</TutorialBox__left>
 
 			<TutorialBox__left>
@@ -128,6 +129,8 @@ const TutorialContainer__right = styled.div`
 const TutorialBox__left = styled.div`
 	height: 10%;
 	padding-top: 4%;
+
+	animation: Tutorial__aniRedBox;
 	
 `
 const TutorialBox__right = styled.div`
@@ -224,5 +227,13 @@ const DiaryRabbitButton_tuto = styled.button`
     height: 100%
   }
 `
+const Tutorial__aniRedBox = keyframes`
+
+  border: solid #FF0000 5px;
+  border-color: red;
+  
+`
+
+
 
 export default Tutorial;

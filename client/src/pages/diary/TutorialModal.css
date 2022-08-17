@@ -1,0 +1,50 @@
+.tutomodal {
+    display: none;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    /* z-index: 100000; */
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+.tutorialModalContainer {
+    /* width: 90%; */
+    /* max-width: 450px; */
+    margin: 0 auto;
+    /* border-radius: 0.3rem; */
+    background-color: #ece6cc;
+    /* 팝업이 열릴때 스르륵 열리는 효과 */
+    animation: modal-show 1s;
+    overflow: hidden;
+
+    /* 내가 새로 추가한 부분 */
+    width: 70%;
+    /* max-height: 70%; */
+    min-height: 70%;
+    top: 0%;
+    transform: translate(0, 0%);
+
+}
+
+.tutomodal.opentutoModal {
+    display: flex;
+    align-items: center;
+    /* 팝업이 열릴때 스르륵 열리는 효과 */
+    animation: modal-bg-show 1s;
+}
+
+.tutorialModalSVG {
+    margin-left: 0;
+	margin-top: 2%;
+	margin-bottom: 0%;
+
+	padding-left: 3%;
+	bottom: 0%;
+	width: 50%;
+	height: 50%;
+	background: #fffdfd;	
+	border-radius: 0px 50px 0px 0px;
+
+}

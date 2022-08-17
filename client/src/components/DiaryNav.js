@@ -1,5 +1,5 @@
 import React from "react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
@@ -7,7 +7,20 @@ import kakaLoginButtonImg from "./../img/kakao_login_medium.png";
 import kakaLoginButtonNarrowImg from "./../img/kakao_login_large_narrow.png";
 import RabbitKv from "./../img/DiaryRabbitKV.svg";
 
+// tutorialSVG
+import TutorialModal from "../pages/diary/TutorialModal";
+import ModalPortal from "../pages/diary/ModalPortal";
+
 const DiaryNav = () => {
+  //modal
+  const [modalOpen, setModalOpen] = useState(false);
+  const openModal = () => {
+    setModalOpen(true);
+  };
+  const closeModal = () => {
+    setModalOpen(false);
+  };
+
   const navigate = useNavigate();
   const [cookies, setCookie, removeCookie] = useCookies(["userData"]);
 
@@ -36,9 +49,17 @@ const DiaryNav = () => {
           <DiaryNav2 onClick={() => navigate("/diary/write")}>
             일기쓰기
           </DiaryNav2>
-          <DiaryNav3 onClick={() => navigate("/diary/tutorial")}>
+          {/* <DiaryNav3 onClick={() => navigate("/diary/tutorial")}> */}
+          <DiaryNav3 onClick={openModal}>
             튜토리얼
-          </DiaryNav3>
+          </DiaryNav3>{
+            modalOpen && (
+              <ModalPortal closePortal={closeModal}>
+                <TutorialModal />
+              </ModalPortal>
+            )
+          }
+          
           <DiaryNav4 onClick={() => navigate("/diary/diaryList")}>
             목록
           </DiaryNav4>
@@ -153,7 +174,7 @@ const DiaryNav2 = styled.a`
     opacity: 1;
   }
 `;
-const DiaryNav3 = styled.a`
+const DiaryNav3 = styled.button`
   width: 70%;
   height: 7%;
   background: #cd83e7;
