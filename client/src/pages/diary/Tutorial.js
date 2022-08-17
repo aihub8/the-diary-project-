@@ -44,21 +44,21 @@ const Tutorial = () => {
   };
 
   return (
-    // <div className="tutorial">
-    // <div className="paper">
-    //   <div className="paper-content">
-    //     {/* <textarea autoFocus>
-    //       Hello world !&#10;Here's a paper textarea tag.
-    //     </textarea> */}
-    //     <div className="paper-text">
-    //       {" "}
-    //       <p>Hello world !&#10;Here's a paper textarea tag.</p>
-    //       <p>튜토리얼 정 안된다면 이걸로 해도 될듯</p>
-    //     </div>
-    //   </div>
-    // </div>
-    // </div>
-    <div>tutorial</div>
+    <div className="tutorial">
+      <div className="paper">
+        <div className="paper-content">
+          {/* <textarea autoFocus>
+          Hello world !&#10;Here's a paper textarea tag.
+        </textarea> */}
+          <div className="paper-text">
+            {" "}
+            <p>Hello world !&#10;Here's a paper textarea tag.</p>
+            <p>튜토리얼 정 안된다면 이걸로 해도 될듯</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    // <div>tutorial</div>
   );
 };
 

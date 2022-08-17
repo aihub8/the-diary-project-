@@ -79,6 +79,7 @@
   -webkit-flex-direction: column-reverse;
   -ms-flex-direction: column-reverse;
   flex-direction: column-reverse;
+  /* justify-content: center; */
   background: #ffffff;
   border: solid 1px #c1ab86;
   /* margin: 0 0 21em 0; */
@@ -89,6 +90,11 @@
   height: 33vmin;
 }
 
+.mini-post-title {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
 .mini-post .image {
   overflow: hidden;
   width: 99%;

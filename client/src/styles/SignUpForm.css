@@ -1,34 +1,35 @@
 .signUp_form {
   /* border: 1px solid #000000; */
-  /* position: absolute; */
+  position: absolute;
   margin-left: 0%;
-  width: 30%;
+  padding: auto;
+  margin: auto;
+  font-size: 2.5vmin;
+  z-index: 9999;
 }
-/* .form-control {
-  border-color:rgb(142, 109, 232);
-} */
 
 .siginUp_form-input {
   outline: 2px solid rgb(255, 255, 255);
   border: 2px solid rgb(255, 46, 46);
   background-color: rgb(255, 255, 255);
-  width: 100%;
-  border-radius: 4px;
-  margin: 4px 0;
+  width: 37vmin;
+  height: 4vmin;
+  border-radius: 0.25em;
+  margin: 0.25em 0;
   /* outline: none; */
-  padding: 4px;
+  padding: 0.25em;
   box-sizing: border-box;
   transition: 0.3s;
 }
 
 .siginUp_form-input:focus {
-  outline: 2.5px solid rgb(255, 255, 255);
-  border: 2.5px solid rgb(255, 0, 0);
+  outline: 0.15625em solid rgb(255, 255, 255);
+  border: 0.15625em solid rgb(255, 0, 0);
   background-color: rgb(255, 255, 255);
-  width: 100%;
-  border-radius: 4px;
-  margin: 4px 0;
-  padding: 4px;
+  width: 37vmin;
+  border-radius: w;
+  margin: 0.25em 0;
+  padding: 0.25em;
   box-sizing: border-box;
   transition: 0.3s;
 }
@@ -37,8 +38,8 @@
   background-color: rgb(123, 82, 235);
   border: rgb(118, 77, 230);
   color: rgb(255, 255, 255);
-  border-radius: 4px;
-  height: 30px;
+  border-radius: 0.25em;
+  height: 5vmin;
   width: 30%;
 }
 
@@ -46,8 +47,8 @@
   background-color: rgb(113, 69, 234);
   border: rgb(109, 66, 229);
   color: rgb(255, 255, 255);
-  border-radius: 4px;
-  height: 30px;
+  border-radius: 0.25em;
+  height: 5vmin;
   width: 30%;
 }
 

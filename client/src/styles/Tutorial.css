@@ -1,6 +1,7 @@
 .tutorial {
   /* padding: 3.125em; */
   font-family: "Roboto", sans-serif;
+  z-index: 9999;
 }
 
 .paper {
@@ -11,13 +12,13 @@
   height: 100%;
   margin: 0 auto;
   border-radius: 10px;
-  /* background: #fafafa; */
-  /* box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3); */
+  background: #fafafa;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
   overflow: hidden;
 }
 .paper:before {
   content: "";
-  position: absolute;
+  /* position: absolute; */
   top: 0;
   bottom: 0;
   left: 0;
@@ -29,7 +30,7 @@
 }
 
 .paper-content {
-  position: absolute;
+  /* position: absolute; */
   top: 30px;
   right: 0;
   bottom: 30px;

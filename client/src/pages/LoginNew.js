@@ -72,7 +72,7 @@ const LoginNew = () => {
 
 const Wrapper = styled.div`
   /* border: 2px solid red; */
-  border-radius: 2.5em;
+  /* border-radius: 2.5em; */
   background: #836a54;
   box-shadow: inset 5px 5px 8px #735d4a, inset -5px -5px 8px #93775e;
   position: relative;

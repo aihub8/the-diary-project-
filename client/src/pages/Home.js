@@ -21,11 +21,10 @@ const Home = () => {
   return (
     <div className="dali__Home">
       <HomeBubble id="HomeBubble">
-        {/* <img src={bubble} className="App-bubble" alt="bubble" /> */}
         <HomeText id="HomeText">
           <span style={{ fontWeight: "bold", lineHeight: 0.5 }}>
-            {" "}
-            <Typed
+            '{" "}
+            {/* <Typed
               strings={textLines}
               typeSpeed={100}
               backDelay={100}
@@ -34,7 +33,10 @@ const Home = () => {
               startDelay={300}
               // loop={true}
               // showCursor={true}
-            />
+            />' */}
+            Welcome to Ai-diary.
+            {/* You can easily Make your own
+            <br></br> Ai-based Diary. */}
           </span>
 
           <button
@@ -54,7 +56,6 @@ const Home = () => {
         </HomeText>
       </HomeBubble>
       <HomeJingu id="HomeJingu">
-        {/* <img src={jingu2} className="App-jingu2" alt="jingu2" /> */}
         <JinguImg />
       </HomeJingu>
     </div>
@@ -75,7 +76,6 @@ const HomeBubble = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  /* pointer-events: none; */
 `;
 const HomeText = styled.div`
   /* border: 2px solid blue; */

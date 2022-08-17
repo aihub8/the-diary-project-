@@ -68,11 +68,15 @@ const DiaryOhterList = () => {
                     <header>
                       <h3>
                         <a
+                          className="mini-post-title"
                           onClick={() => {
                             navigate(`/diary/${it.shortId}/diaryView`);
                           }}
                         >
-                          {it.title.substring(0, it.content.length / 2)}
+                          <span>작성자 : &nbsp;{it.author}</span>
+                          <span>
+                            {it.title.substring(0, it.content.length / 2)}
+                          </span>
                         </a>
                       </h3>
                       <time className="published" dateTime={it.created_at}>
