@@ -3,27 +3,100 @@ const router = Router();
 const asyncHandler = require("./../utils/async-handler");
 const cryto = require("crypto");
 const { User } = require("../models");
+const { Diary } = require("../models/index");
 const jwt = require("jsonwebtoken");
 const jwtConfig = require("./../config/jwtConfig");
 const nodeMailer = require("nodemailer");
-
+const { body, validationResult } = require('express-validator');
+const {userValidatorErrorChecker} = require('../utils/userValidator')
 router.post(
-  "/signUp",
+  "/signUp",[
+    //형식 유효성 검사 
+    body('email').exists().isEmail(), // 1. 이메일 형식 문제
+    body('email').exists().custom(value => {   // 2. 존재하는 이메일
+      return User.findOne({email:value}).then(user => {
+        if (user) {
+          return Promise.reject('E-mail already in use');
+        }
+      });
+    }),
+    // body('password').custom(value => {
+    //     const regexPassword = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z])(?=.*[!@#\$%\^&\*]).{8,16}$/; 
+    //     const isNotValidPassword = !regexPassword.test(value);
+    //     console.log(isNotValidPassword)
+    //     if(isNotValidPassword) {
+    //       return new Error('Body must have valid password (At Least 1 Upper Case, 1 lower case, 1 spacial character, 1 numeric character)');
+    //     }
+    //     else{
+    //       new Error("?"); 
+    //     }
+    //   }),
+     
+      // body('password')
+      // .custom(value=>{  //위에 비밀번호 내부 에러 때문에 진행이 안되고 넘어감 
+      //   if(value ===body('rePassword')){
+      //     return Promise.reject("different")
+      //   }
+      // }),
+      // body('rePassword').custom((value,{req})=>{
+      //   if(value!==req.body.password){
+      //     //return Promise.reject("different")
+      //     throw new Error("diff")
+      //   }
+      // }),
+      // body('name').isLength({min:1}),
+    userValidatorErrorChecker
+  ],
+
+
   asyncHandler(async (req, res, next) => {
-    const { email, password, name } = req.body;
+    const { email, password, rePassword ,name} = req.body;
     console.log(`email: ${email}, password: ${password}, name: ${name}`);
     let hashPassword = passwordHash(password);
 
-    const checkEmail = await User.findOne({ email: email });
-    console.log(`checkEmail: ${checkEmail}`);
-    if (checkEmail) {
-      // throw new Error("이미 가입된 이메일입니다.");
+    // const checkEmail = await User.findOne({ email: email });
+    // console.log(`checkEmail: ${checkEmail}`);
+    // if (checkEmail) {
+    //   // throw new Error("이미 가입된 이메일입니다.");
+    //   res.status(500);
+    //   res.json({
+    //     error: "이미 가입된 이메일입니다.",
+    //   });
+    //   return;
+    // }
+    
+      const regexPassword = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z])(?=.*[!@#\$%\^&\*]).{8,16}$/; 
+      const isNotValidPassword = !regexPassword.test(password);
+      console.log(isNotValidPassword)
+      if(isNotValidPassword) {
+        res.status(500);
+      res.json({
+        value:"password", 
+        error:"비밀번호를 확인하세요"
+      })
+      return;
+      }
+      
+    
+
+    if(password !== rePassword){
       res.status(500);
       res.json({
-        error: "이미 가입된 이메일입니다.",
-      });
+        value:"rePassword", 
+        error:"비밀번호가 비밀번호 확인과 일치 하지 않습니다"
+      })
       return;
     }
+
+    if(!name){
+      res.status(500); 
+      res.json({
+        value:"name",
+        error:"내용을 확인하세요."
+      })
+      return 
+    }
+    
 
     await User.create({
       email,
@@ -154,4 +227,19 @@ const passwordHash = (password) => {
   return cryto.createHash("sha1").update(password).digest("hex");
 };
 
+
+router.get('/:email/findEmail',async(req,res,next)=>{
+  const {email} = req.params; 
+  //console.log(email)
+  const isUserCheck = await User.findOne({ email });
+  if(isUserCheck){
+    res.json({result:"존재하는이메일"})
+  }
+  else{
+    res.status(500);
+      res.json({
+        error:"존재하는 이메일입니다"
+      })
+  }
+})
 module.exports = router;

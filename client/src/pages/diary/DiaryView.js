@@ -5,17 +5,18 @@ import { useNavigate, useParams } from "react-router-dom";
 import url from "./../../data/port.json";
 import { useCookies } from "react-cookie";
 
-//Redux
-import { useDispatch } from "react-redux";
-import { setDiaryDataDetails } from "./../../app/reducer/diarySlice";
-
 //modal
 import Modal from "./Modal";
 import RabbitKv from "../../img/DiaryRabbitKV.svg";
 import styled from "styled-components";
 
+//Redux
+import { useDispatch } from "react-redux";
+import { setDiaryDataDetails } from "./../../app/reducer/diarySlice";
+import "./../../styles/DiaryView.css";
+
 const DiaryView = () => {
-//modal
+  //modal
   const [modalOpen, setModalOpen] = useState(false);
   const openModal = () => {
     setModalOpen(true);
@@ -28,17 +29,27 @@ const DiaryView = () => {
   const params = useParams();
   const [cookies, setCookie, removeCookie] = useCookies(["userData"]);
   const [currntDiary, setCurrentDiary] = useState({});
-  // const [reload, setReload] = useState(true);
+  const emotions = [
+    "😁 I feeel goood",
+    "😂 oh, That's so funny",
+    "😫 what shooooda do?!",
+    "😒 unpleasant, boring",
+    "😤 how dare you",
+    "😡 angry",
+    "🤯 I wanna get outta here...",
+    "💖 love",
+    "🤕 not in a good condition",
+    "💙 I feeel blue",
+  ];
+  //console.log(emotions);
   const navigate = useNavigate();
-  
+
   useEffect(() => {
     getDiaryView(params.id).then((res) => {
-      console.log(res);
+      console.log(res.data);
       setCurrentDiary(res.data);
     });
   }, [params]);
-
-  //---------------------------delete-----------------------------------
 
   const getDiaryView = async () => {
     return await axios.get(url.url + `/diary/${params.id}/view`, {
@@ -53,6 +64,7 @@ const DiaryView = () => {
       [e.target.name]: e.target.value,
     });
   };
+
   const deleteDiary = async () => {
     return await axios.get(url.url + `/diary/${params.id}/delete`, {
       headers: {
@@ -63,7 +75,6 @@ const DiaryView = () => {
 
   const onClickDeleteButton = () => {
     if (window.confirm("삭제 하시겠습니까?")) {
-      //예
       deleteDiary(params.id)
         .then((res) => {
           alert("삭제가 완료됐습니다.");
@@ -73,12 +84,9 @@ const DiaryView = () => {
           console.log(e);
         });
     } else {
-      //아니오.
       return;
     }
   };
-
-  //----------------------------------update------------------------------
 
   const onClickUpdateButton = () => {
     console.log(params.id);
@@ -86,149 +94,171 @@ const DiaryView = () => {
     navigate(`/diary/${params.id}/diaryUpdate`);
   };
 
-  //---------------------------------------------------------------------
   return (
-    <div className="album">
-      <div className="container">
-        <form>
-          <div className="form-row">
-            <div className="form-group col-md-6">
-              <label htmlFor="inputEmail4">작성자</label>
-              <input
-                type="title"
-                className="form-control"
-                id="author"
-                name="author"
-                value={currntDiary.author}
-                readOnly
-                disabled
-              />
-              <input
-                type="title"
-                className="form-control"
-                id="user_id"
-                name="user_id"
-                value={currntDiary.user_id}
-                hidden
-              />
-            </div>
-            <div className="form-group col-md-6">
-              <label htmlFor="inputPassword4">제목</label>
-              <input
-                type="title"
-                className="form-control"
-                id="title"
-                name="title"
-                value={currntDiary.title}
-                onChange={onChangeDiary}
-                readOnly
-                disabled
-              />
-            </div>
+    <div className="diaryViewPaper">
+      <div className="diaryView_content">
+        <div className="diaryView">
+          <div className="diaryView__container">
+            <form>
+              <div className="diaryView__nonDalle">
+                <div className="setion0">
+                  <div className="">
+                    작성일 : &nbsp;{currntDiary.createdDate}
+                  </div>
+                </div>
+                <div className="setion1">
+                  <div className="">
+                    <label htmlFor="inputEmail4">작성자&nbsp;&nbsp;</label>
+                    <input
+                      type="text"
+                      className="author"
+                      id="author"
+                      name="author"
+                      value={currntDiary.author}
+                      style={{ width: "30%" }}
+                      readOnly
+                      disabled
+                    />
+                    <input
+                      type="title"
+                      className="form-control"
+                      id="user_id"
+                      name="user_id"
+                      value={currntDiary.user_id}
+                      hidden
+                    />
+                    <label htmlFor="inputPassword4">
+                      &nbsp;&nbsp;제목 &nbsp;&nbsp;
+                    </label>
+                    <input
+                      type="title"
+                      className="title"
+                      id="title"
+                      name="title"
+                      value={currntDiary.title}
+                      readOnly
+                      disabled
+                    />
+                  </div>
+                </div>
+                <div className="setion2">
+                  <div className="text">Ai 태그</div>
+                  <div className="tags">
+                    <input
+                      type="text"
+                      id="tag1"
+                      name="tag1"
+                      value={currntDiary.tag1}
+                      required
+                      readOnly
+                      disabled
+                    />
+
+                    <input
+                      type="text"
+                      id="tag2"
+                      name="tag2"
+                      value={currntDiary.tag2}
+                      required
+                      readOnly
+                      disabled
+                    />
+
+                    <input
+                      type="text"
+                      id="tag3"
+                      name="tag3"
+                      value={currntDiary.tag3}
+                      required
+                      readOnly
+                      disabled
+                    />
+                  </div>
+                </div>
+                <div className="setion3">
+                  <div className="text">이날의 감정</div>
+                  <div className="selectBox">
+                    <select
+                      className="select"
+                      name="emotion"
+                      id="emotion"
+                      value={currntDiary.emotion}
+                      required
+                      readOnly
+                      disabled
+                    >
+                      <option value="">
+                        {/* {currntDiary.emotion} */}
+                        {emotions.find((item, index) => {
+                          if (index + 1 === currntDiary.emotion) {
+                            return (
+                              <option value={index + 1}>emotions[item]</option>
+                            );
+                          }
+                        })}
+                      </option>
+                    </select>
+                    <span className="icoArrow">
+                      <img
+                        src="https://freepikpsd.com/media/2019/10/down-arrow-icon-png-7-Transparent-Images.png"
+                        alt=""
+                      />
+                    </span>
+                  </div>
+                </div>
+                <div className="setion4">
+                  <textarea
+                    className=""
+                    id="content"
+                    rows="3"
+                    name="content"
+                    value={currntDiary.content}
+                    onChange={onChangeDiary}
+                    readOnly
+                    disabled
+                  ></textarea>
+                </div>
+                <div className="setion5">
+                  <button
+                    type="button"
+                    className=""
+                    // style={{ marginRight: "2%" }}
+                    onClick={onClickUpdateButton}
+                  >
+                    수정하기
+                  </button>
+                  <button
+                    type="button"
+                    className=""
+                    onClick={() => {
+                      window.history.back();
+                    }}
+                  >
+                    뒤로가기
+                  </button>
+                  <button
+                    type="button"
+                    className=""
+                    onClick={() => {
+                      onClickDeleteButton(params.id);
+                    }}
+                  >
+                    삭제
+                  </button>
+                </div>
+              </div>
+              <div className="diaryView__dalle">
+                <div className="diaryView__dalle_img">
+                  <img
+                    src={`data:image/jpeg;base64,${currntDiary.img_url}`}
+                    alt=""
+                  />
+                  <div className="diaryView__dalle_text">Ai based Image</div>
+                </div>
+              </div>
+            </form>
           </div>
-          <div className="form-row">
-            <div className="col-md-6 mb-3">
-              <label htmlFor="validationCustom03">tag1</label>
-              <input
-                type="text"
-                className="form-control"
-                id="tag1"
-                name="tag1"
-                value={currntDiary.tag1}
-                required
-                readOnly
-                disabled
-              />
-            </div>
-            <div className="col-md-3 mb-3">
-              <label htmlFor="validationCustom04">tag2</label>
-              <input
-                type="text"
-                className="form-control"
-                id="tag2"
-                name="tag2"
-                value={currntDiary.tag2}
-                required
-                readOnly
-                disabled
-              />
-            </div>
-            <div className="col-md-3 mb-3">
-              <label htmlFor="validationCustom05">tag3</label>
-              <input
-                type="text"
-                className="form-control"
-                id="tag3"
-                name="tag3"
-                value={currntDiary.tag3}
-                required
-                readOnly
-                disabled
-              />
-            </div>
-          </div>
-          <div className="form-group">
-            <select
-              className="custom-select"
-              name="emotion"
-              id="emotion"
-              value={currntDiary.emotion}
-              required
-              readOnly
-              disabled
-            >
-              <option value="">{currntDiary.emotion}</option>
-              {/* <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-              <option value="6">6</option>
-              <option value="7">7</option> */}
-            </select>
-          </div>
-          <div className="mb-3">
-            <label htmlFor="content" className="form-label">
-              내용
-            </label>
-            <textarea
-              className="form-control"
-              id="content"
-              rows="3"
-              name="content"
-              value={currntDiary.content}
-              onChange={onChangeDiary}
-              readOnly
-              disabled
-            ></textarea>
-          </div>
-          <button
-            type="button"
-            className="btn btn-dark"
-            style={{ marginRight: "2%" }}
-            onClick={onClickUpdateButton}
-          >
-            수정하기
-          </button>
-          <button
-            type="button"
-            className="btn btn-light"
-            onClick={() => {
-              window.history.back();
-            }}
-          >
-            뒤로가기
-          </button>
-          <button
-            type="button"
-            className="btn btn-light"
-            onClick={() => {
-              onClickDeleteButton(params.id);
-            }}
-          >
-            삭제
-          </button>
-        </form>
+        </div>
         <DiaryRabbitKV>
           <DiaryRabbitButton onClick={openModal} >
             <img src={RabbitKv}/>
@@ -236,7 +266,9 @@ const DiaryView = () => {
           <Modal open={modalOpen} close={closeModal} header="Diary List" />
         </DiaryRabbitKV>
       </div>
+      
     </div>
+    
   );
 };
 
@@ -263,11 +295,12 @@ const DiaryRabbitButton = styled.button`
   //버튼색 투명하게
   background-color:transparent;
   position: absolute;
-  width: 17%;
+  // width: 17%;
+  height: 25%;
   // height: 300px; width값에 자동으로 원본 사이즈 조정
   // top: 69%; 우리 다이어리 웹의 기준이 바닥에 있기 때문에 반응형을 바닥을 중심으로 잡았다.
   bottom: 1%;
-  left: 75%;
+  left: 60%;
   // z-index: 9999;
   img {
     width: 100%;

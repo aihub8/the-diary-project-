@@ -26,7 +26,7 @@ const HoriScrollList = () => {
       navigate("/");
     } else {
       getDiaryList(cookies.userData.user_id,month).then((res) => {
-        console.log(res);
+        
       });
     }
   }, [reload]);
@@ -34,6 +34,7 @@ const HoriScrollList = () => {
   //console.log(cookies.userData);
 
   const getDiaryList = async (user_id,month) => {
+    console.log(month)
     return await axios
       .get(url.url + `/diary/${user_id}/${month}/getModalList`, {
         headers: {
@@ -57,9 +58,9 @@ const HoriScrollList = () => {
     <div className="wrap">
       <div aria-label="Page navigation example">
         <div className="pagination">{month-1<1?(<>다음달 없음</>):
-          (<button className="page-item"><a className="page-link" onClick={()=>{getDiaryList(cookies.userData.user_id,month-1)}}>{month-1}월</a></button>)}
+          (<button className="page-item-notnow"><a className="page-link" onClick={()=>{getDiaryList(cookies.userData.user_id,month-1)}}>{month-1}월</a></button>)}
           <div className="page-item"><a className="page-link" >{month}월</a></div>
-          {month+1>12?(<>다음달 없음</>):<button className="page-item"><a className="page-link" onClick={()=>{getDiaryList(cookies.userData.user_id,month+1)}}>{month+1}월</a></button>}
+          {month+1>12?(<>다음달 없음</>):<button className="page-item-notnow"><a className="page-link" onClick={()=>{getDiaryList(cookies.userData.user_id,month+1)}}>{month+1}월</a></button>}
         </div>
       </div>
       <div className="scroll__wrap">

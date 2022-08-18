@@ -2,10 +2,29 @@ import $ from "jquery";
 import axios from "axios";
 import port from "./../../data/port.json";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { useCookies } from "react-cookie";
-const SignInForm = ({ signInData, onChangeSignInData }) => {
+import "./../../styles/SignInForm.css";
+const SignInForm = ({ signInData,setSignInData, onChangeSignInData }) => {
+  
+  useEffect(() => {
+    if (cookies.userData === undefined) {
+      setSignInData({
+        email:"",
+        password:"",
+      })
+      //console.log(cookies.userData);
+      navigate("/");
+    } else {
+      //console.log(cookies.userData);
+      navigate("/diary/home");
+      
+    }
+  }, []);
+  
+  
+  
   const navigate = useNavigate();
 
   const [cookies, setCookie] = useCookies(["userData"]);
@@ -42,43 +61,51 @@ const SignInForm = ({ signInData, onChangeSignInData }) => {
   };
 
   return (
-    <div className="album">
-      <div className="container">
+    <div className="siginIn_form">
+      <div>
         <form>
-          <div className="mb-3">
+          <div>
             <label htmlFor="email" className="form-label">
-              Email address
+              
             </label>
+          
             <input
+              size='30'
+              placeholder="Email address" 
               type="email"
               value={signInData.email}
               onChange={onChangeSignInData}
-              className="form-control"
+              className="siginIn_form-input"
               name="email"
               id="email"
               aria-describedby="emailHelp"
             />
           </div>
-          <div className="mb-3">
+          <p></p>
+          <div>
             <label htmlFor="password" className="form-label">
-              Password
+              
             </label>
+          
             <input
+              size='30'
+              placeholder="Password" 
               type="password"
               value={signInData.password}
               onChange={onChangeSignInData}
               name="password"
-              className="form-control"
+              className="siginIn_form-input"
               id="password"
             />
           </div>
-          <div className="mb-3">
+          <div>
             <span className="text-danger">{errorMessage}</span>
           </div>
+          <p></p>
           <button
             type="button"
             onClick={onClickLoginButton}
-            className="btn btn-primary"
+            className="siginIn_form-button"
           >
             로그인
           </button>
