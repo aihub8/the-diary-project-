@@ -81,6 +81,7 @@ const Wrapper = styled.div`
   bottom: 0%;
   width: 100%;
   height: 100%;
+  border-radius: 0 3rem 0 0;
 `;
 
 const Temp = styled.div`
